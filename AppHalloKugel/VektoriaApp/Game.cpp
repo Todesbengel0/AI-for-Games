@@ -35,6 +35,9 @@ void CGame::Tick(float fTime, float fTimeDelta)
 {
 	// Hier die Echtzeit-Veränderungen einfügen:
 	m_zr.Tick(fTimeDelta);
+
+	// GPU Grill vermeiden :)
+	::Sleep(1);
 }
 
 void CGame::Fini()
