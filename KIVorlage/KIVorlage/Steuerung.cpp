@@ -85,7 +85,7 @@ void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
 		m_iHR = 1;
 	}
 
-	if (m_zdTastatur.KeyPressed(DIK_SPACE))
+	if (m_zdTastatur.KeyDown(DIK_SPACE))
 	{
 		m_bSchmutzporn = true;
 	}
