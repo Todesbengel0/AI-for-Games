@@ -32,7 +32,8 @@ void Welt::Init(CHVector Brettsize)
 		m_zpBrett.AddPlacement(&Npc);
 		Npc.SwitchOff();
 	}
-	
+	m_zmBrett.MakeTextureDiffuse("textures\\snow.png");
+	m_zgcBrett.SetMaterial(&m_zmBrett);
 	m_zhvSize = Brettsize;
 }
 
