@@ -9,13 +9,13 @@ public:
 	~CGame(void);																				// Wird nach Ende einmal aufgerufen (Destruktor)
 
 	void Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CSplash * psplash);	// Wird zu Begin einmal aufgerufen
-	void Tick(float fTime, float fTimeDelta);													// Wird während der Laufzeit bei jedem Bildaufbau aufgerufen
+	void Tick(float fTime, float fTimeDelta);													// Wird wï¿½hrend der Laufzeit bei jedem Bildaufbau aufgerufen
 	void Fini();																				// Wird am Ende einmal aufgerufen
 
-	void WindowReSize(int iNewWidth, int iNewHeight);											// Wird immer dann aufgerufen, wenn der Benutzer die Fenstergröße verändert hat
+	void WindowReSize(int iNewWidth, int iNewHeight);											// Wird immer dann aufgerufen, wenn der Benutzer die Fenstergrï¿½ï¿½e verï¿½ndert hat
 
 private:
-    // Hier ist Platz für Deine Vektoriaobjekte:
+    // Hier ist Platz fï¿½r Deine Vektoriaobjekte:
 	CRoot m_zr;
 	CScene m_zs;
 	CPlacement m_zpCamera;
