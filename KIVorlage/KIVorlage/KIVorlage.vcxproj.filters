@@ -56,9 +56,6 @@
     <ClCompile Include="Welt.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="CSteuerung.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Steuerung.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>

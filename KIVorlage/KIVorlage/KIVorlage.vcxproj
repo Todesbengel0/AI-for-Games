@@ -149,7 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CNpc.cpp" />
-    <ClCompile Include="CSteuerung.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeoFigure.cpp" />
     <ClCompile Include="KIVorlage.cpp" />

@@ -76,6 +76,14 @@ void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
 	{
 		Objekt.SetMat(m_zhmAnfangspos);
 	}
+	if (m_zdTastatur.KeyPressed(DIK_L))
+	{
+		m_iHR = -1;
+	}
+	if (m_zdTastatur.KeyPressed(DIK_O))
+	{
+		m_iHR = 1;
+	}
 
 
 	Objekt.Move(fTimeDelta, false, m_iAD, m_iWS, m_iHR, m_iLR, m_iUD);
