@@ -1,4 +1,6 @@
 #pragma once
+#include "Welt.h"
+#include "Steuerung.h"
 
 class CGame
 {
@@ -17,10 +19,14 @@ private:
 	CRoot m_zr;
 	CScene m_zs;
 	CPlacement m_zpCamera;
-	CPlacement m_zpSphere;
-	CGeoSphere m_zgSphere;
 	CFrame m_zf;
 	CViewport m_zv;
 	CCamera m_zc;
 	CLightParallel m_zl;
+
+	CPlacement m_zpCameraForController;
+
+	//Eigene Objekte
+	Welt m_cSpielbrett;
+	CSteuerung m_cSteuerung;
 };

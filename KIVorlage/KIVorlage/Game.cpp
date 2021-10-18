@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Game.h"
+#include "Welt.h"
+#include "Steuerung.h"
 
 CGame::CGame()
 {
@@ -18,18 +20,30 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 	m_zf.Init(hwnd, procOS); 
 	m_zv.InitFull(&m_zc);
 	m_zl.Init(CHVector(1.0f, 1.0f, 1.0f), CColor(1.0f, 1.0f, 1.0f));
-	m_zgSphere.Init(1.5F, nullptr, 50, 50);
 
 	m_zr.AddFrame(&m_zf);
 	m_zf.AddViewport(&m_zv);
 	m_zr.AddScene(&m_zs);
-	m_zs.AddPlacement(&m_zpSphere);
 	m_zs.AddPlacement(&m_zpCamera);
 	m_zs.AddLightParallel(&m_zl);
 	m_zpCamera.AddCamera(&m_zc);
-	m_zpSphere.AddGeo(&m_zgSphere);
+	m_zpCamera.AddPlacement(&m_zpCameraForController);
 
-	m_zpCamera.TranslateZ(8.0f);
+
+
+	//Spielbrett
+	m_cSpielbrett.Init();
+	m_zs.AddPlacement(m_cSpielbrett.getBrettPlacement());
+
+	//Steuerung
+	m_cSteuerung.Init(&m_zc, &m_zf);
+
+	//Standardeinstellungen für die Camera als Ausgang
+	m_zpCamera.TranslateZ(200.0f);
+	m_zpCamera.RotateXDelta(UM_DEG2RAD(330));
+	m_zc.SetNearClipping(0.001f);
+	m_zc.SetFarClipping(1000.0f);
+
 }
 
 void CGame::Tick(float fTime, float fTimeDelta)
@@ -39,6 +53,9 @@ void CGame::Tick(float fTime, float fTimeDelta)
 
 	// GPU Grill vermeiden :)
 	::Sleep(1);
+
+	//Steuerung muss jeden Tick aufgerufen werden
+	m_cSteuerung.STDSteuerung(m_zpCamera, fTimeDelta);
 }
 
 void CGame::Fini()
