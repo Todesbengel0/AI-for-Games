@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DefaultNpc.h"
+#include "RedNpc.h"
 
 class Welt
 {
@@ -23,6 +24,7 @@ private:
 	CHVector m_zhvSize;
 
 	CDefaultNpc m_cTestobjekt[15];
+	CRedNpc m_cRedObjekt[15];
 
 };
 

@@ -9,10 +9,11 @@ public:
 	void Fini();
 	void Spawn(CHVector dimension, int noise);
 
-private:
+protected:
 	CGeoTriangleTable* m_zgSchneemann;
 	CFileWavefront m_zfwSchneemann;
-	CMaterial m_zmSchneemann;
+	CMaterial m_zmSchneemannBlack;
+	CMaterial m_zmSchneemannRed;
 
 };
 

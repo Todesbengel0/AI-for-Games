@@ -25,7 +25,13 @@ void Welt::Init(CHVector Brettsize)
 		Npc.Init();
 		m_zpBrett.AddPlacement(&Npc);
 		Npc.SwitchOff();
-	} 
+	}
+	for (auto& Npc : m_cRedObjekt)
+	{
+		Npc.Init();
+		m_zpBrett.AddPlacement(&Npc);
+		Npc.SwitchOff();
+	}
 	
 	m_zhvSize = Brettsize;
 }
@@ -42,11 +48,20 @@ void Welt::SpawnNpc()
 	{
 		Npc.Spawn(m_zhvSize, ++i);
 	}
+	for (auto& Npc : m_cRedObjekt)
+	{
+		Npc.Spawn(m_zhvSize, ++i);
+	}
 }
 
 void Welt::Fini()
 {
 	for (auto& Npc : m_cTestobjekt)
+	{
+		Npc.Fini();
+	}
+
+	for (auto& Npc : m_cRedObjekt)
 	{
 		Npc.Fini();
 	}

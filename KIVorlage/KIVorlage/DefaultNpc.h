@@ -7,5 +7,7 @@ public:
 	CDefaultNpc();
 	~CDefaultNpc();
 
+	void Init();
+
 };
 

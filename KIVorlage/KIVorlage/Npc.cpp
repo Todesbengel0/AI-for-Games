@@ -12,8 +12,8 @@ CNpc::~CNpc()
 void CNpc::Init()
 {
 	m_zgSchneemann = m_zfwSchneemann.LoadGeoTriangleTable("Geos\\Schneeman_mit_Hut.obj", true);
-	m_zmSchneemann.MakeTextureDiffuse("textures\\schneeman_farbe.png");
-	m_zgSchneemann->SetMaterial(&m_zmSchneemann);
+	m_zmSchneemannBlack.MakeTextureDiffuse("textures\\schneeman_farbe.png");
+	m_zmSchneemannRed.MakeTextureDiffuse("textures\\schneeman_rot.png");
 	this->AddGeo(m_zgSchneemann);
 }
 
