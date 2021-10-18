@@ -39,6 +39,9 @@
     <ClInclude Include="Npc.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="DefaultNpc.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -63,6 +66,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Npc.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultNpc.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

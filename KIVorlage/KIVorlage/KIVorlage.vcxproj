@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DefaultNpc.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GeoFigure.h" />
     <ClInclude Include="Npc.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Welt.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DefaultNpc.cpp" />
     <ClCompile Include="CNpc.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeoFigure.cpp" />

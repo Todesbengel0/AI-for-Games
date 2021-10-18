@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Welt.h"
 #include "Steuerung.h"
+#include "DefaultNpc.h"
 
 CGame::CGame()
 {
@@ -61,6 +62,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 void CGame::Fini()
 {
 	// Hier die Finalisierung Deiner Vektoria-Objekte einfügen:
+	m_cSpielbrett.Fini();
 }
 
 void CGame::WindowReSize(int iNewWidth, int iNewHeight)

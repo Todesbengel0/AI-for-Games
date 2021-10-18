@@ -1,16 +1,18 @@
 #pragma once
-class CNpc
+class CNpc : public CPlacement
 {
 public:
 	CNpc();
 	~CNpc();
 
 	void Init();
+	void Fini();
+	
 
 private:
-	CGeo m_zgSchneemann;
-	CPlacement m_zpSchneemann;
+	CGeoTriangleTable* m_zgSchneemann;
 	CFileWavefront m_zfwSchneemann;
+	CMaterial m_zmSchneemann;
 
 };
 
