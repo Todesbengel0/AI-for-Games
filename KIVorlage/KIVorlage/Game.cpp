@@ -14,6 +14,9 @@ CGame::~CGame()
 
 void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CSplash * psplash)
 {
+	// Random-Seedilazation
+	srand(time(NULL));
+
 	// Hier die Initialisierung Deiner Vektoria-Objekte einfügen:
 	m_zr.Init(psplash);
 	m_zc.Init(QUARTERPI);
@@ -57,6 +60,12 @@ void CGame::Tick(float fTime, float fTimeDelta)
 
 	//Steuerung muss jeden Tick aufgerufen werden
 	m_cSteuerung.STDSteuerung(m_zpCamera, fTimeDelta);
+
+	if (m_cSteuerung.GetSchmutzporn())
+	{
+		m_cSpielbrett.SpawnNpc();
+		m_cSteuerung.SetSchmutzporn(false);
+	}
 }
 
 void CGame::Fini()

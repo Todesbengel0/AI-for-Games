@@ -22,7 +22,7 @@ private:
 	CMaterial m_zmBrett;
 	CHVector m_zhvSize;
 
-	CDefaultNpc m_cTestobjekt;
+	CDefaultNpc m_cTestobjekt[15];
 
 };
 

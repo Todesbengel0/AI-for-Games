@@ -7,6 +7,8 @@ public:
 
 	void STDSteuerung(CPlacement& Objekt, float fTimeDelta);
 	void Init(CCamera* Camera, CFrame* Frame);
+	bool GetSchmutzporn();
+	void SetSchmutzporn(bool pornoeus);
 	CDeviceKeyboard* getKeyboard();
 
 private:
@@ -17,6 +19,6 @@ private:
 	float m_iWS = 0, m_iAD = 0, m_iLR = 0, m_iUD = 0, m_iHR = 0;
 	int m_isensitivity = 1;
 	CHMat m_zhmAnfangspos;
-	bool m_bFirsttick = true;
+	bool m_bFirsttick = true, m_bSchmutzporn = false;
 };
 

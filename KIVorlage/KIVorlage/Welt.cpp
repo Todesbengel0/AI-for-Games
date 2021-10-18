@@ -20,9 +20,14 @@ void Welt::Init(CHVector Brettsize)
 {
 	m_zgcBrett.Init(Brettsize, nullptr);
 	m_zpBrett.AddGeo(&m_zgcBrett);
-	m_cTestobjekt.Init();
-	m_zpBrett.AddPlacement(&m_cTestobjekt);
-	m_cTestobjekt.SwitchOff();
+	for (auto& Npc : m_cTestobjekt)
+	{
+		Npc.Init();
+		m_zpBrett.AddPlacement(&Npc);
+		Npc.SwitchOff();
+	} 
+	
+	m_zhvSize = Brettsize;
 }
 
 CHVector Welt::getBoardsize()
@@ -32,14 +37,19 @@ CHVector Welt::getBoardsize()
 
 void Welt::SpawnNpc()
 {
-	m_cTestobjekt.SwitchOn();
-	m_cTestobjekt.Translate(m_zhvSize);
-
+	int i = 0;
+	for (auto& Npc : m_cTestobjekt)
+	{
+		Npc.Spawn(m_zhvSize, ++i);
+	}
 }
 
 void Welt::Fini()
 {
-	m_cTestobjekt.Fini();
+	for (auto& Npc : m_cTestobjekt)
+	{
+		Npc.Fini();
+	}
 }
 
 CPlacement* Welt::getBrettPlacement()

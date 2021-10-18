@@ -85,6 +85,11 @@ void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
 		m_iHR = 1;
 	}
 
+	if (m_zdTastatur.KeyPressed(DIK_SPACE))
+	{
+		m_bSchmutzporn = true;
+	}
+
 
 	Objekt.Move(fTimeDelta, false, m_iAD, m_iWS, m_iHR, m_iLR, m_iUD);
 
@@ -95,6 +100,16 @@ void CSteuerung::Init(CCamera* Camera, CFrame* Frame)
 {
 	m_zc = Camera;
 	Frame->AddDeviceKeyboard(&m_zdTastatur);
+}
+
+bool CSteuerung::GetSchmutzporn()
+{
+	return m_bSchmutzporn;
+}
+
+void CSteuerung::SetSchmutzporn(bool pornoeus)
+{
+	m_bSchmutzporn = pornoeus;
 }
 
 CDeviceKeyboard* CSteuerung::getKeyboard()

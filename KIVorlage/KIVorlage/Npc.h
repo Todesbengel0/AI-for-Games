@@ -7,7 +7,7 @@ public:
 
 	void Init();
 	void Fini();
-	
+	void Spawn(CHVector dimension, int noise);
 
 private:
 	CGeoTriangleTable* m_zgSchneemann;
