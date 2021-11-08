@@ -139,11 +139,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CNormalDistribution.h" />
+    <ClInclude Include="Octave.h" />
     <ClInclude Include="DefaultNpc.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GeoFigure.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="RedNpc.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Steuerung.h" />
@@ -152,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CNormalDistribution.cpp" />
+    <ClCompile Include="Octave.cpp" />
     <ClCompile Include="DefaultNpc.cpp" />
     <ClCompile Include="CNpc.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -164,6 +167,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="RedNpc.cpp" />
     <ClCompile Include="Steuerung.cpp" />
     <ClCompile Include="Welt.cpp" />

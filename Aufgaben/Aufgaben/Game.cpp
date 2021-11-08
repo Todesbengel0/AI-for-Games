@@ -4,6 +4,7 @@
 #include "Steuerung.h"
 #include "DefaultNpc.h"
 #include "CNormalDistribution.h"
+#include "PerlinNoise.h"
 
 CGame::CGame()
 {
@@ -55,11 +56,17 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 	//	//ULInfo("Rnd: %f", nd.RandNormFt(-20.0f, 100.0f));
 	//	ULInfo("Rnd: %d", nd.RandNormInt(-1000000, 1000000));
 
+	//PerlinNoise Test
+	CPerlinNoise pn(4,1);
+
 	std::ofstream ofs("normal_export.csv");
 	for (int i = 0; i < 200; ++i)
 	{
-		ofs << nd.RandNormInt(-10, 10) << ";";
+		//ofs << nd.RandNormInt(-10, 10) << ";";
+		ofs << pn.GetValue((float)i/200.0f, 0.5f) << ";";
 	}
+
+
 }
 
 void CGame::Tick(float fTime, float fTimeDelta)
