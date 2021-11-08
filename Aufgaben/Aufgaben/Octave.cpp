@@ -9,7 +9,7 @@ COctave::COctave(int rank)
 	m_TimeMarks[0] = 0;
 	for (int i = 1; i < m_NumSignals; ++i)
 	{
-		m_TimeMarks[i] = i / (m_NumSignals - 1);
+		m_TimeMarks[i] = (float)i / (float)(m_NumSignals - 1);
 	}
 	CRandom rnd;
 	rnd.SRand(rank * time(NULL));
