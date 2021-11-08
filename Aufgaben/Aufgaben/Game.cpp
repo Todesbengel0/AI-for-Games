@@ -57,13 +57,17 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 	//	ULInfo("Rnd: %d", nd.RandNormInt(-1000000, 1000000));
 
 	//PerlinNoise Test
-	CPerlinNoise pn(4,1);
+	CPerlinNoise pn(7,1);
 
-	std::ofstream ofs("normal_export.csv");
+	std::ofstream ofs_normal("normal_export.csv");
 	for (int i = 0; i < 200; ++i)
 	{
-		//ofs << nd.RandNormInt(-10, 10) << ";";
-		ofs << pn.GetValue((float)i/200.0f, 0.5f) << ";";
+		ofs_normal << nd.RandNormInt(-10, 10) << ";";
+	}
+	std::ofstream ofs_pn("pn_export.csv");
+	for (int i = 0; i < 100; ++i)
+	{
+		ofs_pn << pn.GetValue((float)i / 100.0f, 0.5f) << ";";
 	}
 
 
