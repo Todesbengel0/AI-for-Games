@@ -58,7 +58,7 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 
 void CGame::PlotNormalDistributionFloat()
 {
-	std::ofstream ofs("normal_float_export.csv");
+	std::ofstream ofs("normal_float_export.csv", std::ios::out | std::ios::trunc);
 	CNormalDistribution nd;
 
 	// force comma delimiter instead of point
@@ -72,7 +72,7 @@ void CGame::PlotNormalDistributionFloat()
 
 void CGame::PlotNormalDistributionInt()
 {
-	std::ofstream ofs("normal_int_export.csv");
+	std::ofstream ofs("normal_int_export.csv", std::ios::out | std::ios::trunc);
 	CNormalDistribution nd;
 
 	for (int i = 0; i < 200; ++i)
@@ -83,7 +83,7 @@ void CGame::PlotNormalDistributionInt()
 
 void CGame::PlotPerlinNoise()
 {
-	std::ofstream ofs("perlin_noise_export.csv");
+	std::ofstream ofs("perlin_noise_export.csv", std::ios::out | std::ios::trunc);
 	CPerlinNoise pn(20, 1);
 
 	// force comma delimiter instead of point
