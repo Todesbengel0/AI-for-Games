@@ -24,7 +24,8 @@ float CNormalDistribution::RandNormFt(float min, float max)
 	return (RandNormFt() + 1) * range + min;
 }
 
+// just using the float function here with rounding should be fine?
 int CNormalDistribution::RandNormInt(int min, int max)
 {
-	return (int)RandNormFt(min, max);
+	return int(std::round(RandNormFt(float(min), float(max))));
 }
