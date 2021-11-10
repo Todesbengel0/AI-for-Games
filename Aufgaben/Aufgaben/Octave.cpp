@@ -2,7 +2,7 @@
 #include "Octave.h"
 
 COctave::COctave(int rank)
-	: m_Rank(rank), m_NumSignals(std::pow(2,rank-1)+1)
+	: m_Rank(rank), m_NumSignals(std::pow(2, rank - 1) + 1)
 {
 	m_TimeMarks = new float[m_NumSignals];
 	m_Signals = new float[m_NumSignals];
@@ -39,7 +39,7 @@ float COctave::GetSignal(float time)
 	return m_Signals[index - 1] + (m_Signals[index] - m_Signals[index - 1]) * S((time - m_TimeMarks[index - 1]) / (m_TimeMarks[index] - m_TimeMarks[index - 1]));
 }
 
-float COctave::S(float time)
+float COctave::S(float functionvalue)
 {
-	return 10 * std::pow(time,3) - 15 * std::pow(time,4) + 6 * std::pow(time,5);
+	return 10 * std::pow(functionvalue, 3) - 15 * std::pow(functionvalue, 4) + 6 * std::pow(functionvalue, 5);
 }
