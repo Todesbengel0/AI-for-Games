@@ -5,42 +5,59 @@ COctave::COctave(int rank)
 	: m_Rank(rank)
 	, m_NumSignals(int(std::pow(2, rank - 1) + 1))
 {
-	m_TimeMarks = new float[m_NumSignals];
-	m_Signals = new float[m_NumSignals];
-	m_TimeMarks[0] = 0;
+	m_TimeSignalTuples = new SOctaveTuple[m_NumSignals];
+
+	// Erstelle tj
+	m_TimeSignalTuples[0].TimeMark = 0; // t1 = 0
 	for (int i = 1; i < m_NumSignals; ++i)
 	{
-		m_TimeMarks[i] = (float)i / (float)(m_NumSignals - 1);
+		m_TimeSignalTuples[i].TimeMark = (float)i / (float)(m_NumSignals - 1);	// tj = j / n
 	}
+
+	// Erstelle sj
 	CRandom rnd;
 	rnd.SRand(rank * int(time(nullptr)));
 	for (int i = 0; i < m_NumSignals; ++i)
 	{
-		m_Signals[i] = rnd.RandFr();
+		m_TimeSignalTuples[i].Signal = rnd.RandFr();	// sj = Random
 	}
 }
 
 COctave::~COctave()
 {
-	delete[] m_Signals;
-	delete[] m_TimeMarks;
+	delete[] m_TimeSignalTuples;
 }
 
+// Oi(t)
 float COctave::GetSignal(float time)
 {
-	int index = 0;
+	// Zeit-Intervall in der Oktave
+	int tuple_index = 0;
 	for (int i = 1; i < m_NumSignals; ++i)
 	{
-		if (time <= m_TimeMarks[i])
+		if (time <= m_TimeSignalTuples[i].TimeMark)
 		{
-			index = i;
+			tuple_index = i;
 			break;
 		}
 	}
-	return m_Signals[index - 1] + (m_Signals[index] - m_Signals[index - 1]) * S((time - m_TimeMarks[index - 1]) / (m_TimeMarks[index] - m_TimeMarks[index - 1]));
+
+	// (t - tj)/(tj+1 - tj)
+	float time_fraction = (time - m_TimeSignalTuples[tuple_index - 1].TimeMark)
+		/ (m_TimeSignalTuples[tuple_index].TimeMark - m_TimeSignalTuples[tuple_index - 1].TimeMark);
+
+	// Oi(t) = sj + (sj+1 - sj) * S((t - tj)/(tj+1 - tj))
+	return m_TimeSignalTuples[tuple_index - 1].Signal
+		+ (m_TimeSignalTuples[tuple_index].Signal - m_TimeSignalTuples[tuple_index - 1].Signal)
+		* S(time_fraction);
 }
 
+// Eine mögliche S-Funktion
+// Kann ausgewechselt werden!
 float COctave::S(float functionvalue)
 {
-	return 10 * std::pow(functionvalue, 3) - 15 * std::pow(functionvalue, 4) + 6 * std::pow(functionvalue, 5);
+	// S(t) = 10*t^3 - 15*t^4 + 6*t^5
+	return 10 * std::pow(functionvalue, 3)
+		- 15 * std::pow(functionvalue, 4)
+		+ 6 * std::pow(functionvalue, 5);
 }
