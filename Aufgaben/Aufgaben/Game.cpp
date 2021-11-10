@@ -50,28 +50,43 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 	m_zc.SetNearClipping(0.001f);
 	m_zc.SetFarClipping(1000.0f);
 
-	// Normalverteilung Test
-	CNormalDistribution nd;
-	//for (int i = 0; i < 1000; ++i)
-	//	//ULInfo("Rnd: %f", nd.RandNormFt(-20.0f, 100.0f));
-	//	ULInfo("Rnd: %d", nd.RandNormInt(-1000000, 1000000));
+	// Random Tests / Exports nach Excel
+	PlotNormalDistributionFloat();
+	PlotNormalDistributionInt();
+	PlotPerlinNoise();
+}
 
-	std::ofstream ofs_normal("normal_export.csv");
+void CGame::PlotNormalDistributionFloat()
+{
+	std::ofstream ofs("normal_float_export.csv");
+	CNormalDistribution nd;
+
 	for (int i = 0; i < 200; ++i)
 	{
-		ofs_normal << nd.RandNormInt(-10, 10) << ";";
+		ofs << nd.RandNormFt(-10.0f, 10.0f) << ";";
 	}
+}
 
-	//PerlinNoise Test
-	CPerlinNoise pn(20,1);
-	
-	std::ofstream ofs_pn("pn_export.csv");
+void CGame::PlotNormalDistributionInt()
+{
+	std::ofstream ofs("normal_int_export.csv");
+	CNormalDistribution nd;
+
+	for (int i = 0; i < 200; ++i)
+	{
+		ofs << nd.RandNormInt(-10, 10) << ";";
+	}
+}
+
+void CGame::PlotPerlinNoise()
+{
+	std::ofstream ofs("perlin_noise_export.csv");
+	CPerlinNoise pn(20, 1);
+
 	for (int i = 0; i < 100; ++i)
 	{
-		ofs_pn << pn.GetValue((float)i / 100.0f, 0.5f) << ";";
+		ofs << pn.GetValue((float)i / 100.0f, 0.5f) << ";";
 	}
-
-
 }
 
 void CGame::Tick(float fTime, float fTimeDelta)
@@ -104,4 +119,3 @@ void CGame::WindowReSize(int iNewWidth, int iNewHeight)
 	// Hier kannst Du dann die Auflösung des Viewports neu einstellen:
 	m_zf.ReSize(iNewWidth, iNewHeight);
 }
-
