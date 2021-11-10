@@ -4,13 +4,11 @@
 class CPerlinNoise
 {
 public:
-	CPerlinNoise(int numOctaves);
-	CPerlinNoise(int numOctaves, int startValue);
+	CPerlinNoise(int numOctaves, int startValue = 1);
 	~CPerlinNoise();
 
-	float GetValue(float time, float persistance);
-	float GetValue(float time);
-
+	// PN(t) = Ei=1,m(Oi(t) * p^i)
+	float GetValue(float time, float persistance = 0.5f);
 
 private:
 	const int m_numOctaves;
