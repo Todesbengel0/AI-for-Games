@@ -9,7 +9,7 @@ public:
 	float GetSignal(float time);
 
 private:
-	static float S(float time);
+	static float S(float functionvalue);
 	const int m_Rank;
 	const int m_NumSignals;
 	float* m_TimeMarks; //tj
