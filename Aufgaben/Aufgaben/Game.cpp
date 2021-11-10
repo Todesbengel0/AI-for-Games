@@ -61,6 +61,9 @@ void CGame::PlotNormalDistributionFloat()
 	std::ofstream ofs("normal_float_export.csv");
 	CNormalDistribution nd;
 
+	// force comma delimiter instead of point
+	ofs.imbue(std::locale("German_germany"));
+
 	for (int i = 0; i < 200; ++i)
 	{
 		ofs << nd.RandNormFt(-10.0f, 10.0f) << ";";
@@ -82,6 +85,9 @@ void CGame::PlotPerlinNoise()
 {
 	std::ofstream ofs("perlin_noise_export.csv");
 	CPerlinNoise pn(20, 1);
+
+	// force comma delimiter instead of point
+	ofs.imbue(std::locale("German_germany"));
 
 	for (int i = 0; i < 100; ++i)
 	{
