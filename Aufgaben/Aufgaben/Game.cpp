@@ -17,7 +17,7 @@ CGame::~CGame()
 void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CSplash * psplash)
 {
 	// Random-Seedilazation
-	srand(time(NULL));
+	srand(int(time(nullptr)));
 
 	// Hier die Initialisierung Deiner Vektoria-Objekte einfügen:
 	m_zr.Init(psplash);

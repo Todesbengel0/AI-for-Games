@@ -15,7 +15,7 @@ private:
 	CDeviceKeyboard m_zdTastatur;
 	CCamera* m_zc;
 
-	float Kamerazoom = 0.1;
+	float Kamerazoom = 0.1f;
 	float m_iWS = 0, m_iAD = 0, m_iLR = 0, m_iUD = 0, m_iHR = 0;
 	int m_isensitivity = 1;
 	CHMat m_zhmAnfangspos;

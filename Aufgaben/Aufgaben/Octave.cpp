@@ -2,7 +2,8 @@
 #include "Octave.h"
 
 COctave::COctave(int rank)
-	: m_Rank(rank), m_NumSignals(std::pow(2, rank - 1) + 1)
+	: m_Rank(rank)
+	, m_NumSignals(int(std::pow(2, rank - 1) + 1))
 {
 	m_TimeMarks = new float[m_NumSignals];
 	m_Signals = new float[m_NumSignals];
@@ -12,7 +13,7 @@ COctave::COctave(int rank)
 		m_TimeMarks[i] = (float)i / (float)(m_NumSignals - 1);
 	}
 	CRandom rnd;
-	rnd.SRand(rank * time(NULL));
+	rnd.SRand(rank * int(time(nullptr)));
 	for (int i = 0; i < m_NumSignals; ++i)
 	{
 		m_Signals[i] = rnd.RandFr();

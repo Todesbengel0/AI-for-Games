@@ -25,7 +25,7 @@ void CNpc::Fini()
 void CNpc::Spawn(CHVector dimension, int noise)
 {
 	CRandom random;
-	random.SRand(time(NULL) * noise);
+	random.SRand(int(time(nullptr)) * noise);
 	float xSpawn = random.RandFt() * dimension.x;
 	float zSpawn = random.RandFt() * dimension.z;
 	float yRot = random.RandFt() * PI;
