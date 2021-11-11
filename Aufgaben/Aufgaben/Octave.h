@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "interpolation.h"
 
 struct SOctaveTuple
 {
@@ -13,13 +14,9 @@ public:
 	~COctave();
 
 	// Oi(t)
-	float GetSignal(float time);
+	float GetSignal(float time, CInterpolationFunction* function);
 
 private:
-	// Eine mögliche S-Funktion
-	// Kann ausgewechselt werden!
-	static float S(float functionvalue);
-
 	const int m_Rank;
 	const int m_NumSignals;
 	SOctaveTuple* m_TimeSignalTuples; // Tupel(tj,sj)

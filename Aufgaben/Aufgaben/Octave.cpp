@@ -29,7 +29,7 @@ COctave::~COctave()
 }
 
 // Oi(t)
-float COctave::GetSignal(float time)
+float COctave::GetSignal(float time, CInterpolationFunction* function)
 {
 	// Zeit-Intervall in der Oktave
 	int tuple_index = 0;
@@ -48,16 +48,5 @@ float COctave::GetSignal(float time)
 
 	// Oi(t) = sj + (sj+1 - sj) * S((t - tj)/(tj+1 - tj))
 	return m_TimeSignalTuples[tuple_index - 1].Signal
-		+ (m_TimeSignalTuples[tuple_index].Signal - m_TimeSignalTuples[tuple_index - 1].Signal)
-		* S(time_fraction);
-}
-
-// Eine mögliche S-Funktion
-// Kann ausgewechselt werden!
-float COctave::S(float functionvalue)
-{
-	// S(t) = 10*t^3 - 15*t^4 + 6*t^5
-	return 10 * std::pow(functionvalue, 3)
-		- 15 * std::pow(functionvalue, 4)
-		+ 6 * std::pow(functionvalue, 5);
+		+ (m_TimeSignalTuples[tuple_index].Signal - m_TimeSignalTuples[tuple_index - 1].Signal) * function->Interpolation(time_fraction);
 }

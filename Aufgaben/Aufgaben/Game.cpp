@@ -84,14 +84,24 @@ void CGame::PlotNormalDistributionInt()
 void CGame::PlotPerlinNoise()
 {
 	std::ofstream ofs("perlin_noise_export.csv", std::ios::out | std::ios::trunc);
-	CPerlinNoise pn(20, 1);
+	CPerlinNoise pn(5, 1);
 
 	// force comma delimiter instead of point
 	ofs.imbue(std::locale("German_germany"));
 
 	for (int i = 0; i < 100; ++i)
 	{
-		ofs << pn.GetValue((float)i / 100.0f, 0.5f) << ";";
+		ofs << pn.GetValue((float)i * 0.01f) << ";";
+	}
+	ofs << std::endl;
+	for (int i = 0; i < 100; ++i)
+	{
+		ofs << pn.GetValue((float)i * 0.01f, 0.5f, new CThreeDegreeInterpolation) << ";";
+	}
+	ofs << std::endl;
+	for (int i = 0; i < 100; ++i)
+	{
+		ofs << pn.GetValue((float)i * 0.01f, 0.5f, new CLinearInterpolation) << ";";
 	}
 }
 

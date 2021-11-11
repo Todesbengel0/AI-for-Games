@@ -18,19 +18,14 @@ CPerlinNoise::~CPerlinNoise()
 	delete[] m_Octaves;
 }
 
-/// <summary>
-/// Calculates the Perlin Noise at a specific time.
-/// </summary>
-/// <param name="time">Time of which to get the Signal value from</param>
-/// <param name="persistance">Value how much each further Ocatave should contribute more to the final value.</param>
-/// <returns></returns>
-float CPerlinNoise::GetValue(float time, float persistance /*= 0.5f*/)
+float CPerlinNoise::GetValue(float time, float persistance /*= 0.5f*/, CInterpolationFunction* function /*= new CFiveDegreeInterpolation*/)
 {
 	// PN(t) = Ei=1,m(Oi(t) * p^i)
 	float output = 0.0f;
 	for (int i = 0; i < m_numOctaves; ++i)
 	{
-		output += m_Octaves[i]->GetSignal(time) * std::pow(persistance, m_startValue + i);
+		output += m_Octaves[i]->GetSignal(time, function) * std::pow(persistance, m_startValue + i);
 	}
+	delete function;
 	return output;
 }
