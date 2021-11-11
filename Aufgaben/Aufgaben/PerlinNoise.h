@@ -14,10 +14,12 @@ public:
 	/// <param name="persistance">Value how much each further Ocatave should contribute more to the final value. Default: 0.5</param>
 	/// <param name="function">Interpolationfunction to use for Interpolation. Default: Function of degree five</param>
 	/// <returns>Over Octaves accumulated value</returns>
-	float GetValue(float time, float persistance = 0.5f, CInterpolationFunction* function = new CFiveDegreeInterpolation);
+	float GetValue(float time, float persistance = 0.5f, CInterpolationFunction* function = ms_DefaultInterpolationFunction);
 
 private:
 	const int m_numOctaves;
 	const int m_startValue;
 	COctave** m_Octaves;
+
+	static CInterpolationFunction* ms_DefaultInterpolationFunction;
 };

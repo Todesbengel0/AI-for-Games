@@ -96,12 +96,12 @@ void CGame::PlotPerlinNoise()
 	ofs << std::endl;
 	for (int i = 0; i < 100; ++i)
 	{
-		ofs << pn.GetValue((float)i * 0.01f, 0.5f, new CThreeDegreeInterpolation) << ";";
+		ofs << pn.GetValue((float)i * 0.01f, 0.5f, &CThreeDegreeInterpolation()) << ";";
 	}
 	ofs << std::endl;
 	for (int i = 0; i < 100; ++i)
 	{
-		ofs << pn.GetValue((float)i * 0.01f, 0.5f, new CLinearInterpolation) << ";";
+		ofs << pn.GetValue((float)i * 0.01f, 0.5f, &CLinearInterpolation()) << ";";
 	}
 }
 

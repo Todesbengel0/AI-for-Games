@@ -18,7 +18,11 @@ CPerlinNoise::~CPerlinNoise()
 	delete[] m_Octaves;
 }
 
-float CPerlinNoise::GetValue(float time, float persistance /*= 0.5f*/, CInterpolationFunction* function /*= new CFiveDegreeInterpolation*/)
+
+CFiveDegreeInterpolation g_FDI;
+CInterpolationFunction* CPerlinNoise::ms_DefaultInterpolationFunction = &g_FDI;
+
+float CPerlinNoise::GetValue(float time, float persistance /*= 0.5f*/, CInterpolationFunction* function /*= ms_DefaultInterpolationFunction*/)
 {
 	// PN(t) = Ei=1,m(Oi(t) * p^i)
 	float output = 0.0f;
@@ -26,6 +30,5 @@ float CPerlinNoise::GetValue(float time, float persistance /*= 0.5f*/, CInterpol
 	{
 		output += m_Octaves[i]->GetSignal(time, function) * std::pow(persistance, m_startValue + i);
 	}
-	delete function;
 	return output;
 }
