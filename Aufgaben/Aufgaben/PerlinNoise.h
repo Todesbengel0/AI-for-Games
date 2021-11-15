@@ -13,8 +13,9 @@ public:
 	/// <param name="time">Time of which to get the Signal value from</param>
 	/// <param name="persistance">Value how much each further Ocatave should contribute more to the final value. Default: 0.5</param>
 	/// <param name="function">Interpolationfunction to use for Interpolation. Default: Function of degree five</param>
+	/// <param name="bNormalize">True, if the value should be between 0 and 1</param>
 	/// <returns>Over Octaves accumulated value</returns>
-	float GetValue(float time, float persistance = 0.5f, CInterpolationFunction* function = ms_DefaultInterpolationFunction);
+	float GetValue(float time, float persistance = 0.5f, CInterpolationFunction* function = ms_DefaultInterpolationFunction, bool bNormalize = false);
 
 private:
 	const int m_numOctaves;
