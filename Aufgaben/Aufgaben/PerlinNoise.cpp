@@ -29,8 +29,8 @@ float CPerlinNoise::GetValue(float time, float persistance /*= 0.5f*/, CInterpol
 	float ratio = 0.0f;
 	for (int i = 0; i < m_numOctaves; ++i)
 	{
-		output += m_Octaves[i]->GetSignal(time, function) * std::pow(persistance, m_startValue + i);
-		ratio += std::pow(persistance, m_startValue + i);
+		output += m_Octaves[i]->GetSignal(time, function) * std::powf(persistance, float(m_startValue + i));
+		ratio += std::powf(persistance, float(m_startValue + i));
 	}
 	if (bNormalize)
 		output /= ratio;
