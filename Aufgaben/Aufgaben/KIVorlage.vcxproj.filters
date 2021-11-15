@@ -19,6 +19,12 @@
     <Filter Include="Quelldateien\InterpolationFunction">
       <UniqueIdentifier>{450f58dd-b92d-48c5-9073-309c82fe1c25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SteeringBehavior">
+      <UniqueIdentifier>{bb8cd4c7-e753-4f56-9626-50fbf0769483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Knowledge">
+      <UniqueIdentifier>{eb043791-4b93-4d65-93e1-9b24d60eae86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -75,6 +81,30 @@
     <ClInclude Include="interpolation.h">
       <Filter>Headerdateien\InterpolationFunction</Filter>
     </ClInclude>
+    <ClInclude Include="SteeringBehavior.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviorKinematicSEEK.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviorKinematicFLEE.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AIComponent.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="KnowledgePosition.h">
+      <Filter>Knowledge</Filter>
+    </ClInclude>
+    <ClInclude Include="Knowledge.h">
+      <Filter>Knowledge</Filter>
+    </ClInclude>
+    <ClInclude Include="Kinematics.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -124,6 +154,30 @@
     </ClCompile>
     <ClCompile Include="ThreeDegreeInterpolation.cpp">
       <Filter>Quelldateien\InterpolationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehavior.cpp">
+      <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorKinematicSEEK.cpp">
+      <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorKinematicFLEE.cpp">
+      <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="AIComponent.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Knowledge.cpp">
+      <Filter>Knowledge</Filter>
+    </ClCompile>
+    <ClCompile Include="KnowledgePosition.cpp">
+      <Filter>Knowledge</Filter>
+    </ClCompile>
+    <ClCompile Include="Kinematics.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

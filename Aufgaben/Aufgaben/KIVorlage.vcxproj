@@ -22,34 +22,34 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{875CCC02-C17C-4145-A074-6C7FB9250A48}</ProjectGuid>
     <RootNamespace>VektoriaApp</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -142,10 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="AIComponent.h" />
     <ClInclude Include="CNormalDistribution.h" />
     <ClInclude Include="FiveDegreeInterpolation.h" />
     <ClInclude Include="interpolation.h" />
     <ClInclude Include="InterpolationFunction.h" />
+    <ClInclude Include="Kinematics.h" />
+    <ClInclude Include="Knowledge.h" />
+    <ClInclude Include="KnowledgePosition.h" />
     <ClInclude Include="LinearInterpolation.h" />
     <ClInclude Include="Octave.h" />
     <ClInclude Include="DefaultNpc.h" />
@@ -156,14 +161,22 @@
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="RedNpc.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SteeringBehavior.h" />
+    <ClInclude Include="SteeringBehaviorKinematicFLEE.h" />
+    <ClInclude Include="SteeringBehaviorKinematicSEEK.h" />
     <ClInclude Include="Steuerung.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreeDegreeInterpolation.h" />
     <ClInclude Include="Welt.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="CNormalDistribution.cpp" />
     <ClCompile Include="FiveDegreeInterpolation.cpp" />
+    <ClCompile Include="Kinematics.cpp" />
+    <ClCompile Include="Knowledge.cpp" />
+    <ClCompile Include="KnowledgePosition.cpp" />
     <ClCompile Include="LinearInterpolation.cpp" />
     <ClCompile Include="Octave.cpp" />
     <ClCompile Include="DefaultNpc.cpp" />
@@ -180,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="RedNpc.cpp" />
+    <ClCompile Include="SteeringBehavior.cpp" />
+    <ClCompile Include="SteeringBehaviorKinematicFLEE.cpp" />
+    <ClCompile Include="SteeringBehaviorKinematicSEEK.cpp" />
     <ClCompile Include="Steuerung.cpp" />
     <ClCompile Include="ThreeDegreeInterpolation.cpp" />
     <ClCompile Include="Welt.cpp" />

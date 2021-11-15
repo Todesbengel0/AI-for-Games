@@ -1,4 +1,5 @@
 #pragma once
+
 class CNpc : public CPlacement
 {
 public:
@@ -14,6 +15,7 @@ protected:
 	CFileWavefront m_zfwSchneemann;
 	CMaterial m_zmSchneemannBlack;
 	CMaterial m_zmSchneemannRed;
+
 
 };
 
