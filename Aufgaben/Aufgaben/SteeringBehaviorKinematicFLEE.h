@@ -13,5 +13,5 @@ public:
 	CHVector GetForce() override;
 
 private:
-	CKnowledgePosition* m_pKnowledge;
+	CKnowledgePosition* m_pKnowledgePosition;
 };

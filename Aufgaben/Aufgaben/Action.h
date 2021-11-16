@@ -1,8 +1,10 @@
 #pragma once
 
-class CAction
+#include "Option.h"
+
+class CAction : public COption
 {
 public:
 	CAction();
-	virtual ~CAction();
+	~CAction();
 };

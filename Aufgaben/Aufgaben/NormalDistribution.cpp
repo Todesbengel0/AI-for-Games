@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "CNormalDistribution.h"
+#include "NormalDistribution.h"
 
 
 CNormalDistribution::CNormalDistribution()

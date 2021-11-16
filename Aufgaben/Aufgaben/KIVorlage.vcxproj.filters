@@ -25,6 +25,9 @@
     <Filter Include="Knowledge">
       <UniqueIdentifier>{eb043791-4b93-4d65-93e1-9b24d60eae86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Diagrams">
+      <UniqueIdentifier>{5730c117-6aac-49b5-a066-f805270d8bfe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -55,9 +58,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="RedNpc.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CNormalDistribution.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="PerlinNoise.h">
@@ -105,6 +105,24 @@
     <ClInclude Include="Kinematics.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCharacter.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalDistribution.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="KnowledgeCharacter.h">
+      <Filter>Knowledge</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AvailableOptions.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -125,9 +143,6 @@
     <ClCompile Include="Steuerung.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="CNpc.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Npc.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -135,9 +150,6 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="RedNpc.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CNormalDistribution.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="PerlinNoise.cpp">
@@ -179,10 +191,31 @@
     <ClCompile Include="Kinematics.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCharacter.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalDistribution.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="KnowledgeCharacter.cpp">
+      <Filter>Knowledge</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="AvailableOptions.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\VektoriaTest.ico">
       <Filter>Ressourcendateien</Filter>
+    </None>
+    <None Include="ClassDiagram1.cd">
+      <Filter>Diagrams</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

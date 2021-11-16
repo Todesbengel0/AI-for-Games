@@ -23,14 +23,14 @@ void Welt::Init(CHVector Brettsize)
 	for (auto& Npc : m_cTestobjekt)
 	{
 		Npc.Init();
-		m_zpBrett.AddPlacement(&Npc);
-		Npc.SwitchOff();
+		m_zpBrett.AddPlacement(&Npc.GetKinematics());
+		Npc.GetKinematics().SwitchOff();
 	}
 	for (auto& Npc : m_cRedObjekt)
 	{
 		Npc.Init();
-		m_zpBrett.AddPlacement(&Npc);
-		Npc.SwitchOff();
+		m_zpBrett.AddPlacement(&Npc.GetKinematics());
+		Npc.GetKinematics().SwitchOff();
 	}
 	m_zmBrett.MakeTextureDiffuse("textures\\snow.png");
 	m_zgcBrett.SetMaterial(&m_zmBrett);

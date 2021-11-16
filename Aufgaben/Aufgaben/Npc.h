@@ -1,21 +1,18 @@
 #pragma once
 
-class CNpc : public CPlacement
+#include "Character.h"
+#include "AvailableOptions.h"
+
+class CNpc : public CCharacter
 {
 public:
 	CNpc();
 	~CNpc();
 
-	void Init();
-	void Fini();
-	void Spawn(CHVector dimension, int noise);
+public:
+	void Update(float fTime, float fTimeDelta);
 
 protected:
-	CGeoTriangleTable* m_zgSchneemann;
-	CFileWavefront m_zfwSchneemann;
-	CMaterial m_zmSchneemannBlack;
-	CMaterial m_zmSchneemannRed;
-
-
+	CAvailableOptions m_AvailableOptions;
 };
 

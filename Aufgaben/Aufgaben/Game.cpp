@@ -3,7 +3,7 @@
 #include "Welt.h"
 #include "Steuerung.h"
 #include "DefaultNpc.h"
-#include "CNormalDistribution.h"
+#include "NormalDistribution.h"
 #include "PerlinNoise.h"
 
 CGame::CGame()

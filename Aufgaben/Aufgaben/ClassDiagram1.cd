@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CAction" Collapsed="true">
+    <Position X="3.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Action.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAIComponent" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAgAAAAAAAA=</HashCode>
+      <FileName>AIComponent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CNormalDistribution" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAACAAAAAAAAAAQQAAAAAAAAAAAA=</HashCode>
+      <FileName>NormalDistribution.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CKinematics" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIBAAAACEAgAAAAABAAAAAAABAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Kinematics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COctave" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIACAAAAAAAAAAAAAIAAAAAAAACAAAAAACABAA=</HashCode>
+      <FileName>Octave.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDefaultNpc" Collapsed="true">
+    <Position X="7.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>DefaultNpc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGame" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQABAIAAAAQAAAAAgOAAABZEAkEAAACAAgAQAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GeoFigure" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAABAAQACAAACAAAAAAA=</HashCode>
+      <FileName>GeoFigure.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CNpc" Collapsed="true">
+    <Position X="8.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Npc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPerlinNoise" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAIAAAAAAEABAAAAAAAAAAABAAAAAAEIAAAAA=</HashCode>
+      <FileName>PerlinNoise.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRedNpc" Collapsed="true">
+    <Position X="9.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhAAAACAAAAAAA=</HashCode>
+      <FileName>RedNpc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSteuerung" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABkAAAAAAAAQAAABAAQYAwAABIAAIAgAAkACAAAAABE=</HashCode>
+      <FileName>Steuerung.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Welt" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAAAAAAAAAAABAAQAgAZAAAAAAAICEAAAIAQ=</HashCode>
+      <FileName>Welt.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCharacter" Collapsed="true">
+    <Position X="9.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAEAigAAAAAAAEAAAAAAABBAAAAABACAAAAAAA=</HashCode>
+      <FileName>Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPlayerCharacter" Collapsed="true">
+    <Position X="12" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>PlayerCharacter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COption" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Option.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAvailableOptions" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACCAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>AvailableOptions.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFiveDegreeInterpolation" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>FiveDegreeInterpolation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CInterpolationFunction" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>InterpolationFunction.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLinearInterpolation" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>LinearInterpolation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CThreeDegreeInterpolation" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>ThreeDegreeInterpolation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSteeringBehavior" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>SteeringBehavior.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSteeringBehaviorKinematicFLEE" Collapsed="true">
+    <Position X="5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>SteeringBehaviorKinematicFLEE.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSteeringBehaviorKinematicSEEK" Collapsed="true">
+    <Position X="2.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAACAAAAAAAAAAAAIAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>SteeringBehaviorKinematicSEEK.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CKnowledge" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Knowledge.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CKnowledgePosition" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>KnowledgePosition.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CKnowledgeCharacter" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAIAAACAAAAA=</HashCode>
+      <FileName>KnowledgeCharacter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="SOctaveTuple" Collapsed="true">
+    <Position X="14.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Octave.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

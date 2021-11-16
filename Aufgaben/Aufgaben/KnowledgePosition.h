@@ -1,16 +1,15 @@
 #pragma once
 
-#include "Knowledge.h"
+#include "KnowledgeCharacter.h"
 
-class CKnowledgePosition : public CKnowledge
+class CKnowledgePosition : public CKnowledgeCharacter
 {
 public:
-	CKnowledgePosition(const CHVector* pPos);
+	CKnowledgePosition(CCharacter* pCharacter);
 	~CKnowledgePosition();
 
 public:
-	const CHVector* GetPos() const;
+	CHVector GetPos() const;
 
 private:
-	const CHVector* m_pPos;
 };

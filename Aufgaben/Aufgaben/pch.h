@@ -23,6 +23,7 @@
 // C++ / STL Libs
 #include <iostream>
 #include <locale>
+#include <vector>
 
 // Vektoria
 #ifdef _WIN64
