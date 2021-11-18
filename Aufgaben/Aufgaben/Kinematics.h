@@ -11,6 +11,8 @@ public:
 	float GetOrientation();
 	CHVector GetMovementForce();
 	float GetRotationVelocity();
+	float GetMaxMovementForce();
+	float GetMaxRotationVelocity();
 
 	void SetOrientation(float fAngle);
 	void SetMovementForce(CHVector vMovementForce);

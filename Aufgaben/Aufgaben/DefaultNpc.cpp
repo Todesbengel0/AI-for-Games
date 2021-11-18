@@ -3,7 +3,7 @@
 
 CDefaultNpc::CDefaultNpc()
 {
-	
+	//Add all available Options for Default NPC
 }
 
 CDefaultNpc::~CDefaultNpc()

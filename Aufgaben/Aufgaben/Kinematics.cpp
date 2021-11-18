@@ -3,7 +3,10 @@
 
 CKinematics::CKinematics()
 {
-
+	m_MaxMovementForce = 1.0f;
+	m_MaxRotationVelocity = 1.0f;
+	m_RotationVelocity = 0.0f;
+	m_MovementForce = CHVector(0.0f, 0.0f, 0.0f);
 }
 
 CKinematics::~CKinematics()
@@ -31,6 +34,16 @@ CHVector CKinematics::GetMovementForce()
 float CKinematics::GetRotationVelocity()
 {
 	return m_RotationVelocity;
+}
+
+float CKinematics::GetMaxMovementForce()
+{
+	return m_MaxMovementForce;
+}
+
+float CKinematics::GetMaxRotationVelocity()
+{
+	return m_MaxRotationVelocity;
 }
 
 void CKinematics::SetOrientation(float fAngle)

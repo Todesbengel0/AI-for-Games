@@ -28,6 +28,9 @@
     <Filter Include="Diagrams">
       <UniqueIdentifier>{5730c117-6aac-49b5-a066-f805270d8bfe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NPC">
+      <UniqueIdentifier>{68f1d5da-0dd9-4976-b3e3-d2a1e4696b9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -49,15 +52,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Steuerung.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Npc.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="DefaultNpc.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="RedNpc.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="PerlinNoise.h">
@@ -123,6 +117,15 @@
     <ClInclude Include="AvailableOptions.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="RedNpc.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultNpc.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -141,15 +144,6 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Steuerung.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Npc.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="DefaultNpc.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="RedNpc.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="PerlinNoise.cpp">
@@ -208,6 +202,15 @@
     </ClCompile>
     <ClCompile Include="AvailableOptions.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="RedNpc.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultNpc.cpp">
+      <Filter>NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

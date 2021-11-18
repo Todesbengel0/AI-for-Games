@@ -3,6 +3,7 @@
 
 CNpc::CNpc()
 {
+	m_AvailableOptions = CAvailableOptions();
 }
 
 CNpc::~CNpc()

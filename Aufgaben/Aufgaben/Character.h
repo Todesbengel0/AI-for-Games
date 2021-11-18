@@ -17,7 +17,7 @@ public:
 public:
 	CKinematics& GetKinematics();
 
-public:
+protected:
 	// Placement bezogene Daten
 	CKinematics m_zp;
 
