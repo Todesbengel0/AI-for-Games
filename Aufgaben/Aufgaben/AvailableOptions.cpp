@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "AvailableOptions.h"
+#include "SteeringBehaviorsInclude.h"
 
 CAvailableOptions::CAvailableOptions()
 {

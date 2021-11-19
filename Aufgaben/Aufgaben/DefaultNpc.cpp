@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "DefaultNpc.h"
+#include "SteeringBehaviorsInclude.h"
 
 CDefaultNpc::CDefaultNpc()
 {
-	//Add all available Options for Default NPC
+
 }
 
 CDefaultNpc::~CDefaultNpc()
@@ -13,6 +14,7 @@ CDefaultNpc::~CDefaultNpc()
 void CDefaultNpc::Init()
 {
 	CNpc::Init();
-	m_zgSchneemann->SetMaterial(&m_zmSchneemannBlack);
+	m_zm.MakeTextureDiffuse("textures\\schneeman_farbe.png");
+	m_zgMesh->SetMaterial(&m_zm);
 	
 }

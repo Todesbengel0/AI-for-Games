@@ -2,6 +2,7 @@
 #include "Character.h"
 
 CCharacter::CCharacter()
+	: m_zgMesh(nullptr)
 {
 
 }
@@ -13,15 +14,13 @@ CCharacter::~CCharacter()
 
 void CCharacter::Init()
 {
-	m_zgSchneemann = m_zfwSchneemann.LoadGeoTriangleTable("Geos\\Schneeman_mit_Hut.obj", true);
-	m_zmSchneemannBlack.MakeTextureDiffuse("textures\\schneeman_farbe.png");
-	m_zmSchneemannRed.MakeTextureDiffuse("textures\\schneeman_rot.png");
-	m_zp.AddGeo(m_zgSchneemann);
+	m_zgMesh = m_zfWaveFront.LoadGeoTriangleTable("Geos\\Schneeman_mit_Hut.obj", true);
+	m_zpKinematics.AddGeo(m_zgMesh);
 }
 
 void CCharacter::Fini()
 {
-	delete m_zgSchneemann;
+	delete m_zgMesh;
 }
 
 void CCharacter::Spawn(CHVector dimension, int noise)
@@ -31,13 +30,13 @@ void CCharacter::Spawn(CHVector dimension, int noise)
 	float xSpawn = random.RandFt() * dimension.x;
 	float zSpawn = random.RandFt() * dimension.z;
 	float yRot = random.RandFt() * PI;
-	SwitchOn();
-	RotateY(yRot);
-	TranslateDelta(xSpawn, dimension.y, zSpawn);
+	m_zpKinematics.SwitchOn();
+	m_zpKinematics.RotateY(yRot);
+	m_zpKinematics.TranslateDelta(xSpawn, dimension.y, zSpawn);
 }
 
-Vektoria::CPlacement& CCharacter::GetKinematics()
+CKinematics& CCharacter::GetKinematics()
 {
-	return m_zp;
+	return m_zpKinematics;
 }
 

@@ -9,7 +9,7 @@ public:
 	~CKnowledgePosition();
 
 public:
-	CHVector GetPos() const;
+	CHVector GetPosition() const;
 
 private:
 };

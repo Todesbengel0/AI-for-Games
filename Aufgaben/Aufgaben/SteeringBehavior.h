@@ -5,7 +5,7 @@
 class CSteeringBehavior : public CAction
 {
 public:
-	CSteeringBehavior();
+	CSteeringBehavior(CNpc* user);
 	virtual ~CSteeringBehavior();
 
 public:

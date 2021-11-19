@@ -5,6 +5,6 @@
 class CAction : public COption
 {
 public:
-	CAction();
+	CAction(CNpc* user);
 	~CAction();
 };

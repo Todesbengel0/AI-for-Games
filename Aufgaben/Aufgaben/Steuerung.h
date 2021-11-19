@@ -9,16 +9,16 @@ public:
 	void Init(CCamera* Camera, CFrame* Frame);
 	bool GetSchmutzporn();
 	void SetSchmutzporn(bool pornoeus);
-	CDeviceKeyboard* getKeyboard();
+	CDeviceKeyboard* GetKeyboard();
 
 private:
-	CDeviceKeyboard m_zdTastatur;
+	CDeviceKeyboard m_zdKeyboard;
 	CCamera* m_zc;
 
-	float Kamerazoom = 0.1f;
-	float m_iWS = 0, m_iAD = 0, m_iLR = 0, m_iUD = 0, m_iHR = 0;
-	int m_isensitivity = 1;
-	CHMat m_zhmAnfangspos;
-	bool m_bFirsttick = true, m_bSchmutzporn = false;
+	float m_fCameraZoom = 0.1f;
+	float m_fWS = 0.0f, m_fAD = 0.0f, m_fLR = 0.0f, m_fUD = 0.0f, m_fHR = 0.0f;
+	int m_iSensitivity = 1;
+	CHMat m_zhmStartPosition;
+	bool m_bFirsttick = true, m_bSchmutzporn = false, m_bToggleMovement = false;
 };
 

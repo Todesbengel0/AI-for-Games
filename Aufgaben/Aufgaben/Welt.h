@@ -2,6 +2,7 @@
 
 #include "DefaultNpc.h"
 #include "RedNpc.h"
+#include "AvailableOptions.h"
 
 class Welt
 {

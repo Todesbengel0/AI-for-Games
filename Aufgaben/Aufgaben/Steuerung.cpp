@@ -2,6 +2,7 @@
 #include "Steuerung.h"
 
 CSteuerung::CSteuerung()
+	: m_zc(nullptr)
 {
 
 }
@@ -14,11 +15,11 @@ void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
 {
 	if (m_bFirsttick)
 	{
-		m_zhmAnfangspos = Objekt.GetMat();
+		m_zhmStartPosition = Objekt.GetMat();
 		m_bFirsttick = false;
 	}
 
-	if (m_zdTastatur.KeyPressed(DIK_LSHIFT))
+	if (m_zdKeyboard.KeyPressed(DIK_LSHIFT))
 	{
 		Objekt.SetTranslationSensitivity(150.f);
 	}
@@ -27,71 +28,55 @@ void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
 		Objekt.SetTranslationSensitivity(50.f);
 	}
 
-	m_iWS = 0; m_iAD = 0; m_iLR = 0; m_iUD = 0; m_iHR = 0;
+	m_fWS = 0; m_fAD = 0; m_fLR = 0; m_fUD = 0; m_fHR = 0;
 
-	if (m_zdTastatur.KeyPressed(DIK_G))
+	if (m_zdKeyboard.KeyPressed(DIK_G))
 	{
-		Kamerazoom += fTimeDelta;
-		m_zc->SetFov(Kamerazoom);
+		m_fCameraZoom += fTimeDelta;
+		m_zc->SetFov(m_fCameraZoom);
 	}
-	if (m_zdTastatur.KeyPressed(DIK_Y))
+	if (m_zdKeyboard.KeyPressed(DIK_Y))
 	{
-		Kamerazoom -= fTimeDelta;
-		m_zc->SetFov(Kamerazoom);
+		m_fCameraZoom -= fTimeDelta;
+		m_zc->SetFov(m_fCameraZoom);
 	}
-
-	if (m_zdTastatur.KeyPressed(DIK_W))
+	m_bToggleMovement = m_zdKeyboard.KeyPressed(DIK_LCONTROL);
+	if (m_zdKeyboard.KeyPressed(DIK_UPARROW))
 	{
-		m_iWS = -1;
+		m_bToggleMovement ? (m_fUD = 1.0f) : (m_fWS = -1.0f);
 	}
-	if (m_zdTastatur.KeyPressed(DIK_S))
+	if (m_zdKeyboard.KeyPressed(DIK_DOWNARROW))
 	{
-		m_iWS = 1;
+		m_bToggleMovement ? (m_fUD = -1.0f) : (m_fWS = 1.0f);
 	}
-	if (m_zdTastatur.KeyPressed(DIK_A))
+	if (m_zdKeyboard.KeyPressed(DIK_LEFTARROW))
 	{
-		m_iAD = -1;
+		(m_bToggleMovement ? m_fLR : m_fAD) = -1.0f;
 	}
-	if (m_zdTastatur.KeyPressed(DIK_D))
+	if (m_zdKeyboard.KeyPressed(DIK_RIGHTARROW))
 	{
-		m_iAD = 1;
+		(m_bToggleMovement ? m_fLR : m_fAD) = 1.0f;
 	}
-	if (m_zdTastatur.KeyPressed(DIK_LEFTARROW))
+	if (m_zdKeyboard.KeyPressed(DIK_R))
 	{
-		m_iLR = -1;
+		Objekt.SetMat(m_zhmStartPosition);
 	}
-	if (m_zdTastatur.KeyPressed(DIK_RIGHTARROW))
+	if (m_zdKeyboard.KeyPressed(DIK_L))
 	{
-		m_iLR = 1;
+		m_fHR = -1;
 	}
-	if (m_zdTastatur.KeyPressed(DIK_UPARROW))
+	if (m_zdKeyboard.KeyPressed(DIK_O))
 	{
-		m_iUD = 1;
-	}
-	if (m_zdTastatur.KeyPressed(DIK_DOWNARROW))
-	{
-		m_iUD = -1;
-	}
-	if (m_zdTastatur.KeyPressed(DIK_R))
-	{
-		Objekt.SetMat(m_zhmAnfangspos);
-	}
-	if (m_zdTastatur.KeyPressed(DIK_L))
-	{
-		m_iHR = -1;
-	}
-	if (m_zdTastatur.KeyPressed(DIK_O))
-	{
-		m_iHR = 1;
+		m_fHR = 1;
 	}
 
-	if (m_zdTastatur.KeyDown(DIK_SPACE))
+	if (m_zdKeyboard.KeyDown(DIK_SPACE))
 	{
 		m_bSchmutzporn = true;
 	}
 
 
-	Objekt.Move(fTimeDelta, false, m_iAD, m_iWS, m_iHR, m_iLR, m_iUD);
+	Objekt.Move(fTimeDelta, false, m_fAD, m_fWS, m_fHR, m_fLR, m_fUD);
 
 	
 }
@@ -99,7 +84,7 @@ void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
 void CSteuerung::Init(CCamera* Camera, CFrame* Frame)
 {
 	m_zc = Camera;
-	Frame->AddDeviceKeyboard(&m_zdTastatur);
+	Frame->AddDeviceKeyboard(&m_zdKeyboard);
 }
 
 bool CSteuerung::GetSchmutzporn()
@@ -112,7 +97,7 @@ void CSteuerung::SetSchmutzporn(bool pornoeus)
 	m_bSchmutzporn = pornoeus;
 }
 
-CDeviceKeyboard* CSteuerung::getKeyboard()
+CDeviceKeyboard* CSteuerung::GetKeyboard()
 {
-	return &m_zdTastatur;
+	return &m_zdKeyboard;
 }

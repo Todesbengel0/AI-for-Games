@@ -2,8 +2,8 @@
 #include "Option.h"
 #include "NPC.h"
 
-COption::COption(CNPC* user)
-	: m_user(user)
+COption::COption(CNpc* user)
+	: m_pUser(user)
 {
 }
 

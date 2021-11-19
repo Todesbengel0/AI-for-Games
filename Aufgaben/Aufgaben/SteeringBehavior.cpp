@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "SteeringBehavior.h"
 
-CSteeringBehavior::CSteeringBehavior()
+CSteeringBehavior::CSteeringBehavior(CNpc* user)
+	: CAction(user)
 {
-
 }
 
 CSteeringBehavior::~CSteeringBehavior()

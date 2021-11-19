@@ -16,7 +16,7 @@ CKinematics::~CKinematics()
 
 CHVector CKinematics::GetPosition()
 {
-	return GetPos();
+	return GetPosition();
 }
 
 float CKinematics::GetOrientation()
@@ -70,4 +70,9 @@ void CKinematics::SetMaxMovementForce(float force)
 void CKinematics::SetMaxRotationVelocity(float vel)
 {
 	m_MaxRotationVelocity = vel;
+}
+
+void CKinematics::AddOrientation(float fAngle)
+{
+	RotateYDelta(fAngle);
 }

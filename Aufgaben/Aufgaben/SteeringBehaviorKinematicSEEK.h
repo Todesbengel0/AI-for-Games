@@ -6,11 +6,12 @@ class CKnowledgePosition;
 class CSteeringBehaviorKinematicSEEK : public CSteeringBehavior
 {
 public:
-	CSteeringBehaviorKinematicSEEK(CKnowledgePosition* pKnowledge);
+	CSteeringBehaviorKinematicSEEK(CNpc* user);
 	~CSteeringBehaviorKinematicSEEK();
 
 public:
 	CHVector GetForce() override;
+	void SetKnowledgePosition(CKnowledgePosition* target);
 
 private:
 	CKnowledgePosition* m_pKnowledge;

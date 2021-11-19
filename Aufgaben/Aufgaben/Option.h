@@ -2,17 +2,17 @@
 
 #include "AIComponent.h"
 
-class CNPC;
+class CNpc;
 
 class COption : public CAIComponent
 {
 public:
-	COption(CNPC* user);
+	COption(CNpc* user);
 	~COption();
 
 public:
 	virtual void Execute() = 0;
 
 protected:
-	CNPC* m_user;
+	CNpc* m_pUser;
 };

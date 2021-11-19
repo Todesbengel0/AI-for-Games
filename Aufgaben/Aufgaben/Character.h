@@ -19,11 +19,10 @@ public:
 
 protected:
 	// Placement bezogene Daten
-	CKinematics m_zp;
+	CKinematics m_zpKinematics;
 
 	// Geometrie bezogene Daten
-	CGeoTriangleTable* m_zgSchneemann;
-	CFileWavefront m_zfwSchneemann;
-	CMaterial m_zmSchneemannBlack;
-	CMaterial m_zmSchneemannRed;
+	CGeoTriangleTable* m_zgMesh;
+	CFileWavefront m_zfWaveFront;
+	CMaterial m_zm;
 };

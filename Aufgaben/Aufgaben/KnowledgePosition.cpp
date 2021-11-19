@@ -11,7 +11,7 @@ CKnowledgePosition::~CKnowledgePosition()
 {
 }
 
-CHVector CKnowledgePosition::GetPos() const
+CHVector CKnowledgePosition::GetPosition() const
 {
-	return m_pCharacter->GetKinematics().GetPos();
+	return m_pCharacter->GetKinematics().GetPosition();
 }
