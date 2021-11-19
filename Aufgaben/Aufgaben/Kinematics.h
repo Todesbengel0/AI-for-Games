@@ -20,6 +20,8 @@ public:
 	void SetMaxMovementForce(float force);
 	void SetMaxRotationVelocity(float vel);
 
+	void AddOrientation(float fAngle);
+
 private:
 	CHVector m_MovementForce;
 	float m_RotationVelocity;

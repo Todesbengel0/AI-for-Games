@@ -169,6 +169,7 @@
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="SteeringBehaviorKinematicFLEE.h" />
     <ClInclude Include="SteeringBehaviorKinematicSEEK.h" />
+    <ClInclude Include="SteeringBehaviorsInclude.h" />
     <ClInclude Include="Steuerung.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreeDegreeInterpolation.h" />

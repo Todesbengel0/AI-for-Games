@@ -126,6 +126,9 @@
     <ClInclude Include="DefaultNpc.h">
       <Filter>NPC</Filter>
     </ClInclude>
+    <ClInclude Include="SteeringBehaviorsInclude.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
