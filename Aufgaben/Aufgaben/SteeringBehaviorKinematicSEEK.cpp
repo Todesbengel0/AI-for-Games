@@ -14,7 +14,7 @@ CSteeringBehaviorKinematicSEEK::~CSteeringBehaviorKinematicSEEK()
 
 CHVector CSteeringBehaviorKinematicSEEK::GetForce()
 {
-
+	return CHVector();
 }
 
 void CSteeringBehaviorKinematicSEEK::SetKnowledgePosition(CKnowledgePosition* target)

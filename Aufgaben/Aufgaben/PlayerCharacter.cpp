@@ -11,10 +11,11 @@ CPlayerCharacter::~CPlayerCharacter()
 
 void CPlayerCharacter::Init()
 {
-	m_zgMesh = m_zfWaveFront.LoadGeoTriangleTable("Geos\\Schneeman_mit_Hut.obj", true);
-	m_zm.MakeTextureDiffuse("textures\\schneeman_farbe.png");
+	m_zgMesh = m_zfWaveFront.LoadGeoTriangleTable("Geos\\elsa.obj", true);
+	m_zm.MakeTextureDiffuse("textures\\elsa_texture.png");
 	m_zpKinematics.AddGeo(m_zgMesh);
 	m_zgMesh->SetMaterial(&m_zm);
+	m_zpKinematics.Scale(4.0f);
 }
 
 void CPlayerCharacter::Update(float fTime, float fTimeDelta, CDeviceKeyboard* zdKeyboard)

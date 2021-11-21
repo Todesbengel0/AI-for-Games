@@ -1,5 +1,6 @@
 #pragma once
 
+#include "PlayerCharacter.h"
 #include "DefaultNpc.h"
 #include "RedNpc.h"
 
@@ -9,12 +10,14 @@ public:
 	Welt();
 	~Welt();
 
-	void setMaterial(CMaterial newmaterial);
-	void Init(CHVector Brettsize = CHVector(80.0f, 1.0f, 40.0f));
-	CHVector getBoardsize();
-	void SpawnNpc();
+public:
+	void Init(CHVector vBoardSize = CHVector(80.0f, 1.0f, 40.0f));
 	void Fini();
 
+	void SpawnNpc();
+
+public:
+	CHVector GetBoardsize();
 	CPlacement* getBrettPlacement();
 
 private:
@@ -23,8 +26,8 @@ private:
 	CMaterial m_zmBrett;
 	CHVector m_zhvSize;
 
+	CPlayerCharacter m_cPlayer;
 	CDefaultNpc m_cTestobjekt[15];
 	CRedNpc m_cRedObjekt[15];
-
 };
 

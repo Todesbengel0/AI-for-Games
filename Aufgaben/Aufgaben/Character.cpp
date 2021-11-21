@@ -18,21 +18,18 @@ void CCharacter::Init()
 	m_zpKinematics.AddGeo(m_zgMesh);
 }
 
+void CCharacter::Spawn(CHVector vPos /*= CHVector(0.0f, 0.0f, 0.0f)*/, CHVector vRot /*= CHVector(0.0f, 0.0f, 0.0f)*/)
+{
+	m_zpKinematics.RotateX(vRot.x);
+	m_zpKinematics.RotateYDelta(vRot.y);
+	m_zpKinematics.RotateZDelta(vRot.z);
+	m_zpKinematics.TranslateDelta(vPos);
+	m_zpKinematics.SwitchOn();
+}
+
 void CCharacter::Fini()
 {
 	delete m_zgMesh;
-}
-
-void CCharacter::Spawn(CHVector dimension, int noise)
-{
-	CRandom random;
-	random.SRand(int(time(nullptr)) * noise);
-	float xSpawn = random.RandFt() * dimension.x;
-	float zSpawn = random.RandFt() * dimension.z;
-	float yRot = random.RandFt() * PI;
-	m_zpKinematics.SwitchOn();
-	m_zpKinematics.RotateY(yRot);
-	m_zpKinematics.TranslateDelta(xSpawn, dimension.y, zSpawn);
 }
 
 CKinematics& CCharacter::GetKinematics()
