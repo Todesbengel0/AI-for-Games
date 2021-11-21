@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "SteeringBehaviorKinematicSEEK.h"
 
-CSteeringBehaviorKinematicSEEK::CSteeringBehaviorKinematicSEEK(CNpc* user)
-	: CSteeringBehavior(user),
-	m_pKnowledge(nullptr)
+CSteeringBehaviorKinematicSEEK::CSteeringBehaviorKinematicSEEK(CNpc* user, std::shared_ptr<CKnowledgePosition> target)
+	: CSteeringBehavior(user, NpcAIMode::KinematicSeek)
+	, m_pKnowledge(target)
 {
 
 }
@@ -12,12 +12,7 @@ CSteeringBehaviorKinematicSEEK::~CSteeringBehaviorKinematicSEEK()
 {
 }
 
-CHVector CSteeringBehaviorKinematicSEEK::GetForce()
+SSteeringForce CSteeringBehaviorKinematicSEEK::GetForce()
 {
-	return CHVector();
-}
-
-void CSteeringBehaviorKinematicSEEK::SetKnowledgePosition(CKnowledgePosition* target)
-{
-	m_pKnowledge = target;
+	return SSteeringForce();
 }

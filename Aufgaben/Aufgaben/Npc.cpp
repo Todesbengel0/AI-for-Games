@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Npc.h"
+#include "SteeringBehaviorsInclude.h"
+#include "KnowledgesInclude.h"
 
 CNpc::CNpc()
 {
@@ -15,7 +17,19 @@ void CNpc::Init(CHVector dimension)
 	m_zgMesh = m_zfWaveFront.LoadGeoTriangleTable("Geos\\Schneeman_mit_Hut.obj", true);
 	InitMaterial();
 
+	InitOptions();
+
 	CCharacter::Init(dimension);
+}
+
+void CNpc::InitOptions()
+{
+	std::shared_ptr<CKnowledgePosition> knowledgePlayerPos = GetKnowledge<CKnowledgePosition>("PlayerPos");
+	if (knowledgePlayerPos)
+	{
+		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorKinematicSEEK>(this, knowledgePlayerPos));
+		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorKinematicFLEE>(this, knowledgePlayerPos));
+	}
 }
 
 void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)
@@ -27,9 +41,9 @@ void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)
 	Spawn(CHVector(xSpawn, 0.0f, zSpawn), CHVector(0.0f, yRot, 0.0f));
 }
 
-void CNpc::Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard)
+void CNpc::Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
 {
-	m_AvailableOptions.ExecutePreferred(fTime, fTimeDelta);
+	m_AvailableOptions.UpdatePreferred(fTime, fTimeDelta, pSteuerung);
 }
 
 void CNpc::AddKnowledge(std::string name, std::shared_ptr<CKnowledge> knowledge)

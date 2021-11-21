@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "PlayerCharacter.h"
+#include "Steuerung.h"
 
 CPlayerCharacter::CPlayerCharacter()
 {
@@ -25,24 +26,24 @@ void CPlayerCharacter::Init(CHVector dimension)
 	CCharacter::Init(dimension);
 }
 
-void CPlayerCharacter::Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard)
+void CPlayerCharacter::Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
 {
 	float fSW = 0.0f;
 	float fLR = 0.0f;
 
-	if (pzdKeyboard->KeyPressed(DIK_W))
+	if (pSteuerung->GetKeyboard()->KeyPressed(DIK_W))
 	{
 		fSW = -1.0f;
 	}
-	if (pzdKeyboard->KeyPressed(DIK_S))
+	if (pSteuerung->GetKeyboard()->KeyPressed(DIK_S))
 	{
 		fSW = 1.0f;
 	}
-	if (pzdKeyboard->KeyPressed(DIK_A))
+	if (pSteuerung->GetKeyboard()->KeyPressed(DIK_A))
 	{
 		fLR = -1.0f;
 	}
-	if (pzdKeyboard->KeyPressed(DIK_D))
+	if (pSteuerung->GetKeyboard()->KeyPressed(DIK_D))
 	{
 		fLR = 1.0f;
 	}

@@ -1,14 +1,16 @@
 #pragma once
 
 #include "Action.h"
+#include "SteeringForce.h"
 
 class CSteeringBehavior : public CAction
 {
 public:
-	CSteeringBehavior(CNpc* user);
+	CSteeringBehavior(CNpc* user, NpcAIMode npcAiMode = NpcAIMode::Idle);
 	virtual ~CSteeringBehavior();
 
 public:
-	void Update(float fTime, float fTimeDelta);
-	virtual CHVector GetForce() = 0;
+	// final, da erbende Steering Behaviors GetForce() implementieren sollen, nicht Update()
+	void Update(float fTime, float fTimeDelta) final;
+	virtual SSteeringForce GetForce() = 0;
 };

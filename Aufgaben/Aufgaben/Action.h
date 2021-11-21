@@ -5,6 +5,6 @@
 class CAction : public COption
 {
 public:
-	CAction(CNpc* user);
+	CAction(CNpc* user, NpcAIMode npcAiMode = NpcAIMode::Idle);
 	~CAction();
 };

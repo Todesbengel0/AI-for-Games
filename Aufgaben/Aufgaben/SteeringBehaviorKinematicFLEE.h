@@ -7,13 +7,12 @@ class CKnowledgePosition;
 class CSteeringBehaviorKinematicFLEE : public CSteeringBehavior
 {
 public:
-	CSteeringBehaviorKinematicFLEE(CNpc* user);
+	CSteeringBehaviorKinematicFLEE(CNpc* user, std::shared_ptr<CKnowledgePosition> target);
 	~CSteeringBehaviorKinematicFLEE();
 
 public:
-	CHVector GetForce() override;
-	void SetKnowledgePosition(CKnowledgePosition* target);
+	SSteeringForce GetForce() override;
 
 private:
-	CKnowledgePosition* m_pKnowledgePosition;
+	std::shared_ptr<CKnowledgePosition> m_pKnowledgePosition;
 };

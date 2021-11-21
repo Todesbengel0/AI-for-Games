@@ -129,6 +129,15 @@
     <ClInclude Include="SteeringBehaviorsInclude.h">
       <Filter>SteeringBehavior</Filter>
     </ClInclude>
+    <ClInclude Include="SteeringForce.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="KnowledgesInclude.h">
+      <Filter>Knowledge</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcAIMode.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">

@@ -1,15 +1,22 @@
 #pragma once
+
+#include "NpcAIMode.h"
+
 class CSteuerung
 {
 public:
 	CSteuerung();
 	~CSteuerung();
 
-	void STDSteuerung(CPlacement& Objekt, float fTimeDelta);
+	void STDSteuerung(CPlacement& rzpCamera, float fTimeDelta);
 	void Init(CCamera* Camera, CFrame* Frame);
 	bool GetShouldSpawn();
 	void SetShouldSpawn(bool bShouldSpawn);
 	CDeviceKeyboard* GetKeyboard();
+	NpcAIMode GetNpcAIMode() const;
+
+private:
+	void CamSteuerung(CPlacement& rzpCamera, float fTimeDelta);
 
 private:
 	CDeviceKeyboard m_zdKeyboard;
@@ -20,5 +27,7 @@ private:
 	int m_iSensitivity = 1;
 	CHMat m_zhmStartPosition;
 	bool m_bFirsttick = true, m_bShouldSpawn = false, m_bToggleMovement = false;
+
+	NpcAIMode m_NpcAIMode;
 };
 

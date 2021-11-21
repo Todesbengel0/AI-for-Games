@@ -1,6 +1,7 @@
 #pragma once
 
 class COption;
+class CSteuerung;
 class CAvailableOptions
 {
 public:
@@ -8,11 +9,11 @@ public:
 	~CAvailableOptions();
 
 public:
-	void AddOption(COption* pOption);
-	void RemoveOption(COption* pOption);
+	void AddOption(std::shared_ptr<COption> pOption);
+	void RemoveOption(std::shared_ptr<COption> pOption);
 
-	void ExecutePreferred(float fTime, float fTimeDelta);
+	void UpdatePreferred(float fTime, float fTimeDelta, CSteuerung* pSteuerung);
 
 private:
-	std::vector<COption*> m_Options;
+	std::vector<std::shared_ptr<COption>> m_Options;
 };

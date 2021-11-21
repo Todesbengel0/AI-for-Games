@@ -4,6 +4,7 @@
 #include "DefaultNpc.h"
 #include "RedNpc.h"
 
+class CSteuerung;
 class Welt
 {
 public:
@@ -15,7 +16,7 @@ public:
 	void Fini();
 
 	void SpawnNpc();
-	void Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard);
+	void Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung);
 
 public:
 	CHVector GetBoardsize();

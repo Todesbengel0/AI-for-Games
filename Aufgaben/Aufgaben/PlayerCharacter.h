@@ -10,7 +10,7 @@ public:
 
 public:
 	void Init(CHVector dimension) override;
-	void Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard) override;
+	void Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung) override;
 
 private:
 };

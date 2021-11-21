@@ -3,29 +3,54 @@
 
 CSteuerung::CSteuerung()
 	: m_zc(nullptr)
+	, m_NpcAIMode(NpcAIMode::Idle)
 {
-
 }
 
 CSteuerung::~CSteuerung()
 {
 }
 
-void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
+void CSteuerung::STDSteuerung(CPlacement& rzpCamera, float fTimeDelta)
+{
+	// Kamerasteuerung
+	CamSteuerung(rzpCamera, fTimeDelta);
+	
+	// andere Keys
+	if (m_zdKeyboard.KeyDown(DIK_SPACE))
+	{
+		m_bShouldSpawn = true;
+	}
+
+	if (m_zdKeyboard.KeyDown(DIK_1))
+	{
+		m_NpcAIMode = NpcAIMode::Idle;
+	}
+	if (m_zdKeyboard.KeyDown(DIK_2))
+	{
+		m_NpcAIMode = NpcAIMode::KinematicSeek;
+	}
+	if (m_zdKeyboard.KeyDown(DIK_3))
+	{
+		m_NpcAIMode = NpcAIMode::KinematicFlee;
+	}
+}
+
+void CSteuerung::CamSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 {
 	if (m_bFirsttick)
 	{
-		m_zhmStartPosition = Objekt.GetMat();
+		m_zhmStartPosition = rzpCamera.GetMat();
 		m_bFirsttick = false;
 	}
 
 	if (m_zdKeyboard.KeyPressed(DIK_LSHIFT))
 	{
-		Objekt.SetTranslationSensitivity(150.f);
+		rzpCamera.SetTranslationSensitivity(150.f);
 	}
 	else
 	{
-		Objekt.SetTranslationSensitivity(50.f);
+		rzpCamera.SetTranslationSensitivity(50.f);
 	}
 
 	m_fWS = 0; m_fAD = 0; m_fLR = 0; m_fUD = 0; m_fHR = 0;
@@ -59,7 +84,7 @@ void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
 	}
 	if (m_zdKeyboard.KeyPressed(DIK_R))
 	{
-		Objekt.SetMat(m_zhmStartPosition);
+		rzpCamera.SetMat(m_zhmStartPosition);
 	}
 	if (m_zdKeyboard.KeyPressed(DIK_L))
 	{
@@ -70,15 +95,7 @@ void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
 		m_fHR = 1;
 	}
 
-	if (m_zdKeyboard.KeyDown(DIK_SPACE))
-	{
-		m_bShouldSpawn = true;
-	}
-
-
-	Objekt.Move(fTimeDelta, false, m_fAD, m_fWS, m_fHR, m_fLR, m_fUD);
-
-	
+	rzpCamera.Move(fTimeDelta, false, m_fAD, m_fWS, m_fHR, m_fLR, m_fUD);
 }
 
 void CSteuerung::Init(CCamera* Camera, CFrame* Frame)
@@ -100,4 +117,9 @@ void CSteuerung::SetShouldSpawn(bool bShouldSpawn)
 CDeviceKeyboard* CSteuerung::GetKeyboard()
 {
 	return &m_zdKeyboard;
+}
+
+NpcAIMode CSteuerung::GetNpcAIMode() const
+{
+	return m_NpcAIMode;
 }

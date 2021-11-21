@@ -1,23 +1,22 @@
 #include "pch.h"
 #include "AvailableOptions.h"
 #include "SteeringBehaviorsInclude.h"
+#include "Steuerung.h"
 
 CAvailableOptions::CAvailableOptions()
 {
-
 }
 
 CAvailableOptions::~CAvailableOptions()
 {
-
 }
 
-void CAvailableOptions::AddOption(COption* pOption)
+void CAvailableOptions::AddOption(std::shared_ptr<COption> pOption)
 {
 	m_Options.emplace_back(pOption);
 }
 
-void CAvailableOptions::RemoveOption(COption* pOption)
+void CAvailableOptions::RemoveOption(std::shared_ptr<COption> pOption)
 {
 	for (auto it = m_Options.begin(); it != m_Options.end(); ++it)
 	{
@@ -29,7 +28,11 @@ void CAvailableOptions::RemoveOption(COption* pOption)
 	}
 }
 
-void CAvailableOptions::ExecutePreferred(float fTime, float fTimeDelta)
+void CAvailableOptions::UpdatePreferred(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
 {
-
+	for (const auto& it : m_Options)
+	{
+		if (it->GetNpcAIMode() == pSteuerung->GetNpcAIMode())
+			it->Update(fTime, fTimeDelta);
+	}
 }

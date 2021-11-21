@@ -123,7 +123,7 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	}
 
 	// update des spielers & aller NPCs
-	m_cSpielbrett.Update(fTime, fTimeDelta, m_cSteuerung.GetKeyboard());
+	m_cSpielbrett.Update(fTime, fTimeDelta, &m_cSteuerung);
 }
 
 void CGame::Fini()
