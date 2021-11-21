@@ -47,8 +47,8 @@ void CGame::Init(HWND hwnd, void(*procOS)(HWND hwnd, unsigned int uWndFlags), CS
 	//Standardeinstellungen für die Camera als Ausgang
 	m_zpCamera.TranslateZ(210.0f);
 	m_zpCamera.RotateXDelta(UM_DEG2RAD(330));
-	m_zc.SetNearClipping(0.001f);
-	m_zc.SetFarClipping(1000.0f);
+	m_zc.SetNearClipping(0.1f);
+	m_zc.SetFarClipping(500.0f);
 
 	// Random Tests / Exports nach Excel
 	PlotNormalDistributionFloat();
