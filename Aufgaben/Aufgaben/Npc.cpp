@@ -9,14 +9,11 @@ CNpc::~CNpc()
 {
 }
 
-void CNpc::RandomSpawn(CHVector dimension, int noise)
+void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)
 {
-	CRandom random;
-	random.SRand(int(time(nullptr)) * noise);
-
-	float xSpawn = random.RandFt() * dimension.x;
-	float zSpawn = random.RandFt() * dimension.z;
-	float yRot = random.RandFt() * PI;
+	float xSpawn = rRnd.RandFt() * dimension.x;
+	float zSpawn = rRnd.RandFt() * dimension.z;
+	float yRot = rRnd.RandFt() * PI;
 
 	Spawn(CHVector(xSpawn, dimension.y, zSpawn), CHVector(0.0f, yRot, 0.0f));
 }

@@ -47,14 +47,17 @@ CHVector Welt::GetBoardsize()
 
 void Welt::SpawnNpc()
 {
+	CRandom spawnRnd;
+	spawnRnd.SRand(int(time(nullptr)));
+
 	int i = 0;
 	for (auto& Npc : m_cTestobjekt)
 	{
-		Npc.RandomSpawn(m_zhvSize, ++i);
+		Npc.RandomSpawn(m_zhvSize, spawnRnd);
 	}
 	for (auto& Npc : m_cRedObjekt)
 	{
-		Npc.RandomSpawn(m_zhvSize, ++i);
+		Npc.RandomSpawn(m_zhvSize, spawnRnd);
 	}
 }
 
