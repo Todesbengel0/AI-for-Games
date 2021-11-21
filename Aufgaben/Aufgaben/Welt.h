@@ -22,10 +22,10 @@ public:
 	CPlacement* getBrettPlacement();
 
 private:
-	CGeoCube m_zgcBrett;
-	CPlacement m_zpBrett;
-	CMaterial m_zmBrett;
-	CHVector m_zhvSize;
+	CGeoCube m_zgBoard;
+	CPlacement m_zpBoard;
+	CMaterial m_zmBoard;
+	CHVector m_vBoardSize;
 
 	CPlayerCharacter m_cPlayer;
 	CDefaultNpc m_cTestobjekt[15];

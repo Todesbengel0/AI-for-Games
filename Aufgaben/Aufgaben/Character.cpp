@@ -12,10 +12,16 @@ CCharacter::~CCharacter()
 
 }
 
-void CCharacter::Init()
+void CCharacter::Init(CHVector dimension)
 {
-	m_zgMesh = m_zfWaveFront.LoadGeoTriangleTable("Geos\\Schneeman_mit_Hut.obj", true);
-	m_zpKinematics.AddGeo(m_zgMesh);
+	// dimension / bounds
+	CAABB bounds(-dimension, dimension);
+	m_zpKinematics.SetMoveRange(bounds);
+
+	// zwischenplacement, um NUR model auszurichten, kann leer sein
+	m_zpModelFix.AddGeo(m_zgMesh);
+	m_zpModelFix.TranslateYDelta(dimension.y);
+	m_zpKinematics.AddPlacement(&m_zpModelFix);
 }
 
 void CCharacter::Spawn(CHVector vPos /*= CHVector(0.0f, 0.0f, 0.0f)*/, CHVector vRot /*= CHVector(0.0f, 0.0f, 0.0f)*/)

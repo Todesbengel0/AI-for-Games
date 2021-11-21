@@ -9,10 +9,8 @@ CRedNpc::~CRedNpc()
 {
 }
 
-void CRedNpc::Init()
+void CRedNpc::InitMaterial()
 {
-	CNpc::Init();
 	m_zm.MakeTextureDiffuse("textures\\schneeman_rot.png");
 	m_zgMesh->SetMaterial(&m_zm);
-
 }

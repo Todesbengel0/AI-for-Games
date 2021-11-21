@@ -9,13 +9,22 @@ CNpc::~CNpc()
 {
 }
 
+void CNpc::Init(CHVector dimension)
+{
+	// alle NPCs sind schneemänner
+	m_zgMesh = m_zfWaveFront.LoadGeoTriangleTable("Geos\\Schneeman_mit_Hut.obj", true);
+	InitMaterial();
+
+	CCharacter::Init(dimension);
+}
+
 void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)
 {
 	float xSpawn = rRnd.RandFt() * dimension.x;
 	float zSpawn = rRnd.RandFt() * dimension.z;
 	float yRot = rRnd.RandFt() * PI;
 
-	Spawn(CHVector(xSpawn, dimension.y, zSpawn), CHVector(0.0f, yRot, 0.0f));
+	Spawn(CHVector(xSpawn, 0.0f, zSpawn), CHVector(0.0f, yRot, 0.0f));
 }
 
 void CNpc::Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard)

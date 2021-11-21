@@ -9,6 +9,8 @@ public:
 	~CPlayerCharacter();
 
 public:
-	void Init() override;
+	void Init(CHVector dimension) override;
 	void Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard) override;
+
+private:
 };

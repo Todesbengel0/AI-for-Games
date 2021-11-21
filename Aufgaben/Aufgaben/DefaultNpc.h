@@ -3,11 +3,10 @@
 class CDefaultNpc : public CNpc
 {
 public:
-
 	CDefaultNpc();
 	~CDefaultNpc();
 
-	void Init();
-
+protected:
+	void InitMaterial() override;
 };
 

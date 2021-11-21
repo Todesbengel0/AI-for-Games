@@ -13,36 +13,36 @@ Welt::~Welt()
 
 void Welt::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 {
-	m_zhvSize = vBoardSize;
+	m_vBoardSize = vBoardSize;
 
 	// spielbrett
-	m_zgcBrett.Init(vBoardSize, nullptr);
-	m_zmBrett.MakeTextureDiffuse("textures\\snow.png");
-	m_zgcBrett.SetMaterial(&m_zmBrett);
-	m_zpBrett.AddGeo(&m_zgcBrett);
+	m_zgBoard.Init(vBoardSize, nullptr);
+	m_zmBoard.MakeTextureDiffuse("textures\\snow.png");
+	m_zgBoard.SetMaterial(&m_zmBoard);
+	m_zpBoard.AddGeo(&m_zgBoard);
 
 	// player
-	m_cPlayer.Init();
-	m_zpBrett.AddPlacement(&m_cPlayer.GetKinematics());
+	m_cPlayer.Init(m_vBoardSize);
+	m_zpBoard.AddPlacement(&m_cPlayer.GetKinematics());
 
 	// NPCs
 	for (auto& Npc : m_cTestobjekt)
 	{
-		Npc.Init();
-		m_zpBrett.AddPlacement(&Npc.GetKinematics());
+		Npc.Init(m_vBoardSize);
+		m_zpBoard.AddPlacement(&Npc.GetKinematics());
 		Npc.GetKinematics().SwitchOff();
 	}
 	for (auto& Npc : m_cRedObjekt)
 	{
-		Npc.Init();
-		m_zpBrett.AddPlacement(&Npc.GetKinematics());
+		Npc.Init(m_vBoardSize);
+		m_zpBoard.AddPlacement(&Npc.GetKinematics());
 		Npc.GetKinematics().SwitchOff();
 	}
 }
 
 CHVector Welt::GetBoardsize()
 {
-	return m_zhvSize;
+	return m_vBoardSize;
 }
 
 void Welt::SpawnNpc()
@@ -53,11 +53,11 @@ void Welt::SpawnNpc()
 	int i = 0;
 	for (auto& Npc : m_cTestobjekt)
 	{
-		Npc.RandomSpawn(m_zhvSize, spawnRnd);
+		Npc.RandomSpawn(m_vBoardSize, spawnRnd);
 	}
 	for (auto& Npc : m_cRedObjekt)
 	{
-		Npc.RandomSpawn(m_zhvSize, spawnRnd);
+		Npc.RandomSpawn(m_vBoardSize, spawnRnd);
 	}
 }
 
@@ -85,5 +85,5 @@ void Welt::Fini()
 
 CPlacement* Welt::getBrettPlacement()
 {
-	return &m_zpBrett;
+	return &m_zpBoard;
 }

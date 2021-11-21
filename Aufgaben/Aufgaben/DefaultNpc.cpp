@@ -4,17 +4,14 @@
 
 CDefaultNpc::CDefaultNpc()
 {
-
 }
 
 CDefaultNpc::~CDefaultNpc()
 {
 }
 
-void CDefaultNpc::Init()
+void CDefaultNpc::InitMaterial()
 {
-	CNpc::Init();
 	m_zm.MakeTextureDiffuse("textures\\schneeman_farbe.png");
 	m_zgMesh->SetMaterial(&m_zm);
-	
 }
