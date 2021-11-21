@@ -1,12 +1,15 @@
 #pragma once
 
-class CKinematics : public CPlacement
+class CKinematics
 {
 public:
 	CKinematics();
 	~CKinematics();
 
 public:
+	CPlacement& GetTopPlacement();
+	CPlacement& GetLowestPlacement();
+
 	CHVector GetPosition();
 	float GetOrientation();
 	CHVector GetMovementForce();
@@ -14,18 +17,22 @@ public:
 	float GetMaxMovementForce();
 	float GetMaxRotationVelocity();
 
-	void SetOrientation(float fAngle);
-	void SetMovementForce(CHVector vMovementForce);
+	void ResetPosRot();
+	void SetBounds(CHVector vMin, CHVector vMax);
+	void ChangeOrientation(float fAngle);
+	void ApplyMovementForce(CHVector vMovementForce);
 	void SetRotationVelocity(float vel);
 	void SetMaxMovementForce(float force);
 	void SetMaxRotationVelocity(float vel);
 
-	void AddOrientation(float fAngle);
+private:
+	void ClampInBounds();
 
 private:
+	// Rotation muss unabh. von Positions-Placement bleiben, sonst Rotation um aktuelle Translation
+	CPlacement m_zpPos;
+	CPlacement m_zpRot;
+
 	CHVector m_MovementForce;
 	float m_RotationVelocity;
-
-	float m_MaxMovementForce;
-	float m_MaxRotationVelocity;
 };

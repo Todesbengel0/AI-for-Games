@@ -4,38 +4,42 @@
 CCharacter::CCharacter()
 	: m_zgMesh(nullptr)
 {
-
 }
 
 CCharacter::~CCharacter()
 {
-
 }
 
 void CCharacter::Init(CHVector dimension)
 {
+	m_zpTop.AddPlacement(&m_zpKinematics.GetTopPlacement());
+
 	// dimension / bounds
-	CAABB bounds(-dimension, dimension);
-	m_zpKinematics.SetMoveRange(bounds);
+	m_zpKinematics.SetBounds(-dimension, dimension);
 
 	// zwischenplacement, um NUR model auszurichten, kann leer sein
-	m_zpModelFix.AddGeo(m_zgMesh);
-	m_zpModelFix.TranslateYDelta(dimension.y);
-	m_zpKinematics.AddPlacement(&m_zpModelFix);
+	m_zpModel.AddGeo(m_zgMesh);
+	m_zpModel.TranslateYDelta(dimension.y);
+	m_zpKinematics.GetLowestPlacement().AddPlacement(&m_zpModel);
 }
 
-void CCharacter::Spawn(CHVector vPos /*= CHVector(0.0f, 0.0f, 0.0f)*/, CHVector vRot /*= CHVector(0.0f, 0.0f, 0.0f)*/)
+void CCharacter::Spawn(CHVector vPos /*= CHVector(0.0f, 0.0f, 0.0f)*/, float fOrientationAngle /*= 0.0f*/)
 {
-	m_zpKinematics.RotateX(vRot.x);
-	m_zpKinematics.RotateYDelta(vRot.y);
-	m_zpKinematics.RotateZDelta(vRot.z);
-	m_zpKinematics.TranslateDelta(vPos);
-	m_zpKinematics.SwitchOn();
+	m_zpKinematics.ResetPosRot();
+	m_zpKinematics.ChangeOrientation(fOrientationAngle);
+	m_zpKinematics.ApplyMovementForce(vPos);
+
+	m_zpTop.SwitchOn();
 }
 
 void CCharacter::Fini()
 {
 	delete m_zgMesh;
+}
+
+CPlacement& CCharacter::GetPlacement()
+{
+	return m_zpTop;
 }
 
 CKinematics& CCharacter::GetKinematics()

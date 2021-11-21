@@ -38,7 +38,7 @@ void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)
 	float zSpawn = rRnd.RandFt() * dimension.z;
 	float yRot = rRnd.RandFt() * PI;
 
-	Spawn(CHVector(xSpawn, 0.0f, zSpawn), CHVector(0.0f, yRot, 0.0f));
+	Spawn(CHVector(xSpawn, 0.0f, zSpawn), yRot);
 }
 
 void CNpc::Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung)

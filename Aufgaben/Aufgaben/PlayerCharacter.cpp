@@ -17,11 +17,11 @@ void CPlayerCharacter::Init(CHVector dimension)
 	m_zgMesh->SetMaterial(&m_zm);
 
 	// skalierungsfix
-	m_zpModelFix.Scale(4.0f);
+	m_zpModel.Scale(4.0f);
 
 	// bewegungseigenschaften
-	m_zpKinematics.SetTranslationSensitivity(15.0f);
-	m_zpKinematics.SetRotationSensitivity(UM_DEG2RAD(90.0f));
+	m_zpKinematics.SetMaxMovementForce(15.0f);
+	m_zpKinematics.SetMaxRotationVelocity(UM_DEG2RAD(90.0f));
 
 	CCharacter::Init(dimension);
 }
@@ -51,5 +51,5 @@ void CPlayerCharacter::Update(float fTime, float fTimeDelta, CSteuerung* pSteuer
 	float fAD = 0.0f; // keine DIREKTE links- rechtsverschiebung!
 	float fFR = 0.0f; // keine hoch- runterverschiebung!
 	float fUD = 0.0f; // keine hoch- runterdrehung!
-	m_zpKinematics.Move(fTimeDelta, true, fAD, fSW, fFR, fLR, fUD);
+	m_zpKinematics.GetTopPlacement().Move(fTimeDelta, true, fAD, fSW, fFR, fLR, fUD);
 }

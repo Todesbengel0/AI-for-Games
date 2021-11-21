@@ -13,5 +13,5 @@ public:
 	SSteeringForce GetForce() override;
 
 private:
-	std::shared_ptr<CKnowledgePosition> m_pKnowledge;
+	std::shared_ptr<CKnowledgePosition> m_pKnowledgePosition;
 };

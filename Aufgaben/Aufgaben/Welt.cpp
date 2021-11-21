@@ -25,7 +25,7 @@ void Welt::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 
 	// player
 	m_cPlayer.Init(m_vBoardSize);
-	m_zpBoard.AddPlacement(&m_cPlayer.GetKinematics());
+	m_zpBoard.AddPlacement(&m_cPlayer.GetPlacement());
 
 	// NPCs
 	for (auto& Npc : m_cTestobjekt)
@@ -33,16 +33,16 @@ void Welt::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 		Npc.AddKnowledge("PlayerPos", std::make_shared<CKnowledgePosition>(&m_cPlayer));
 
 		Npc.Init(m_vBoardSize);
-		m_zpBoard.AddPlacement(&Npc.GetKinematics());
-		Npc.GetKinematics().SwitchOff();
+		m_zpBoard.AddPlacement(&Npc.GetPlacement());
+		Npc.GetPlacement().SwitchOff();
 	}
 	for (auto& Npc : m_cRedObjekt)
 	{
 		Npc.AddKnowledge("PlayerPos", std::make_shared<CKnowledgePosition>(&m_cPlayer));
 
 		Npc.Init(m_vBoardSize);
-		m_zpBoard.AddPlacement(&Npc.GetKinematics());
-		Npc.GetKinematics().SwitchOff();
+		m_zpBoard.AddPlacement(&Npc.GetPlacement());
+		Npc.GetPlacement().SwitchOff();
 	}
 }
 

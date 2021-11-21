@@ -20,17 +20,14 @@ SSteeringForce CSteeringBehaviorKinematicFLEE::GetForce()
 	if (!m_pKnowledgePosition)
 		return resForce;
 
-	//CHVector vTargetDir = m_pUser->GetKinematics().GetPosition() - m_pKnowledgePosition->GetPosition();
-	//vTargetDir.Norm();
-	//vTargetDir *= m_pUser->GetKinematics().GetMaxMovementForce();
-	//m_pUser->GetKinematics().SetMovementForce(vTargetDir);
-	//m_pUser->GetKinematics().SetOrientation(0.0f);
-
 	resForce.vMovementForce = m_pUser->GetKinematics().GetPosition() - m_pKnowledgePosition->GetPosition();
 	resForce.vMovementForce.Norm();
 	resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
 
-	resForce.fRotationForce = 0.0f;
+	// für korrekten Winkel muss Z-Achse invertiert werden
+	CHVector vFixedDir = resForce.vMovementForce;
+	vFixedDir.z = -vFixedDir.z;
+	resForce.fRotationForce = vFixedDir.AngleXZ();
 
 	return resForce;
 }

@@ -11,18 +11,20 @@ public:
 
 public:
 	virtual void Init(CHVector dimension);
-	void Spawn(CHVector vPos = CHVector(0.0f, 0.0f, 0.0f), CHVector vRot = CHVector(0.0f, 0.0f, 0.0f));
+	void Spawn(CHVector vPos = CHVector(0.0f, 0.0f, 0.0f), float fOrientationAngle = 0.0f);
 	virtual void Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung) = 0;
 	void Fini();
 
 // getter / setter
 public:
+	CPlacement& GetPlacement();
 	CKinematics& GetKinematics();
 
 protected:
 	// Placement bezogene Daten
-	CKinematics m_zpKinematics;
-	CPlacement m_zpModelFix;
+	CPlacement m_zpTop;	// nur um alle Placements zu aktivieren / deaktivieren
+	CKinematics m_zpKinematics; // kinematisch gesteuerte Position & Rotation
+	CPlacement m_zpModel; // Model
 
 	// Geometrie bezogene Daten
 	CGeoTriangleTable* m_zgMesh;
