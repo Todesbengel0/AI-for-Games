@@ -31,5 +31,7 @@ private:
 	CPlayerCharacter m_cPlayer;
 	CDefaultNpc m_cTestobjekt[15];
 	CRedNpc m_cRedObjekt[15];
+
+	CRandom m_SpawnRnd;
 };
 

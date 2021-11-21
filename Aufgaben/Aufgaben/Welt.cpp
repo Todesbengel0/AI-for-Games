@@ -17,6 +17,8 @@ void Welt::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 {
 	m_vBoardSize = vBoardSize;
 
+	m_SpawnRnd.SRand(int(time(nullptr)));
+
 	// spielbrett
 	m_zgBoard.Init(vBoardSize, nullptr);
 	m_zmBoard.MakeTextureDiffuse("textures\\snow.png");
@@ -53,18 +55,10 @@ CHVector Welt::GetBoardsize()
 
 void Welt::SpawnNpc()
 {
-	CRandom spawnRnd;
-	spawnRnd.SRand(int(time(nullptr)));
-
-	int i = 0;
-	for (auto& Npc : m_cTestobjekt)
-	{
-		Npc.RandomSpawn(m_vBoardSize, spawnRnd);
-	}
-	for (auto& Npc : m_cRedObjekt)
-	{
-		Npc.RandomSpawn(m_vBoardSize, spawnRnd);
-	}
+	for (auto& npc : m_cTestobjekt)
+		npc.RandomSpawn(m_vBoardSize, m_SpawnRnd);
+	for (auto& npc : m_cRedObjekt)
+		npc.RandomSpawn(m_vBoardSize, m_SpawnRnd);
 }
 
 void Welt::Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
@@ -81,15 +75,11 @@ void Welt::Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
 
 void Welt::Fini()
 {
-	for (auto& Npc : m_cTestobjekt)
-	{
-		Npc.Fini();
-	}
+	for (auto& npc : m_cTestobjekt)
+		npc.Fini();
 
-	for (auto& Npc : m_cRedObjekt)
-	{
-		Npc.Fini();
-	}
+	for (auto& npc : m_cRedObjekt)
+		npc.Fini();
 }
 
 CPlacement* Welt::getBrettPlacement()
