@@ -18,7 +18,7 @@ void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)
 	Spawn(CHVector(xSpawn, dimension.y, zSpawn), CHVector(0.0f, yRot, 0.0f));
 }
 
-void CNpc::Update(float fTime, float fTimeDelta)
+void CNpc::Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard)
 {
 	m_AvailableOptions.ExecutePreferred(fTime, fTimeDelta);
 }

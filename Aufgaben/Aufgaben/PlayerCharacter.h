@@ -10,5 +10,5 @@ public:
 
 public:
 	void Init() override;
-	void Update(float fTime, float fTimeDelta, CDeviceKeyboard* zdKeyboard);
+	void Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard) override;
 };

@@ -61,6 +61,15 @@ void Welt::SpawnNpc()
 	}
 }
 
+void Welt::Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard)
+{
+	m_cPlayer.Update(fTime, fTimeDelta, pzdKeyboard);
+	for (auto& npc : m_cTestobjekt)
+		npc.Update(fTime, fTimeDelta, pzdKeyboard);
+	for (auto& npc : m_cRedObjekt)
+		npc.Update(fTime, fTimeDelta, pzdKeyboard);
+}
+
 void Welt::Fini()
 {
 	for (auto& Npc : m_cTestobjekt)

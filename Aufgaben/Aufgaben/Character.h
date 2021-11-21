@@ -11,6 +11,7 @@ public:
 public:
 	virtual void Init();
 	void Spawn(CHVector vPos = CHVector(0.0f, 0.0f, 0.0f), CHVector vRot = CHVector(0.0f, 0.0f, 0.0f));
+	virtual void Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard) = 0;
 	void Fini();
 
 // getter / setter

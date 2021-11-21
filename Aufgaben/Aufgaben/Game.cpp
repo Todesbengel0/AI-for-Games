@@ -116,11 +116,14 @@ void CGame::Tick(float fTime, float fTimeDelta)
 	//Steuerung muss jeden Tick aufgerufen werden
 	m_cSteuerung.STDSteuerung(m_zpCamera, fTimeDelta);
 
-	if (m_cSteuerung.GetSchmutzporn())
+	if (m_cSteuerung.GetShouldSpawn())
 	{
 		m_cSpielbrett.SpawnNpc();
-		m_cSteuerung.SetSchmutzporn(false);
+		m_cSteuerung.SetShouldSpawn(false);
 	}
+
+	// update des spielers & aller NPCs
+	m_cSpielbrett.Update(fTime, fTimeDelta, m_cSteuerung.GetKeyboard());
 }
 
 void CGame::Fini()

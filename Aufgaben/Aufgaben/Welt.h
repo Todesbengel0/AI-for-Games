@@ -15,6 +15,7 @@ public:
 	void Fini();
 
 	void SpawnNpc();
+	void Update(float fTime, float fTimeDelta, CDeviceKeyboard* pzdKeyboard);
 
 public:
 	CHVector GetBoardsize();

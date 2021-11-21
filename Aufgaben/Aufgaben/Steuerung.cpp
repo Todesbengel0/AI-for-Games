@@ -72,7 +72,7 @@ void CSteuerung::STDSteuerung(CPlacement& Objekt, float fTimeDelta)
 
 	if (m_zdKeyboard.KeyDown(DIK_SPACE))
 	{
-		m_bSchmutzporn = true;
+		m_bShouldSpawn = true;
 	}
 
 
@@ -87,14 +87,14 @@ void CSteuerung::Init(CCamera* Camera, CFrame* Frame)
 	Frame->AddDeviceKeyboard(&m_zdKeyboard);
 }
 
-bool CSteuerung::GetSchmutzporn()
+bool CSteuerung::GetShouldSpawn()
 {
-	return m_bSchmutzporn;
+	return m_bShouldSpawn;
 }
 
-void CSteuerung::SetSchmutzporn(bool pornoeus)
+void CSteuerung::SetShouldSpawn(bool bShouldSpawn)
 {
-	m_bSchmutzporn = pornoeus;
+	m_bShouldSpawn = bShouldSpawn;
 }
 
 CDeviceKeyboard* CSteuerung::GetKeyboard()
