@@ -80,6 +80,8 @@ void Welt::Fini()
 
 	for (auto& npc : m_cRedObjekt)
 		npc.Fini();
+
+	m_cPlayer.Fini();
 }
 
 CPlacement* Welt::getBrettPlacement()
