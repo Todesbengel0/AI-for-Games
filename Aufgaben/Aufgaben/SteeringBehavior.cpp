@@ -15,6 +15,9 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 {
 	SSteeringForce force = GetForce();
 
-	m_pUser->GetKinematics().ApplyMovementForce(force.vMovementForce);
-	m_pUser->GetKinematics().ChangeOrientation(force.fRotationForce);
+	// bewegung
+	m_pUser->GetKinematics().ApplyMovementForce(force.vMovementForce * fTimeDelta);
+
+	// ausrichtung / rotation
+	m_pUser->GetKinematics().ChangeOrientation(force.fRotationForce /** fTimeDelta*/);
 }

@@ -5,7 +5,7 @@ CKinematics::CKinematics()
 	: m_MovementForce(0.0f, 0.0f, 0.0f)
 	, m_RotationVelocity(0.0f)
 {
-	SetMaxMovementForce(0.1f);
+	SetMaxMovementForce(1.0f);
 	SetMaxRotationVelocity(1.0f);
 
 	m_zpPos.AddPlacement(&m_zpRot);
