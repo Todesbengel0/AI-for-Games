@@ -34,6 +34,14 @@ void CSteuerung::STDSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 	{
 		m_NpcAIMode = NpcAIMode::KinematicFlee;
 	}
+	if (m_zdKeyboard.KeyDown(DIK_4))
+	{
+		m_NpcAIMode = NpcAIMode::DynamicSeek;
+	}
+	if (m_zdKeyboard.KeyDown(DIK_5))
+	{
+		m_NpcAIMode = NpcAIMode::DynamicFlee;
+	}
 }
 
 void CSteuerung::CamSteuerung(CPlacement& rzpCamera, float fTimeDelta)

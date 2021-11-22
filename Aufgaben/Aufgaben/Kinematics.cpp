@@ -64,6 +64,11 @@ float CKinematics::GetMaxRotationVelocity()
 	return m_zpPos.GetRotationSensitivity();
 }
 
+void CKinematics::SetPosition(CHVector vPos)
+{
+	m_zpPos.Translate(vPos);
+}
+
 void CKinematics::SetBounds(CHVector vMin, CHVector vMax)
 {
 	m_zpPos.SetMoveRange(CAABB(vMin, vMax));
@@ -76,10 +81,10 @@ void CKinematics::ChangeOrientation(float fAngle)
 	m_zpRot.RotateY(fAngle);
 }
 
-void CKinematics::ApplyMovementForce(CHVector vMovementForce)
+void CKinematics::ApplyMovementForce(CHVector vMovementForce, float fTimeDelta)
 {
 	m_MovementForce = vMovementForce;
-	m_zpPos.TranslateDelta(vMovementForce);
+	m_zpPos.TranslateDelta(vMovementForce * fTimeDelta);
 
 	// sicherstellen, dass bewegung in grenzen bleibt
 	ClampInBounds();

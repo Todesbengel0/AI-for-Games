@@ -6,4 +6,6 @@ enum class NpcAIMode
 
 	KinematicSeek,
 	KinematicFlee,
+	DynamicSeek,
+	DynamicFlee,
 };

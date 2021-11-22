@@ -16,8 +16,18 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 	SSteeringForce force = GetForce();
 
 	// bewegung
-	m_pUser->GetKinematics().ApplyMovementForce(force.vMovementForce * fTimeDelta);
+	Limit(force.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
+	m_pUser->GetKinematics().ApplyMovementForce(force.vMovementForce, fTimeDelta);
 
 	// ausrichtung / rotation
 	m_pUser->GetKinematics().ChangeOrientation(force.fRotationForce /** fTimeDelta*/);
+}
+
+void CSteeringBehavior::Limit(CHVector& v, float maxLength)
+{
+	if (v.Length() <= maxLength)
+		return;
+
+	v.Norm();
+	v *= maxLength;
 }

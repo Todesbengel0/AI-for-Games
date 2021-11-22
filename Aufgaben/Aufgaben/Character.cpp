@@ -27,7 +27,7 @@ void CCharacter::Spawn(CHVector vPos /*= CHVector(0.0f, 0.0f, 0.0f)*/, float fOr
 {
 	m_zpKinematics.ResetPosRot();
 	m_zpKinematics.ChangeOrientation(fOrientationAngle);
-	m_zpKinematics.ApplyMovementForce(vPos);
+	m_zpKinematics.SetPosition(vPos);
 
 	m_zpTop.SwitchOn();
 }
