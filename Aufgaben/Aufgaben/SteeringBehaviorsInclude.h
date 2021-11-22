@@ -5,3 +5,4 @@
 #include "SteeringBehaviorDynamicFLEE.h"
 #include "SteeringBehaviorDynamicARRIVE.h"
 #include "SteeringBehaviorDynamicWANDER.h"
+#include "SteeringBehaviorDynamicESCAPE.h"

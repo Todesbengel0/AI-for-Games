@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Headerdateien\InterpolationFunction">
-      <UniqueIdentifier>{3dc43e0b-dc0a-4f42-ad1f-6cd432b4a234}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\InterpolationFunction">
-      <UniqueIdentifier>{450f58dd-b92d-48c5-9073-309c82fe1c25}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SteeringBehavior">
       <UniqueIdentifier>{bb8cd4c7-e753-4f56-9626-50fbf0769483}</UniqueIdentifier>
     </Filter>
@@ -30,6 +24,9 @@
     </Filter>
     <Filter Include="NPC">
       <UniqueIdentifier>{68f1d5da-0dd9-4976-b3e3-d2a1e4696b9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterpolationFunction">
+      <UniqueIdentifier>{3dc43e0b-dc0a-4f42-ad1f-6cd432b4a234}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,19 +52,19 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="InterpolationFunction.h">
-      <Filter>Headerdateien\InterpolationFunction</Filter>
+      <Filter>InterpolationFunction</Filter>
     </ClInclude>
     <ClInclude Include="LinearInterpolation.h">
-      <Filter>Headerdateien\InterpolationFunction</Filter>
+      <Filter>InterpolationFunction</Filter>
     </ClInclude>
     <ClInclude Include="FiveDegreeInterpolation.h">
-      <Filter>Headerdateien\InterpolationFunction</Filter>
+      <Filter>InterpolationFunction</Filter>
     </ClInclude>
     <ClInclude Include="ThreeDegreeInterpolation.h">
-      <Filter>Headerdateien\InterpolationFunction</Filter>
+      <Filter>InterpolationFunction</Filter>
     </ClInclude>
     <ClInclude Include="interpolation.h">
-      <Filter>Headerdateien\InterpolationFunction</Filter>
+      <Filter>InterpolationFunction</Filter>
     </ClInclude>
     <ClInclude Include="SteeringBehavior.h">
       <Filter>SteeringBehavior</Filter>
@@ -144,17 +141,20 @@
     <ClInclude Include="SteeringBehaviorDynamicARRIVE.h">
       <Filter>SteeringBehavior</Filter>
     </ClInclude>
-    <ClInclude Include="KnowledgeWorld.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="KnowledgeWorldBorder.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ControlInput.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviorDynamicESCAPE.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="KnowledgeWorldBorder.h">
+      <Filter>Knowledge</Filter>
+    </ClInclude>
+    <ClInclude Include="KnowledgeWorld.h">
+      <Filter>Knowledge</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -175,15 +175,6 @@
     </ClCompile>
     <ClCompile Include="Octave.cpp">
       <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="FiveDegreeInterpolation.cpp">
-      <Filter>Quelldateien\InterpolationFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="LinearInterpolation.cpp">
-      <Filter>Quelldateien\InterpolationFunction</Filter>
-    </ClCompile>
-    <ClCompile Include="ThreeDegreeInterpolation.cpp">
-      <Filter>Quelldateien\InterpolationFunction</Filter>
     </ClCompile>
     <ClCompile Include="SteeringBehavior.cpp">
       <Filter>SteeringBehavior</Filter>
@@ -248,17 +239,29 @@
     <ClCompile Include="SteeringBehaviorDynamicARRIVE.cpp">
       <Filter>SteeringBehavior</Filter>
     </ClCompile>
-    <ClCompile Include="KnowledgeWorld.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="KnowledgeWorldBorder.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="ControlInput.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreeDegreeInterpolation.cpp">
+      <Filter>InterpolationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="FiveDegreeInterpolation.cpp">
+      <Filter>InterpolationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearInterpolation.cpp">
+      <Filter>InterpolationFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorDynamicESCAPE.cpp">
+      <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="KnowledgeWorldBorder.cpp">
+      <Filter>Knowledge</Filter>
+    </ClCompile>
+    <ClCompile Include="KnowledgeWorld.cpp">
+      <Filter>Knowledge</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

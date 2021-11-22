@@ -10,5 +10,6 @@ public:
 
 protected:
 	void InitMaterial() override;
+    void InitOptions() override;
 };
 

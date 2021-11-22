@@ -21,9 +21,7 @@ public:
 protected:
 	virtual void InitMaterial() = 0;
 
-private:
-	void InitOptions();
-
+	virtual void InitOptions();
 	template<typename KnowledgeTy>
 	std::shared_ptr<KnowledgeTy> GetKnowledge(std::string name);
 
@@ -48,4 +46,3 @@ std::shared_ptr<KnowledgeTy> CNpc::GetKnowledge(std::string name)
 
 	return std::dynamic_pointer_cast<KnowledgeTy>(it->second);
 }
-

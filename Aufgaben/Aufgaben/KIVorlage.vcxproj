@@ -172,6 +172,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="SteeringBehaviorDynamicARRIVE.h" />
+    <ClInclude Include="SteeringBehaviorDynamicESCAPE.h" />
     <ClInclude Include="SteeringBehaviorDynamicFLEE.h" />
     <ClInclude Include="SteeringBehaviorDynamicSEEK.h" />
     <ClInclude Include="SteeringBehaviorDynamicWANDER.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="KnowledgeWorld.cpp" />
     <ClCompile Include="KnowledgeWorldBorder.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicARRIVE.cpp" />
+    <ClCompile Include="SteeringBehaviorDynamicESCAPE.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicFLEE.cpp" />
     <ClCompile Include="KnowledgeCharacter.cpp" />
     <ClCompile Include="NormalDistribution.cpp" />

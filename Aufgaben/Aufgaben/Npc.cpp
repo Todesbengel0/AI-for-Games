@@ -34,7 +34,6 @@ void CNpc::InitOptions()
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorKinematicSEEK>(this, knowledgePlayerPos));
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorKinematicFLEE>(this, knowledgePlayerPos));
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicSEEK>(this, knowledgePlayerPos));
-		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicFLEE>(this, knowledgePlayerPos));
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicARRIVE>(this, knowledgePlayerPos));
 	}
 

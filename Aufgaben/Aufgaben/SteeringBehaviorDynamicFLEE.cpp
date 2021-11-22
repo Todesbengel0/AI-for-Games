@@ -27,8 +27,6 @@ SSteeringForce CSteeringBehaviorDynamicFLEE::GetForce()
 	CHVector vCurMovementForce = m_pUser->GetKinematics().GetMovementForce();
 	resForce.vMovementForce += vCurMovementForce;
 
-	// schönere Mittlung mit /2 (kein ARRIVE notwendig), aber nicht gefragt
-	//resForce.vMovementForce *= 0.5f;
 	resForce.vMovementForce.Norm();
 	resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
 
