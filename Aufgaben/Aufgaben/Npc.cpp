@@ -35,6 +35,13 @@ void CNpc::InitOptions()
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorKinematicFLEE>(this, knowledgePlayerPos));
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicSEEK>(this, knowledgePlayerPos));
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicFLEE>(this, knowledgePlayerPos));
+		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicARRIVE>(this, knowledgePlayerPos));
+	}
+
+	std::shared_ptr<CKnowledgeWorldBorder> knowledgeWorldBorder = GetKnowledge<CKnowledgeWorldBorder>("WorldBorder");
+	if (knowledgeWorldBorder)
+	{
+		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicWANDER>(this, knowledgeWorldBorder));
 	}
 }
 
@@ -47,7 +54,7 @@ void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)
 	Spawn(CHVector(xSpawn, 0.0f, zSpawn), yRot);
 }
 
-void CNpc::Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
+void CNpc::Update(float fTime, float fTimeDelta, CControlInput* pSteuerung)
 {
 	m_AvailableOptions.UpdatePreferred(fTime, fTimeDelta, pSteuerung);
 }

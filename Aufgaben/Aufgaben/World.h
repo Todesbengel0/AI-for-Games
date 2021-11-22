@@ -4,22 +4,22 @@
 #include "DefaultNpc.h"
 #include "RedNpc.h"
 
-class CSteuerung;
-class Welt
+class CControlInput;
+class CWorld
 {
 public:
-	Welt();
-	~Welt();
+	CWorld();
+	~CWorld();
 
 public:
 	void Init(CHVector vBoardSize = CHVector(80.0f, 1.0f, 40.0f));
 	void Fini();
 
 	void SpawnNpc();
-	void Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung);
+	void Update(float fTime, float fTimeDelta, CControlInput* pSteuerung);
 
 public:
-	CHVector GetBoardsize();
+	CHVector GetBoardSize();
 	CPlacement* getBrettPlacement();
 
 private:

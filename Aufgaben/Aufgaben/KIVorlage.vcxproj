@@ -148,6 +148,8 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="KnowledgeCharacter.h" />
     <ClInclude Include="KnowledgesInclude.h" />
+    <ClInclude Include="KnowledgeWorld.h" />
+    <ClInclude Include="KnowledgeWorldBorder.h" />
     <ClInclude Include="NormalDistribution.h" />
     <ClInclude Include="FiveDegreeInterpolation.h" />
     <ClInclude Include="interpolation.h" />
@@ -169,22 +171,27 @@
     <ClInclude Include="RedNpc.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SteeringBehavior.h" />
+    <ClInclude Include="SteeringBehaviorDynamicARRIVE.h" />
     <ClInclude Include="SteeringBehaviorDynamicFLEE.h" />
     <ClInclude Include="SteeringBehaviorDynamicSEEK.h" />
+    <ClInclude Include="SteeringBehaviorDynamicWANDER.h" />
     <ClInclude Include="SteeringBehaviorKinematicFLEE.h" />
     <ClInclude Include="SteeringBehaviorKinematicSEEK.h" />
     <ClInclude Include="SteeringBehaviorsInclude.h" />
     <ClInclude Include="SteeringForce.h" />
-    <ClInclude Include="Steuerung.h" />
+    <ClInclude Include="ControlInput.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreeDegreeInterpolation.h" />
-    <ClInclude Include="Welt.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="AvailableOptions.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="KnowledgeWorld.cpp" />
+    <ClCompile Include="KnowledgeWorldBorder.cpp" />
+    <ClCompile Include="SteeringBehaviorDynamicARRIVE.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicFLEE.cpp" />
     <ClCompile Include="KnowledgeCharacter.cpp" />
     <ClCompile Include="NormalDistribution.cpp" />
@@ -211,11 +218,12 @@
     <ClCompile Include="RedNpc.cpp" />
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicSEEK.cpp" />
+    <ClCompile Include="SteeringBehaviorDynamicWANDER.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicFLEE.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicSEEK.cpp" />
-    <ClCompile Include="Steuerung.cpp" />
+    <ClCompile Include="ControlInput.cpp" />
     <ClCompile Include="ThreeDegreeInterpolation.cpp" />
-    <ClCompile Include="Welt.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

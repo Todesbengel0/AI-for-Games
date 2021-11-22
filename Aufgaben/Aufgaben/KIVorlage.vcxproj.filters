@@ -48,12 +48,6 @@
     <ClInclude Include="pch.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Welt.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Steuerung.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="PerlinNoise.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -144,6 +138,24 @@
     <ClInclude Include="SteeringBehaviorDynamicFLEE.h">
       <Filter>SteeringBehavior</Filter>
     </ClInclude>
+    <ClInclude Include="SteeringBehaviorDynamicWANDER.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviorDynamicARRIVE.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="KnowledgeWorld.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="KnowledgeWorldBorder.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlInput.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -156,12 +168,6 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Welt.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Steuerung.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="PerlinNoise.cpp">
@@ -235,6 +241,24 @@
     </ClCompile>
     <ClCompile Include="SteeringBehaviorDynamicFLEE.cpp">
       <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorDynamicWANDER.cpp">
+      <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorDynamicARRIVE.cpp">
+      <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="KnowledgeWorld.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="KnowledgeWorldBorder.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlInput.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -37,11 +37,16 @@ CHVector CKinematics::GetPosition()
 	return m_zpPos.GetPos();
 }
 
-float CKinematics::GetOrientation()
+float CKinematics::GetOrientationAngle()
 {
 	CHVector vDir = -m_zpRot.GetDirection();
 	//std::atan2f(std::sqrtf( , vDir.y)
 	return vDir.AngleZX();
+}
+
+CHVector CKinematics::GetOrientationVec()
+{
+	return m_zpRot.GetDirection();
 }
 
 CHVector CKinematics::GetMovementForce()

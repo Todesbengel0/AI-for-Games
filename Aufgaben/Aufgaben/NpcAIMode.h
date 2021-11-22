@@ -8,4 +8,7 @@ enum class NpcAIMode
 	KinematicFlee,
 	DynamicSeek,
 	DynamicFlee,
+
+	DynamicArrive,
+	DynamicWander,
 };

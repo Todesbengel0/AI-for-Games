@@ -81,7 +81,7 @@
     <Position X="14.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABkAAAAAAAAQAAABAAQYAwAABIAAIAgAAkACAAAAABE=</HashCode>
-      <FileName>Steuerung.h</FileName>
+      <FileName>ControlInput.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Welt" Collapsed="true">

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "AvailableOptions.h"
 #include "SteeringBehaviorsInclude.h"
-#include "Steuerung.h"
+#include "ControlInput.h"
 
 CAvailableOptions::CAvailableOptions()
 {
@@ -28,7 +28,7 @@ void CAvailableOptions::RemoveOption(std::shared_ptr<COption> pOption)
 	}
 }
 
-void CAvailableOptions::UpdatePreferred(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
+void CAvailableOptions::UpdatePreferred(float fTime, float fTimeDelta, CControlInput* pSteuerung)
 {
 	for (const auto& it : m_Options)
 	{

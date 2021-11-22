@@ -1,19 +1,19 @@
 #include "pch.h"
-#include "Welt.h"
+#include "World.h"
 #include "KnowledgesInclude.h"
-#include "Steuerung.h"
+#include "ControlInput.h"
 
-Welt::Welt()
+CWorld::CWorld()
 {
 
 }
 
-Welt::~Welt()
+CWorld::~CWorld()
 {
 
 }
 
-void Welt::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
+void CWorld::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 {
 	m_vBoardSize = vBoardSize;
 
@@ -25,6 +25,10 @@ void Welt::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 	m_zgBoard.SetMaterial(&m_zmBoard);
 	m_zpBoard.AddGeo(&m_zgBoard);
 
+	// knowledges
+	auto knowledgeWorldBorder = std::make_shared<CKnowledgeWorldBorder>(this);
+	auto knowledgePlayerPos = std::make_shared<CKnowledgePosition>(&m_cPlayer);
+
 	// player
 	m_cPlayer.Init(m_vBoardSize);
 	m_zpBoard.AddPlacement(&m_cPlayer.GetPlacement());
@@ -32,7 +36,8 @@ void Welt::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 	// NPCs
 	for (auto& Npc : m_cTestobjekt)
 	{
-		Npc.AddKnowledge("PlayerPos", std::make_shared<CKnowledgePosition>(&m_cPlayer));
+		Npc.AddKnowledge("WorldBorder", knowledgeWorldBorder);
+		Npc.AddKnowledge("PlayerPos", knowledgePlayerPos);
 
 		Npc.Init(m_vBoardSize);
 		m_zpBoard.AddPlacement(&Npc.GetPlacement());
@@ -40,7 +45,8 @@ void Welt::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 	}
 	for (auto& Npc : m_cRedObjekt)
 	{
-		Npc.AddKnowledge("PlayerPos", std::make_shared<CKnowledgePosition>(&m_cPlayer));
+		Npc.AddKnowledge("WorldBorder", knowledgeWorldBorder);
+		Npc.AddKnowledge("PlayerPos", knowledgePlayerPos);
 
 		Npc.Init(m_vBoardSize);
 		m_zpBoard.AddPlacement(&Npc.GetPlacement());
@@ -48,12 +54,12 @@ void Welt::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 	}
 }
 
-CHVector Welt::GetBoardsize()
+CHVector CWorld::GetBoardSize()
 {
 	return m_vBoardSize;
 }
 
-void Welt::SpawnNpc()
+void CWorld::SpawnNpc()
 {
 	for (auto& npc : m_cTestobjekt)
 		npc.RandomSpawn(m_vBoardSize, m_SpawnRnd);
@@ -61,7 +67,7 @@ void Welt::SpawnNpc()
 		npc.RandomSpawn(m_vBoardSize, m_SpawnRnd);
 }
 
-void Welt::Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
+void CWorld::Update(float fTime, float fTimeDelta, CControlInput* pSteuerung)
 {
 	// eigenen spieler vor anderen updaten
 	m_cPlayer.Update(fTime, fTimeDelta, pSteuerung);
@@ -73,7 +79,7 @@ void Welt::Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
 		npc.Update(fTime, fTimeDelta, pSteuerung);
 }
 
-void Welt::Fini()
+void CWorld::Fini()
 {
 	for (auto& npc : m_cTestobjekt)
 		npc.Fini();
@@ -84,7 +90,7 @@ void Welt::Fini()
 	m_cPlayer.Fini();
 }
 
-CPlacement* Welt::getBrettPlacement()
+CPlacement* CWorld::getBrettPlacement()
 {
 	return &m_zpBoard;
 }

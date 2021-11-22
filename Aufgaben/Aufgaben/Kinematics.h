@@ -11,7 +11,8 @@ public:
 	CPlacement& GetLowestPlacement();
 
 	CHVector GetPosition();
-	float GetOrientation();
+	float GetOrientationAngle();
+	CHVector GetOrientationVec();
 	CHVector GetMovementForce();
 	float GetRotationVelocity();
 	float GetMaxMovementForce();

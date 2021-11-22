@@ -2,11 +2,11 @@
 
 #include "NpcAIMode.h"
 
-class CSteuerung
+class CControlInput
 {
 public:
-	CSteuerung();
-	~CSteuerung();
+	CControlInput();
+	~CControlInput();
 
 	void STDSteuerung(CPlacement& rzpCamera, float fTimeDelta);
 	void Init(CCamera* Camera, CFrame* Frame);

@@ -14,7 +14,7 @@ public:
 public:
 	void Init(CHVector dimension) override;
 	void RandomSpawn(CHVector dimension, CRandom& rRnd);
-	void Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung) override;
+	void Update(float fTime, float fTimeDelta, CControlInput* pSteuerung) override;
 	void AddKnowledge(std::string name, std::shared_ptr<CKnowledge> knowledge);
 	void RemoveKnowledge(std::string name);
 

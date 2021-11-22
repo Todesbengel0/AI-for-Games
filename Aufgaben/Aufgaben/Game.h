@@ -1,6 +1,6 @@
 #pragma once
-#include "Welt.h"
-#include "Steuerung.h"
+#include "World.h"
+#include "ControlInput.h"
 
 class CGame
 {
@@ -32,6 +32,6 @@ private:
 	CPlacement m_zpCameraForController;
 
 	//Eigene Objekte
-	Welt m_cSpielbrett;
-	CSteuerung m_cSteuerung;
+	CWorld m_cSpielbrett;
+	CControlInput m_cSteuerung;
 };

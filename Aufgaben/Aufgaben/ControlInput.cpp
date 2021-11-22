@@ -1,17 +1,17 @@
 #include "pch.h"
-#include "Steuerung.h"
+#include "ControlInput.h"
 
-CSteuerung::CSteuerung()
+CControlInput::CControlInput()
 	: m_zc(nullptr)
 	, m_NpcAIMode(NpcAIMode::Idle)
 {
 }
 
-CSteuerung::~CSteuerung()
+CControlInput::~CControlInput()
 {
 }
 
-void CSteuerung::STDSteuerung(CPlacement& rzpCamera, float fTimeDelta)
+void CControlInput::STDSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 {
 	// Kamerasteuerung
 	CamSteuerung(rzpCamera, fTimeDelta);
@@ -42,9 +42,17 @@ void CSteuerung::STDSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 	{
 		m_NpcAIMode = NpcAIMode::DynamicFlee;
 	}
+	if (m_zdKeyboard.KeyDown(DIK_6))
+	{
+		m_NpcAIMode = NpcAIMode::DynamicArrive;
+	}
+	if (m_zdKeyboard.KeyDown(DIK_7))
+	{
+		m_NpcAIMode = NpcAIMode::DynamicWander;
+	}
 }
 
-void CSteuerung::CamSteuerung(CPlacement& rzpCamera, float fTimeDelta)
+void CControlInput::CamSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 {
 	if (m_bFirsttick)
 	{
@@ -106,28 +114,28 @@ void CSteuerung::CamSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 	rzpCamera.Move(fTimeDelta, false, m_fAD, m_fWS, m_fHR, m_fLR, m_fUD);
 }
 
-void CSteuerung::Init(CCamera* Camera, CFrame* Frame)
+void CControlInput::Init(CCamera* Camera, CFrame* Frame)
 {
 	m_zc = Camera;
 	Frame->AddDeviceKeyboard(&m_zdKeyboard);
 }
 
-bool CSteuerung::GetShouldSpawn()
+bool CControlInput::GetShouldSpawn()
 {
 	return m_bShouldSpawn;
 }
 
-void CSteuerung::SetShouldSpawn(bool bShouldSpawn)
+void CControlInput::SetShouldSpawn(bool bShouldSpawn)
 {
 	m_bShouldSpawn = bShouldSpawn;
 }
 
-CDeviceKeyboard* CSteuerung::GetKeyboard()
+CDeviceKeyboard* CControlInput::GetKeyboard()
 {
 	return &m_zdKeyboard;
 }
 
-NpcAIMode CSteuerung::GetNpcAIMode() const
+NpcAIMode CControlInput::GetNpcAIMode() const
 {
 	return m_NpcAIMode;
 }

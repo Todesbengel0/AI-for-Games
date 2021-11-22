@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "PlayerCharacter.h"
-#include "Steuerung.h"
+#include "ControlInput.h"
 
 CPlayerCharacter::CPlayerCharacter()
 {
@@ -26,7 +26,7 @@ void CPlayerCharacter::Init(CHVector dimension)
 	CCharacter::Init(dimension);
 }
 
-void CPlayerCharacter::Update(float fTime, float fTimeDelta, CSteuerung* pSteuerung)
+void CPlayerCharacter::Update(float fTime, float fTimeDelta, CControlInput* pSteuerung)
 {
 	float fSW = 0.0f;
 	float fLR = 0.0f;

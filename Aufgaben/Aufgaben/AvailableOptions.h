@@ -1,7 +1,7 @@
 #pragma once
 
 class COption;
-class CSteuerung;
+class CControlInput;
 class CAvailableOptions
 {
 public:
@@ -12,7 +12,7 @@ public:
 	void AddOption(std::shared_ptr<COption> pOption);
 	void RemoveOption(std::shared_ptr<COption> pOption);
 
-	void UpdatePreferred(float fTime, float fTimeDelta, CSteuerung* pSteuerung);
+	void UpdatePreferred(float fTime, float fTimeDelta, CControlInput* pSteuerung);
 
 private:
 	std::vector<std::shared_ptr<COption>> m_Options;
