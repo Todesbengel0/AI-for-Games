@@ -38,17 +38,28 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	vTargetDir.Norm();
 
 	// NPC has Borderline-Syndrom
-	if (std::abs(m_pUser->GetKinematics().GetPosition().x) >= EPSENV(m_pWorldBorder->GetBoardSize().x))
-		resForce.vMovementForce.x = -resForce.vMovementForce.x;
-	if (std::abs(m_pUser->GetKinematics().GetPosition().z) >= EPSENV(m_pWorldBorder->GetBoardSize().z))
-		resForce.vMovementForce.z = -resForce.vMovementForce.z;
+	//if (std::abs(m_pUser->GetKinematics().GetPosition().x) >= EPSENV(m_pWorldBorder->GetBoardSize().x))
+	//	resForce.vMovementForce.x = -resForce.vMovementForce.x;
+	//if (std::abs(m_pUser->GetKinematics().GetPosition().z) >= EPSENV(m_pWorldBorder->GetBoardSize().z))
+	//	resForce.vMovementForce.z = -resForce.vMovementForce.z;
 
 	resForce.vMovementForce = vTargetDir * m_pUser->GetKinematics().GetMaxMovementForce();
 
 	// für korrekten Winkel muss Z-Achse invertiert werden (Brummkreisel!!)
-	/*CHVector vFixedDir = resForce.vMovementForce;
+	CHVector vFixedDir = resForce.vMovementForce;
 	vFixedDir.z = -vFixedDir.z;
-	resForce.fRotationForce = vFixedDir.AngleXZ();*/
+	resForce.fRotationForce = vFixedDir.AngleXZ();
+
+	static CNpc* trackNpc = m_pUser;
+	if (trackNpc == m_pUser)
+	{
+		ULInfo("[%f,%f,%f] , %f , [%f,%f,%f] , [%f,%f,%f]"
+			, vCircleCenter.x, vCircleCenter.y, vCircleCenter.z
+			, m_fCurAngle
+			, vAngleDir.x, vAngleDir.y, vAngleDir.z
+			, vTargetDir.x, vTargetDir.y, vTargetDir.z
+		);
+	}
 
 	return resForce;
 }
