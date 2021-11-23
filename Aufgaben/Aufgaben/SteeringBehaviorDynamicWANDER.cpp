@@ -3,7 +3,7 @@
 #include "Npc.h"
 #include "KnowledgeWorldBorder.h"
 
-#define EPSENV(x)	0.95f * (float)x
+#define EPSENV(x)	0.97f * (float)x
 
 CRandom CSteeringBehaviorDynamicWANDER::ms_Rnd;
 
@@ -39,15 +39,9 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce()
 
 	// NPC has Borderline-Syndrom
 	if (std::abs(m_pUser->GetKinematics().GetPosition().x) >= EPSENV(m_pWorldBorder->GetBoardSize().x))
-	{
-		CHVector vXNorm = CHVector(1.0f, 0.0f, 0.0f);
-		resForce.vMovementForce -= vXNorm * (resForce.vMovementForce * vXNorm) * 2;
-	}
+		resForce.vMovementForce.x = -resForce.vMovementForce.x;
 	if (std::abs(m_pUser->GetKinematics().GetPosition().z) >= EPSENV(m_pWorldBorder->GetBoardSize().z))
-	{
-		CHVector vZNorm = CHVector(0.0f, 0.0f, 1.0f);
-		resForce.vMovementForce -= vZNorm * (resForce.vMovementForce * vZNorm) * 2;
-	}
+		resForce.vMovementForce.z = -resForce.vMovementForce.z;
 
 	resForce.vMovementForce = vTargetDir * m_pUser->GetKinematics().GetMaxMovementForce();
 

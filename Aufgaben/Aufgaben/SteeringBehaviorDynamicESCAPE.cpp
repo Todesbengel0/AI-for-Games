@@ -33,7 +33,7 @@ SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce()
 
 	// Überprüfen, ob Zielpunkt außerhalb der Map liegen würde (an manchen Ecken gibts noch Vorzeichenfehler)
 	CHVector vMovementPosition = m_pUser->GetKinematics().GetPosition() + resForce.vMovementForce;
-	if (std::abs(vMovementPosition.x) > m_pWorldBorder->GetBoardSize().x && std::abs(vMovementPosition.z) > m_pWorldBorder->GetBoardSize().z)
+	if (std::abs(vMovementPosition.x) >= m_pWorldBorder->GetBoardSize().x && std::abs(vMovementPosition.z) >= m_pWorldBorder->GetBoardSize().z)
 	{
 		CHVector vCornerPosition = CHVector((vMovementPosition.x / std::abs(vMovementPosition.x)) * m_pWorldBorder->GetBoardSize().x
 											, 0.0f
@@ -41,44 +41,30 @@ SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce()
 		CHVector vTestForce = resForce.vMovementForce;
 		if (std::abs(vTestForce.x) > std::abs(vTestForce.z))
 		{
-			vTestForce.x = vTestForce.z;
-			vTestForce.z = -vTestForce.x;
-			CHVector vRotatedPosition = m_pUser->GetKinematics().GetPosition() + vTestForce;
-			if (std::abs(vRotatedPosition.x) > m_pWorldBorder->GetBoardSize().x)
-			{
-				if (vRotatedPosition.x < 0.0f)
-					vTestForce.x -= vRotatedPosition.x + m_pWorldBorder->GetBoardSize().x;
-				else
-					vTestForce.x -= vRotatedPosition.x - m_pWorldBorder->GetBoardSize().x;
-				vRotatedPosition = m_pUser->GetKinematics().GetPosition() + vTestForce;
-			}
-			
-			if ((vRotatedPosition - m_pKnowledgePosition->GetPosition()).Length() > (vCornerPosition - m_pKnowledgePosition->GetPosition()).Length())
-			{
-				resForce.vMovementForce = vTestForce;
-				resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
-			}
+			vTestForce.z = -vTestForce.z;
+			vMovementPosition = m_pUser->GetKinematics().GetPosition() + vTestForce;
+			if (vMovementPosition.x < 0.0f)
+				vTestForce.x -= vMovementPosition.x + m_pWorldBorder->GetBoardSize().x;
+			else
+				vTestForce.x -= vMovementPosition.x - m_pWorldBorder->GetBoardSize().x;
 		}
 		else if (std::abs(vTestForce.x) < std::abs(vTestForce.z))
 		{
-			vTestForce.x = -vTestForce.z;
-			vTestForce.z = vTestForce.x;
-			CHVector vRotatedPosition = m_pUser->GetKinematics().GetPosition() + vTestForce;
-			if (std::abs(vRotatedPosition.z) > m_pWorldBorder->GetBoardSize().z)
-			{
-				if (vRotatedPosition.z < 0.0f)
-					vTestForce.z -= vRotatedPosition.z + m_pWorldBorder->GetBoardSize().z;
-				else
-					vTestForce.z -= vRotatedPosition.z - m_pWorldBorder->GetBoardSize().z;
-				vRotatedPosition = m_pUser->GetKinematics().GetPosition() + vTestForce;
-			}
-
-			if ((vRotatedPosition - m_pKnowledgePosition->GetPosition()).Length() > (vCornerPosition - m_pKnowledgePosition->GetPosition()).Length())
-			{
-				resForce.vMovementForce = vTestForce;
-				resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
-			}
+			vTestForce.x = -vTestForce.x;
+			vMovementPosition = m_pUser->GetKinematics().GetPosition() + vTestForce;
+			if (vMovementPosition.z < 0.0f)
+				vTestForce.z -= vMovementPosition.z + m_pWorldBorder->GetBoardSize().z;
+			else
+				vTestForce.z -= vMovementPosition.z - m_pWorldBorder->GetBoardSize().z;
+			vTestForce.Norm();
+			vTestForce *= m_pUser->GetKinematics().GetMaxMovementForce();
 		}
+		vTestForce.Norm();
+		vTestForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+		vMovementPosition = m_pUser->GetKinematics().GetPosition() + vTestForce;
+
+		if ((vMovementPosition - m_pKnowledgePosition->GetPosition()).Length() > (vCornerPosition - m_pKnowledgePosition->GetPosition()).Length())
+			resForce.vMovementForce = vTestForce;
 	}
 	else if (std::abs(vMovementPosition.x) > m_pWorldBorder->GetBoardSize().x)
 	{
