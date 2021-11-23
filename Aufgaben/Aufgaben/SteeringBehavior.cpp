@@ -13,7 +13,7 @@ CSteeringBehavior::~CSteeringBehavior()
 
 void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 {
-	SSteeringForce force = GetForce();
+	SSteeringForce force = GetForce(fTimeDelta);
 
 	// bewegung
 	Limit(force.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());

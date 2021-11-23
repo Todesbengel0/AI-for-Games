@@ -12,7 +12,7 @@ public:
 public:
 	// final, da erbende Steering Behaviors GetForce() implementieren sollen, nicht Update()
 	void Update(float fTime, float fTimeDelta) final;
-	virtual SSteeringForce GetForce() = 0;
+	virtual SSteeringForce GetForce(float fTimeDelta) = 0;
 
 private:
 	static void Limit(CHVector& v, float maxLength);

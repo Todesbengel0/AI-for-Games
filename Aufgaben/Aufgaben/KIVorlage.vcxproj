@@ -178,6 +178,7 @@
     <ClInclude Include="SteeringBehaviorDynamicWANDER.h" />
     <ClInclude Include="SteeringBehaviorKinematicFLEE.h" />
     <ClInclude Include="SteeringBehaviorKinematicSEEK.h" />
+    <ClInclude Include="SteeringBehaviorRealisticSEEK.h" />
     <ClInclude Include="SteeringBehaviorsInclude.h" />
     <ClInclude Include="SteeringForce.h" />
     <ClInclude Include="ControlInput.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="SteeringBehaviorKinematicFLEE.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicSEEK.cpp" />
     <ClCompile Include="ControlInput.cpp" />
+    <ClCompile Include="SteeringBehaviorRealisticSEEK.cpp" />
     <ClCompile Include="ThreeDegreeInterpolation.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>

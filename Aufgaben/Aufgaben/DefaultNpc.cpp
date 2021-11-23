@@ -23,6 +23,7 @@ void CDefaultNpc::InitOptions()
 	std::shared_ptr<CKnowledgePosition> knowledgePlayerPos = GetKnowledge<CKnowledgePosition>("PlayerPos");
 	if (knowledgePlayerPos)
 	{
+		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicSEEK>(this, knowledgePlayerPos));
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicFLEE>(this, knowledgePlayerPos));
 	}
 }

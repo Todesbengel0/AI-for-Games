@@ -21,7 +21,7 @@ CSteeringBehaviorDynamicWANDER::~CSteeringBehaviorDynamicWANDER()
 {
 }
 
-SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce()
+SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
 
@@ -29,9 +29,9 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce()
 	CHVector vCircleCenter = m_pUser->GetKinematics().GetOrientationVec() * m_fOffset;
 
 	float fNewAngle = ms_Rnd.RandFt();
-	m_fCurAngle += fNewAngle * m_fMaxAngleChange;
+	m_fCurAngle += fNewAngle * m_fMaxAngleChange * fTimeDelta;
 
-	// angle to vec
+	// angle to vec !!MUSS HIER SCHON Z-ACHSE INVERTIERT WERDEN?
 	CHVector vAngleDir(std::cosf(m_fCurAngle), 0.0f, std::sinf(m_fCurAngle));
 
 	CHVector vTargetDir = vCircleCenter + vAngleDir * m_fRadius;

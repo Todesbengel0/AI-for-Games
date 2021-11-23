@@ -10,7 +10,7 @@ public:
 	~CSteeringBehaviorDynamicWANDER();
 
 public:
-	SSteeringForce GetForce() override;
+	SSteeringForce GetForce(float fTimeDelta) override;
 
 private:
 	std::shared_ptr<CKnowledgeWorldBorder> m_pWorldBorder;

@@ -15,7 +15,7 @@ CSteeringBehaviorDynamicARRIVE::~CSteeringBehaviorDynamicARRIVE()
 {
 }
 
-SSteeringForce CSteeringBehaviorDynamicARRIVE::GetForce()
+SSteeringForce CSteeringBehaviorDynamicARRIVE::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
 

@@ -21,6 +21,10 @@ void CRedNpc::InitOptions()
 {
 	CNpc::InitOptions();
 	std::shared_ptr<CKnowledgePosition> knowledgePlayerPos = GetKnowledge<CKnowledgePosition>("PlayerPos");
+	if (knowledgePlayerPos)
+	{
+		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorRealisticSEEK>(this, knowledgePlayerPos));
+	}
 	std::shared_ptr<CKnowledgeWorldBorder> knowledgeWorldBorder = GetKnowledge<CKnowledgeWorldBorder>("WorldBorder");
 	if (knowledgePlayerPos && knowledgeWorldBorder)
 	{

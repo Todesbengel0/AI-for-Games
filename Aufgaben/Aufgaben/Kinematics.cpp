@@ -4,6 +4,7 @@
 CKinematics::CKinematics()
 	: m_MovementForce(0.0f, 0.0f, 0.0f)
 	, m_RotationVelocity(0.0f)
+	, m_MaxMovementAcceleration(1.0f)
 {
 	SetMaxMovementForce(1.0f);
 	SetMaxRotationVelocity(1.0f);
@@ -69,6 +70,11 @@ float CKinematics::GetMaxRotationVelocity()
 	return m_zpPos.GetRotationSensitivity();
 }
 
+float CKinematics::GetMaxMovementAcceleration()
+{
+	return m_MaxMovementAcceleration;
+}
+
 void CKinematics::SetPosition(CHVector vPos)
 {
 	m_zpPos.Translate(vPos);
@@ -110,6 +116,11 @@ void CKinematics::SetMaxRotationVelocity(float vel)
 {
 	m_zpPos.SetRotationSensitivity(vel);
 	m_zpRot.SetRotationSensitivity(vel);
+}
+
+void CKinematics::SetMaxMovementAcceleration(float acceleration)
+{
+	m_MaxMovementAcceleration = acceleration;
 }
 
 void CKinematics::ClampInBounds()

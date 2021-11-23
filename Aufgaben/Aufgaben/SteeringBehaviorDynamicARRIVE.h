@@ -10,7 +10,7 @@ public:
 	~CSteeringBehaviorDynamicARRIVE();
 
 public:
-	SSteeringForce GetForce() override;
+	SSteeringForce GetForce(float fTimeDelta) override;
 
 private:
 	std::shared_ptr<CKnowledgePosition> m_pKnowledgePosition;

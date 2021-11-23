@@ -156,6 +156,9 @@
     <ClInclude Include="KnowledgeWorld.h">
       <Filter>Knowledge</Filter>
     </ClInclude>
+    <ClInclude Include="SteeringBehaviorRealisticSEEK.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -262,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="KnowledgeWorld.cpp">
       <Filter>Knowledge</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorRealisticSEEK.cpp">
+      <Filter>SteeringBehavior</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

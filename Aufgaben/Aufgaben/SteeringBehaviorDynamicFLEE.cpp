@@ -13,7 +13,7 @@ CSteeringBehaviorDynamicFLEE::~CSteeringBehaviorDynamicFLEE()
 {
 }
 
-SSteeringForce CSteeringBehaviorDynamicFLEE::GetForce()
+SSteeringForce CSteeringBehaviorDynamicFLEE::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
 

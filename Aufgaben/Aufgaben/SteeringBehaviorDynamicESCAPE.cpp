@@ -14,7 +14,7 @@ CSteeringBehaviorDynamicESCAPE::~CSteeringBehaviorDynamicESCAPE()
 {
 }
 
-SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce()
+SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
 

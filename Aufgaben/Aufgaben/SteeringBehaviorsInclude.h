@@ -6,3 +6,4 @@
 #include "SteeringBehaviorDynamicARRIVE.h"
 #include "SteeringBehaviorDynamicWANDER.h"
 #include "SteeringBehaviorDynamicESCAPE.h"
+#include "SteeringBehaviorRealisticSEEK.h"

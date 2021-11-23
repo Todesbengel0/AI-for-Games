@@ -22,6 +22,7 @@ void CNpc::Init(CHVector dimension)
 	// bewegungseigenschaften
 	m_zpKinematics.SetMaxMovementForce(8.0f);
 	m_zpKinematics.SetMaxRotationVelocity(UM_DEG2RAD(90.0f));
+	m_zpKinematics.SetMaxMovementAcceleration(2.5f);
 
 	CCharacter::Init(dimension);
 }
@@ -33,7 +34,6 @@ void CNpc::InitOptions()
 	{
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorKinematicSEEK>(this, knowledgePlayerPos));
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorKinematicFLEE>(this, knowledgePlayerPos));
-		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicSEEK>(this, knowledgePlayerPos));
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicARRIVE>(this, knowledgePlayerPos));
 	}
 

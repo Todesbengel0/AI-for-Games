@@ -13,7 +13,7 @@ CSteeringBehaviorDynamicSEEK::~CSteeringBehaviorDynamicSEEK()
 {
 }
 
-SSteeringForce CSteeringBehaviorDynamicSEEK::GetForce()
+SSteeringForce CSteeringBehaviorDynamicSEEK::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
 

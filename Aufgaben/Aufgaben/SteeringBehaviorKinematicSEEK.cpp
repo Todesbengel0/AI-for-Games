@@ -13,7 +13,7 @@ CSteeringBehaviorKinematicSEEK::~CSteeringBehaviorKinematicSEEK()
 {
 }
 
-SSteeringForce CSteeringBehaviorKinematicSEEK::GetForce()
+SSteeringForce CSteeringBehaviorKinematicSEEK::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
 
