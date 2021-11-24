@@ -18,6 +18,7 @@ CSteeringBehaviorRealisticSEEK::~CSteeringBehaviorRealisticSEEK()
 SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
+	resForce.bApplyRotationForce = false;
 
 	if (!m_pKnowledgePosition)
 		return resForce;
@@ -56,16 +57,20 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	if (abs(fRotationAngle) > (fTemp = (m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta)) && resForce.vMovementForce.Length() > vCurMovementForce.Length())
 	{
 		if (fRotationAngle > PI)
-			fRotationAngle -= 2 * PI;
+			fRotationAngle -= TWOPI;
 		else if (fRotationAngle < -PI)
-			fRotationAngle += 2 * PI;
+			fRotationAngle += TWOPI;
 
+		// Kürzesten Winkel zum Ziel nehmen
 		float fAlpha = fRotationAngle - fTemp;
 		if (abs(fRotationAngle + fTemp) < abs(fRotationAngle - fTemp))
 			fAlpha = fRotationAngle + fTemp;
 		
+		// Force-Vector drehen
 		CHMat mYRotMat = CHMat(std::cosf(fAlpha), 0, sinf(fAlpha), 0, 0, 1, 0, 0, -sinf(fAlpha), 0, cosf(fAlpha), 0, 0, 0, 0, 1);
 		resForce.vMovementForce = mYRotMat * resForce.vMovementForce;
+
+		// Direction übergeben
 		vFixedDir = resForce.vMovementForce;
 		vFixedDir.z = -vFixedDir.z;
 	}

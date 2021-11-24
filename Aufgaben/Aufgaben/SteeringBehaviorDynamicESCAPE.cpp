@@ -17,6 +17,7 @@ CSteeringBehaviorDynamicESCAPE::~CSteeringBehaviorDynamicESCAPE()
 SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
+	resForce.bApplyRotationForce = false;
 
 	if (!m_pKnowledgePosition)
 		return resForce;
