@@ -13,6 +13,7 @@
 // Windows
 #include "targetver.h"
 #define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
 //#define _WIN32_WINNT _WIN32_WINNT_WIN10	// nicht zwingend nötig
 #define DIRECTINPUT_VERSION 0x0800
 #include <windows.h>
@@ -24,6 +25,7 @@
 #include <iostream>
 #include <locale>
 #include <vector>
+#include <algorithm>
 
 // Vektoria
 #ifdef _WIN64

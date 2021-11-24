@@ -85,10 +85,8 @@ SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce(float fTimeDelta)
 		resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
 	}
 
-	// für korrekten Winkel muss Z-Achse invertiert werden
-	CHVector vFixedDir = resForce.vMovementForce;
-	vFixedDir.z = -vFixedDir.z;
-	resForce.fRotationForce = vFixedDir.AngleXZ();
+	// Skalarwinkel des Kraftvektors
+	resForce.fRotationForce = GetAngleDirectionByZAxis(resForce.vMovementForce);
 
 	return resForce;
 }

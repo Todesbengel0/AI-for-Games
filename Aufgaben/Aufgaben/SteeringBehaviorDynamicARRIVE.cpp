@@ -40,10 +40,8 @@ SSteeringForce CSteeringBehaviorDynamicARRIVE::GetForce(float fTimeDelta)
 	if (fBrake < 1.0f)
 		resForce.vMovementForce *= fBrake / m_fBrakeFactor;
 
-	// für korrekten Winkel muss Z-Achse invertiert werden
-	CHVector vFixedDir = resForce.vMovementForce;
-	vFixedDir.z = -vFixedDir.z;
-	resForce.fRotationForce = vFixedDir.AngleXZ();
+	// Skalarwinkel des Kraftvektors
+	resForce.fRotationForce = GetAngleDirectionByZAxis(resForce.vMovementForce);
 
 	return resForce;
 }

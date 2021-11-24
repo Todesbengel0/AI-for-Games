@@ -3,11 +3,11 @@
 
 CKinematics::CKinematics()
 	: m_MovementForce(0.0f, 0.0f, 0.0f)
-	, m_RotationVelocity(0.0f)
+	, m_RotationForce(0.0f)
 	, m_MaxMovementAcceleration(1.0f)
 {
 	SetMaxMovementForce(1.0f);
-	SetMaxRotationVelocity(1.0f);
+	SetMaxRotationForce(1.0f);
 
 	m_zpPos.AddPlacement(&m_zpRot);
 }
@@ -55,9 +55,9 @@ CHVector CKinematics::GetMovementForce()
 	return m_MovementForce;
 }
 
-float CKinematics::GetRotationVelocity()
+float CKinematics::GetRotationForce()
 {
-	return m_RotationVelocity;
+	return m_RotationForce;
 }
 
 float CKinematics::GetMaxMovementForce()
@@ -65,7 +65,7 @@ float CKinematics::GetMaxMovementForce()
 	return m_zpPos.GetTranslationSensitivity();
 }
 
-float CKinematics::GetMaxRotationVelocity()
+float CKinematics::GetMaxRotationForce()
 {
 	return m_zpPos.GetRotationSensitivity();
 }
@@ -101,9 +101,24 @@ void CKinematics::ApplyMovementForce(CHVector vMovementForce, float fTimeDelta)
 	ClampInBounds();
 }
 
-void CKinematics::SetRotationVelocity(float vel)
+void CKinematics::ApplyRotationForce(float vel, float fTimeDelta)
 {
-	m_RotationVelocity = vel;
+	m_RotationForce = vel;
+
+	//float fAngleDiff = m_RotationForce - GetOrientationAngle();
+	float fAngleDiff = AngleDiff(GetOrientationAngle(), m_RotationForce);
+	m_zpRot.RotateYDelta(fAngleDiff * fTimeDelta);
+}
+
+float CKinematics::AngleDiff(float aSource, float aTarget)
+{
+	//return std::atan2f(std::sinf(a2 - a1), std::cosf(a2 - a1));
+	float a = aTarget - aSource;
+
+	if (a > PI) a -= TWOPI;
+	else if (a < -PI) a += TWOPI;
+
+	return a;
 }
 
 void CKinematics::SetMaxMovementForce(float force)
@@ -112,7 +127,7 @@ void CKinematics::SetMaxMovementForce(float force)
 	m_zpRot.SetTranslationSensitivity(force);
 }
 
-void CKinematics::SetMaxRotationVelocity(float vel)
+void CKinematics::SetMaxRotationForce(float vel)
 {
 	m_zpPos.SetRotationSensitivity(vel);
 	m_zpRot.SetRotationSensitivity(vel);

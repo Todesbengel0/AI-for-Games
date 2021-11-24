@@ -45,19 +45,18 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 
 	resForce.vMovementForce = vTargetDir * m_pUser->GetKinematics().GetMaxMovementForce();
 
-	// für korrekten Winkel muss Z-Achse invertiert werden (Brummkreisel!!)
-	CHVector vFixedDir = resForce.vMovementForce;
-	vFixedDir.z = -vFixedDir.z;
-	resForce.fRotationForce = vFixedDir.AngleXZ();
+	// Skalarwinkel des Kraftvektors
+	resForce.fRotationForce = GetAngleDirectionByZAxis(resForce.vMovementForce);
 
 	static CNpc* trackNpc = m_pUser;
 	if (trackNpc == m_pUser)
 	{
-		ULInfo("[%f,%f,%f] , %f , [%f,%f,%f] , [%f,%f,%f]"
+		ULInfo("[%f,%f,%f] , %f , [%f,%f,%f] , [%f,%f,%f] , %f"
 			, vCircleCenter.x, vCircleCenter.y, vCircleCenter.z
 			, m_fCurAngle
 			, vAngleDir.x, vAngleDir.y, vAngleDir.z
 			, vTargetDir.x, vTargetDir.y, vTargetDir.z
+			, resForce.fRotationForce
 		);
 	}
 

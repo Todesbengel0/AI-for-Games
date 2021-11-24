@@ -21,7 +21,7 @@ void CNpc::Init(CHVector dimension)
 
 	// bewegungseigenschaften
 	m_zpKinematics.SetMaxMovementForce(8.0f);
-	m_zpKinematics.SetMaxRotationVelocity(UM_DEG2RAD(90.0f));
+	m_zpKinematics.SetMaxRotationForce(UM_DEG2RAD(90.0f));
 	m_zpKinematics.SetMaxMovementAcceleration(2.5f);
 
 	CCharacter::Init(dimension);

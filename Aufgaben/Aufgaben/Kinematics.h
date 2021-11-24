@@ -14,9 +14,9 @@ public:
 	float GetOrientationAngle();
 	CHVector GetOrientationVec();
 	CHVector GetMovementForce();
-	float GetRotationVelocity();
+	float GetRotationForce();
 	float GetMaxMovementForce();
-	float GetMaxRotationVelocity();
+	float GetMaxRotationForce();
 	float GetMaxMovementAcceleration();
 
 	void SetPosition(CHVector vPos);
@@ -24,13 +24,13 @@ public:
 	void SetBounds(CHVector vMin, CHVector vMax);
 	void ChangeOrientation(float fAngle);
 	void ApplyMovementForce(CHVector vMovementForce, float fTimeDelta);
-	void SetRotationVelocity(float vel);
+	void ApplyRotationForce(float vel, float fTimeDelta);
 	void SetMaxMovementForce(float force);
 	/// <summary>
 	/// Setzt den Wert, um den sich ein Objekt maximal drehen kann.
 	/// </summary>
 	/// <param name="vel">Maximaler Drehwinkel pro Sekunde in Bogenmaﬂ.</param>
-	void SetMaxRotationVelocity(float vel);
+	void SetMaxRotationForce(float vel);
 	/// <summary>
 	/// Setzt den Wert, um den sich ein Objekt maximal beschleunigen kann.
 	/// </summary>
@@ -39,6 +39,7 @@ public:
 
 private:
 	void ClampInBounds();
+	static float AngleDiff(float aSource, float aTarget);
 
 private:
 	// Rotation muss unabh. von Positions-Placement bleiben, sonst Rotation um aktuelle Translation
@@ -46,7 +47,7 @@ private:
 	CPlacement m_zpRot;
 
 	CHVector m_MovementForce;
-	float m_RotationVelocity;
+	float m_RotationForce;
 
 	float m_MaxMovementAcceleration;
 };

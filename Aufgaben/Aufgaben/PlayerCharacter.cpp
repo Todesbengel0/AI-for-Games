@@ -21,7 +21,7 @@ void CPlayerCharacter::Init(CHVector dimension)
 
 	// bewegungseigenschaften
 	m_zpKinematics.SetMaxMovementForce(15.0f);
-	m_zpKinematics.SetMaxRotationVelocity(UM_DEG2RAD(90.0f));
+	m_zpKinematics.SetMaxRotationForce(UM_DEG2RAD(90.0f));
 
 	CCharacter::Init(dimension);
 }

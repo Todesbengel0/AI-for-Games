@@ -16,4 +16,8 @@ public:
 
 private:
 	static void Limit(CHVector& v, float maxLength);
+	static void Limit(float& angle, float maxAngle);
+
+protected:
+	static float GetAngleDirectionByZAxis(CHVector v);
 };
