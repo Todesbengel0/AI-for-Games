@@ -63,10 +63,12 @@ void CControlInput::CamSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 	if (m_zdKeyboard.KeyPressed(DIK_LSHIFT))
 	{
 		rzpCamera.SetTranslationSensitivity(150.f);
+		rzpCamera.SetRotationSensitivity(UM_DEG2RAD(100.f));
 	}
 	else
 	{
 		rzpCamera.SetTranslationSensitivity(50.f);
+		rzpCamera.SetRotationSensitivity(UM_DEG2RAD(50.f));
 	}
 
 	m_fWS = 0; m_fAD = 0; m_fLR = 0; m_fUD = 0; m_fHR = 0;
