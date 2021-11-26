@@ -33,5 +33,11 @@ private:
 	CRedNpc m_cRedObjekt[15];
 
 	CRandom m_SpawnRnd;
+
+#ifdef _DEBUG
+	CPlacement m_zpDebugNpc;
+	CGeoCube m_zgDebugNpc;
+	CMaterial m_zmDebugNpc;
+#endif // _DEBUG
 };
 

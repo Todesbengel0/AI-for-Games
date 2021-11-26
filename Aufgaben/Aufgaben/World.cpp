@@ -52,6 +52,14 @@ void CWorld::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 		m_zpBoard.AddPlacement(&Npc.GetPlacement());
 		Npc.GetPlacement().SwitchOff();
 	}
+
+#ifdef _DEBUG
+	m_zmDebugNpc.MakeTextureDiffuse("textures\\red_image.jpg");
+	m_zgDebugNpc.Init(CHVector(0.5f, 2.0f, 0.5f), &m_zmDebugNpc);
+	m_zpDebugNpc.AddGeo(&m_zgDebugNpc);
+	m_zpDebugNpc.TranslateY(7.5f);
+	m_cTestobjekt[0].GetKinematics().GetTopPlacement().AddPlacement(&m_zpDebugNpc);
+#endif // _DEBUG
 }
 
 CHVector CWorld::GetBoardSize()
