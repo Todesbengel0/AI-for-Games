@@ -23,8 +23,11 @@ CSteeringBehaviorDynamicWANDER::~CSteeringBehaviorDynamicWANDER()
 
 SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 {
+	// resultierende Kraft, wir übernehmen Rotationskraftauswirkung über Zeit (bApplyRotationForce = false)
 	SSteeringForce resForce;
+	resForce.bApplyRotationForce = false;
 
+	// kinematische Daten des NPCs / Boids
 	CHVector vUserPos = m_pUser->GetKinematics().GetPosition();
 	CHVector vUserOri = m_pUser->GetKinematics().GetOrientationVec();
 	float fAUserOri = m_pUser->GetKinematics().GetOrientationAngleXZ();
@@ -36,40 +39,41 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 #ifdef _DEBUG
 	CHVector vToCircle = vCircleCenter - vUserPos;
 	vToCircle.Norm();
-	assert((vUserOri - vToCircle).Length() < 0.001f);
-	float fA1 = CKinematics::AngleVektoriaToXZ(vToCircle);
-	assert(std::abs(fA1 - fAUserOri) < 0.001f);
+	assert((vUserOri - vToCircle).Length() < 0.001f);	// Kreis muss in Laufbahn des Boids liegen
+	float fAToCircle = CKinematics::AngleVektoriaToXZ(vToCircle);
+	assert(std::abs(fAToCircle - fAUserOri) < 0.001f);	// Umrechnung zu Skalarwinkel muss auch übereinstimmen
 #endif // _DEBUG
 
-
+	// fortlaufender Winkel im Kreis
 	float fNewAngle = ms_Rnd.RandNormFt();
 	m_fCurAngle += fNewAngle * m_fMaxAngleChange * fTimeDelta;
 
-	// Winkel bezüglich -Z-Achse
+	// lokaler Winkelvektor im Kreis (in Standardorientierung nach +X)
 	CHVector vAngleDir(std::cosf(m_fCurAngle), 0.0f, std::sinf(m_fCurAngle));
 
+	// Punkt auf Kreisbahn
 	CHVector vCirclePoint = vCircleCenter + vAngleDir * m_fRadius;
 
+	// Richtung: Boid zu Punkt
 	CHVector vDir = vCirclePoint - vUserPos;
 	vDir.Norm();
-	float fDir = CKinematics::AngleVektoriaToXZ(vDir);
+	float fDir = CKinematics::AngleVektoriaToXZ(vDir);	// Skalarwinkel in lokalem Kreis
+
+	// Rotationskraftänderung
+	// Addition von Winkeldelta (zu altem Winkel) verrechnet mit Zeitdelta
+	resForce.fRotationForce = fAUserOri + CKinematics::AngleDiff(fAUserOri, fDir) * fTimeDelta;
+
+	// Laufe mit max. Geschwindigkeit in neue Richtung
+	// wird durch CSteeringBehavior::Update nach fRotationForce verrechnet
+	// muss lediglich Länge übergeben
+	resForce.bMoveByRot = true;
+	resForce.vMovementForce = CHVector(m_pUser->GetKinematics().GetMaxMovementForce(), 0.0f, 0.0f);
 
 	// NPC has Borderline-Syndrom
 	//if (std::abs(m_pUser->GetKinematics().GetPosition().x) >= EPSENV(m_pWorldBorder->GetBoardSize().x))
 	//	resForce.vMovementForce.x = -resForce.vMovementForce.x;
 	//if (std::abs(m_pUser->GetKinematics().GetPosition().z) >= EPSENV(m_pWorldBorder->GetBoardSize().z))
 	//	resForce.vMovementForce.z = -resForce.vMovementForce.z;
-
-	//resForce.vMovementForce = CHVector(0.0f, 0.0f, -1.0f) * m_pUser->GetKinematics().GetMaxMovementForce();
-
-	// Skalarwinkel des Kraftvektors
-	//resForce.fRotationForce = m_fCurAngle;
-	resForce.fRotationForce = fAUserOri + CKinematics::AngleDiff(fAUserOri, fDir) * fTimeDelta;
-	//resForce.fRotationForce = CKinematics::AngleDiff(fDir, m_pUser->GetKinematics().GetOrientationAngle());
-	//resForce.fRotationForce = GetAngleDirectionByZAxis(vDir);
-	//resForce.fRotationForce = m_pUser->GetKinematics().GetOrientationVec().Angle(vDir);
-	resForce.bApplyRotationForce = false;
-	//resForce.bMoveByRot = true;
 
 	// Debug logging
 //#ifdef _DEBUG
