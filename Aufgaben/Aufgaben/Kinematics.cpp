@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Kinematics.h"
 
 CKinematics::CKinematics()
@@ -38,15 +38,25 @@ CHVector CKinematics::GetPosition()
 	return m_zpPos.GetPos();
 }
 
-float CKinematics::GetOrientationAngle()
+float CKinematics::AngleVektoriaToXZ(CHVector vVektoriaDirection)
 {
-	CHVector vDir = -m_zpRot.GetDirection();
-	//std::atan2f(std::sqrtf( , vDir.y)
-	return vDir.AngleZX();
+	// Vektoria Placement Ausrichtung ist (warum auch immer) standardmäßig relativ zur -Z Achse
+	// Für unsere Berechnungen wollen wir gerne Winkel bezüglich der +X Achse
+	// Dies ist die Umrechnung
+	return (-vVektoriaDirection).AngleZX();
+}
+
+float CKinematics::GetOrientationAngleXZ()
+{
+	return AngleVektoriaToXZ(GetOrientationVec());
+	//CHVector vDir = -m_zpRot.GetDirection();
+	////std::atan2f(std::sqrtf( , vDir.y)
+	//return vDir.AngleZX();
 }
 
 CHVector CKinematics::GetOrientationVec()
 {
+	// Lokale Richtung des Placements bezüglich lokaler -Z Achse
 	return m_zpRot.GetDirection();
 }
 
@@ -106,7 +116,7 @@ void CKinematics::ApplyRotationForce(float vel, float fTimeDelta)
 	m_RotationForce = vel;
 
 	//float fAngleDiff = m_RotationForce - GetOrientationAngle();
-	float fAngleDiff = AngleDiff(GetOrientationAngle(), m_RotationForce);
+	float fAngleDiff = AngleDiff(GetOrientationAngleXZ(), m_RotationForce);
 	m_zpRot.RotateYDelta(fAngleDiff * fTimeDelta);
 }
 

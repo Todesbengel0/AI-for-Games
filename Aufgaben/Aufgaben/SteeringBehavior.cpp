@@ -15,11 +15,25 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 {
 	SSteeringForce force = GetForce(fTimeDelta);
 
-	// bewegung
+	// Bewegung nach Rotation ausrichten
+	if (force.bMoveByRot)
+	{
+		// Force-Vector drehen
+		CHMat mYRot(
+			std::cosf(force.fRotationForce), 0.0f, std::sinf(force.fRotationForce), 0.0f,
+			0.0f, 1.0f, 0.0f, 0.0f,
+			-std::sinf(force.fRotationForce), 0.0f, std::cosf(force.fRotationForce), 0.0f,
+			0.0f, 0.0f, 0.0f, 1.0f
+		);
+		force.vMovementForce = mYRot * force.vMovementForce;
+		//force.fRotationForce = GetAngleDirectionByZAxis(force.vMovementForce);
+	}
+
+	// Bewegung
 	Limit(force.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
 	m_pUser->GetKinematics().ApplyMovementForce(force.vMovementForce, fTimeDelta);
 
-	// ausrichtung / rotation
+	// Ausrichtung / Rotation
 	if (force.bApplyRotationForce)
 	{
 		//Limit(force.fRotationForce, m_pUser->GetKinematics().GetMaxRotationForce());
@@ -56,10 +70,8 @@ void CSteeringBehavior::Limit(float& angle, float maxAngle)
 		angle = std::min(angle, maxAngle);
 }
 
-float CSteeringBehavior::GetAngleDirectionByZAxis(CHVector v)
+float CSteeringBehavior::GetAngleDirectionByXZ(CHVector v)
 {
-	//CHVector vZ(0.0f, 0.0f, 1.0f);
-	//v.Norm();
 	v.z = -v.z;
 	return v.AngleXZ();
 }

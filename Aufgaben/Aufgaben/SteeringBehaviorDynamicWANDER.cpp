@@ -5,7 +5,7 @@
 
 #define EPSENV(x)	0.97f * (float)x
 
-CRandom CSteeringBehaviorDynamicWANDER::ms_Rnd;
+CNormalDistribution CSteeringBehaviorDynamicWANDER::ms_Rnd;
 
 CSteeringBehaviorDynamicWANDER::CSteeringBehaviorDynamicWANDER(CNpc* user, std::shared_ptr<CKnowledgeWorldBorder> pWorldBorder, float fOffset, float fRadius, float fMaxAngleChange)
 	: CSteeringBehavior(user, NpcAIMode::DynamicWander)
@@ -25,19 +25,34 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
 
-	// Hilfskreis für Wander Bewegung
-	CHVector vCircleCenter = m_pUser->GetKinematics().GetPosition() + m_pUser->GetKinematics().GetOrientationVec() * m_fOffset;
+	CHVector vUserPos = m_pUser->GetKinematics().GetPosition();
+	CHVector vUserOri = m_pUser->GetKinematics().GetOrientationVec();
+	float fAUserOri = m_pUser->GetKinematics().GetOrientationAngleXZ();
 
-	float fNewAngle = ms_Rnd.RandFt();
+	// Hilfskreis für Wander Bewegung
+	CHVector vCircleCenter = vUserPos + vUserOri * m_fOffset;
+
+	// Debug check Orientierung- und Winkelumrechnungen
+#ifdef _DEBUG
+	CHVector vToCircle = vCircleCenter - vUserPos;
+	vToCircle.Norm();
+	assert((vUserOri - vToCircle).Length() < 0.001f);
+	float fA1 = CKinematics::AngleVektoriaToXZ(vToCircle);
+	assert(std::abs(fA1 - fAUserOri) < 0.001f);
+#endif // _DEBUG
+
+
+	float fNewAngle = ms_Rnd.RandNormFt();
 	m_fCurAngle += fNewAngle * m_fMaxAngleChange * fTimeDelta;
 
-	// angle to vec !!MUSS HIER SCHON Z-ACHSE INVERTIERT WERDEN?
+	// Winkel bezüglich -Z-Achse
 	CHVector vAngleDir(std::cosf(m_fCurAngle), 0.0f, std::sinf(m_fCurAngle));
 
 	CHVector vCirclePoint = vCircleCenter + vAngleDir * m_fRadius;
 
-	CHVector vDir = vCirclePoint - m_pUser->GetKinematics().GetPosition();
+	CHVector vDir = vCirclePoint - vUserPos;
 	vDir.Norm();
+	float fDir = CKinematics::AngleVektoriaToXZ(vDir);
 
 	// NPC has Borderline-Syndrom
 	//if (std::abs(m_pUser->GetKinematics().GetPosition().x) >= EPSENV(m_pWorldBorder->GetBoardSize().x))
@@ -45,26 +60,33 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	//if (std::abs(m_pUser->GetKinematics().GetPosition().z) >= EPSENV(m_pWorldBorder->GetBoardSize().z))
 	//	resForce.vMovementForce.z = -resForce.vMovementForce.z;
 
-	resForce.vMovementForce = vDir * m_pUser->GetKinematics().GetMaxMovementForce();
+	//resForce.vMovementForce = CHVector(0.0f, 0.0f, -1.0f) * m_pUser->GetKinematics().GetMaxMovementForce();
 
 	// Skalarwinkel des Kraftvektors
+	//resForce.fRotationForce = m_fCurAngle;
+	resForce.fRotationForce = fAUserOri + CKinematics::AngleDiff(fAUserOri, fDir) * fTimeDelta;
+	//resForce.fRotationForce = CKinematics::AngleDiff(fDir, m_pUser->GetKinematics().GetOrientationAngle());
 	//resForce.fRotationForce = GetAngleDirectionByZAxis(vDir);
-	resForce.fRotationForce = m_pUser->GetKinematics().GetOrientationVec().Angle(vDir);
-	//resForce.bApplyRotationForce = false;
+	//resForce.fRotationForce = m_pUser->GetKinematics().GetOrientationVec().Angle(vDir);
+	resForce.bApplyRotationForce = false;
+	//resForce.bMoveByRot = true;
 
-	static CNpc* trackNpc = m_pUser;
-	if (trackNpc == m_pUser)
-	{
-		ULInfo("Pos[%.1f,%.1f,%.1f] , Ori[%.3f,%.3f,%.3f] => Angle[%f] , CircleCenter[%.1f,%.1f,%.1f] , CirclePoint[%.1f,%.1f,%.1f] , NewOri[%.3f,%.3f,%.3f] %f"
-			, m_pUser->GetKinematics().GetPosition().x, m_pUser->GetKinematics().GetPosition().y, m_pUser->GetKinematics().GetPosition().z
-			, m_pUser->GetKinematics().GetOrientationVec().x, m_pUser->GetKinematics().GetOrientationVec().y, m_pUser->GetKinematics().GetOrientationVec().z
-			, m_fCurAngle
-			, vCircleCenter.x, vCircleCenter.y, vCircleCenter.z
-			, vCirclePoint.x, vCirclePoint.y, vCirclePoint.z
-			, vDir.x, vDir.y, vDir.z
-			, resForce.fRotationForce
-		);
-	}
+	// Debug logging
+//#ifdef _DEBUG
+//	static CNpc* trackNpc = m_pUser;
+//	if (trackNpc == m_pUser)
+//	{
+//		ULInfo("Pos[%.1f,%.1f,%.1f] , Ori[%.3f,%.3f,%.3f] => Angle[%f] , CircleCenter[%.1f,%.1f,%.1f] , CirclePoint[%.1f,%.1f,%.1f] , NewOri[%.3f,%.3f,%.3f] %f"
+//			, vUserPos.x, vUserPos.y, vUserPos.z
+//			, vUserOri.x, vUserOri.y, vUserOri.z
+//			, m_fCurAngle
+//			, vCircleCenter.x, vCircleCenter.y, vCircleCenter.z
+//			, vCirclePoint.x, vCirclePoint.y, vCirclePoint.z
+//			, vDir.x, vDir.y, vDir.z
+//			, resForce.fRotationForce
+//		);
+//	}
+//#endif // _DEBUG
 
 	return resForce;
 }

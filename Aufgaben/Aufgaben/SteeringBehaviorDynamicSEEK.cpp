@@ -33,7 +33,7 @@ SSteeringForce CSteeringBehaviorDynamicSEEK::GetForce(float fTimeDelta)
 	resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
 
 	// Skalarwinkel des Kraftvektors
-	resForce.fRotationForce = GetAngleDirectionByZAxis(resForce.vMovementForce);
+	resForce.fRotationForce = GetAngleDirectionByXZ(resForce.vMovementForce);
 
 	return resForce;
 }

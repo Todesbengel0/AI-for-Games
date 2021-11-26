@@ -52,7 +52,7 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	vFixedDir.z = -vFixedDir.z;
 
 	// Drehgeschwindigkeit drosseln
-	float fRotationAngle =  m_pUser->GetKinematics().GetOrientationAngle() - vFixedDir.AngleXZ();
+	float fRotationAngle =  m_pUser->GetKinematics().GetOrientationAngleXZ() - vFixedDir.AngleXZ();
 	fTemp = 0.0f;
 	if (abs(fRotationAngle) > (fTemp = (m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta)) && resForce.vMovementForce.Length() > vCurMovementForce.Length())
 	{

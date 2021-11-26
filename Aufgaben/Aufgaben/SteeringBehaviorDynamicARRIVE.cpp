@@ -41,7 +41,7 @@ SSteeringForce CSteeringBehaviorDynamicARRIVE::GetForce(float fTimeDelta)
 		resForce.vMovementForce *= fBrake / m_fBrakeFactor;
 
 	// Skalarwinkel des Kraftvektors
-	resForce.fRotationForce = GetAngleDirectionByZAxis(resForce.vMovementForce);
+	resForce.fRotationForce = GetAngleDirectionByXZ(resForce.vMovementForce);
 
 	return resForce;
 }

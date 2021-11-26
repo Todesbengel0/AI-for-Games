@@ -11,7 +11,7 @@ public:
 	CPlacement& GetLowestPlacement();
 
 	CHVector GetPosition();
-	float GetOrientationAngle();
+	float GetOrientationAngleXZ();
 	CHVector GetOrientationVec();
 	CHVector GetMovementForce();
 	float GetRotationForce();
@@ -37,9 +37,11 @@ public:
 	/// <param name="acceleration">Faktor der maximalen Beschleunigung in einer Sekunde.</param>
 	void SetMaxMovementAcceleration(float acceleration);
 
+	static float AngleVektoriaToXZ(CHVector vVektoriaDirection);
+	static float AngleDiff(float aSource, float aTarget);
+
 private:
 	void ClampInBounds();
-	static float AngleDiff(float aSource, float aTarget);
 
 private:
 	// Rotation muss unabh. von Positions-Placement bleiben, sonst Rotation um aktuelle Translation
