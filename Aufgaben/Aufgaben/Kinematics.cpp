@@ -38,26 +38,27 @@ CHVector CKinematics::GetPosition()
 	return m_zpPos.GetPos();
 }
 
-float CKinematics::AngleVektoriaToXZ(CHVector vVektoriaDirection)
-{
-	// Vektoria Placement Ausrichtung ist (warum auch immer) standardmäßig relativ zur -Z Achse
-	// Für unsere Berechnungen wollen wir gerne Winkel bezüglich der +X Achse
-	// Dies ist die Umrechnung
-	return (-vVektoriaDirection).AngleZX();
-}
-
-float CKinematics::GetOrientationAngleXZ()
-{
-	return AngleVektoriaToXZ(GetOrientationVec());
-	//CHVector vDir = -m_zpRot.GetDirection();
-	////std::atan2f(std::sqrtf( , vDir.y)
-	//return vDir.AngleZX();
-}
-
 CHVector CKinematics::GetOrientationVec()
 {
 	// Lokale Richtung des Placements bezüglich lokaler -Z Achse
 	return m_zpRot.GetDirection();
+}
+
+float CKinematics::AngleVektoriaToZX(CHVector vVektoriaDirection)
+{
+	// Vektoria Placement Ausrichtung ist (warum auch immer) standardmäßig relativ zur -Z Achse
+	// Für unsere Berechnungen wollen wir gerne Winkel bezüglich der +X Achse
+
+	// Zuerst -Z nach +Z, dann projiziert an XZ Ebene mit 0 = Z-Achse
+	return (-vVektoriaDirection).AngleZX();
+}
+
+float CKinematics::GetOrientationAngleZX()
+{
+	return AngleVektoriaToZX(GetOrientationVec());
+	//CHVector vDir = -m_zpRot.GetDirection();
+	////std::atan2f(std::sqrtf( , vDir.y)
+	//return vDir.AngleZX();
 }
 
 CHVector CKinematics::GetMovementForce()
@@ -97,8 +98,6 @@ void CKinematics::SetBounds(CHVector vMin, CHVector vMax)
 
 void CKinematics::ChangeOrientation(float fAngle)
 {
-	//float fAngleDelta = fAngle - GetOrientation();
-	//m_zpRot.RotateYDelta(fAngleDelta);
 	m_zpRot.RotateY(fAngle);
 }
 
@@ -116,7 +115,7 @@ void CKinematics::ApplyRotationForce(float vel, float fTimeDelta)
 	m_RotationForce = vel;
 
 	//float fAngleDiff = m_RotationForce - GetOrientationAngle();
-	float fAngleDiff = AngleDiff(GetOrientationAngleXZ(), m_RotationForce);
+	float fAngleDiff = AngleDiff(GetOrientationAngleZX(), m_RotationForce);
 	m_zpRot.RotateYDelta(fAngleDiff * fTimeDelta);
 }
 

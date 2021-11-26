@@ -19,6 +19,7 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
 	resForce.bApplyRotationForce = false;
+	resForce.bMoveByRot = false;
 
 	if (!m_pKnowledgePosition)
 		return resForce;
@@ -47,36 +48,52 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 		resForce.vMovementForce *= fTemp;
 	}
 
-	// für korrekten Winkel muss Z-Achse invertiert werden
-	CHVector vFixedDir = resForce.vMovementForce;
-	vFixedDir.z = -vFixedDir.z;
+	//// für korrekten Winkel muss Z-Achse invertiert werden
+	//CHVector vFixedDir = resForce.vMovementForce;
+	//vFixedDir.z = -vFixedDir.z;
+	//
+	//// Drehgeschwindigkeit drosseln
+	//float fRotationAngle =  m_pUser->GetKinematics().GetOrientationAngleZX() - vFixedDir.AngleXZ();
+	//fTemp = 0.0f;
+	//if (abs(fRotationAngle) > (fTemp = (m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta)) && resForce.vMovementForce.Length() > vCurMovementForce.Length())
+	//{
+	//	if (fRotationAngle > PI)
+	//		fRotationAngle -= TWOPI;
+	//	else if (fRotationAngle < -PI)
+	//		fRotationAngle += TWOPI;
+	//
+	//	// Kürzesten Winkel zum Ziel nehmen
+	//	float fAlpha = fRotationAngle - fTemp;
+	//	if (abs(fRotationAngle + fTemp) < abs(fRotationAngle - fTemp))
+	//		fAlpha = fRotationAngle + fTemp;
+	//	
+	//	// Force-Vector drehen
+	//	CHMat mYRotMat = CHMat(std::cosf(fAlpha), 0, sinf(fAlpha), 0, 0, 1, 0, 0, -sinf(fAlpha), 0, cosf(fAlpha), 0, 0, 0, 0, 1);
+	//	resForce.vMovementForce = mYRotMat * resForce.vMovementForce;
+	//
+	//	// Direction übergeben
+	//	vFixedDir = resForce.vMovementForce;
+	//	vFixedDir.z = -vFixedDir.z;
+	//}
+	//
+	//resForce.fRotationForce = vFixedDir.AngleXZ();
 
 	// Drehgeschwindigkeit drosseln
-	float fRotationAngle =  m_pUser->GetKinematics().GetOrientationAngleXZ() - vFixedDir.AngleXZ();
+	float fRotationAngle = CKinematics::AngleDiff(CKinematics::AngleVektoriaToZX(resForce.vMovementForce), m_pUser->GetKinematics().GetOrientationAngleZX());
 	fTemp = 0.0f;
 	if (abs(fRotationAngle) > (fTemp = (m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta)) && resForce.vMovementForce.Length() > vCurMovementForce.Length())
 	{
-		if (fRotationAngle > PI)
-			fRotationAngle -= TWOPI;
-		else if (fRotationAngle < -PI)
-			fRotationAngle += TWOPI;
-
 		// Kürzesten Winkel zum Ziel nehmen
 		float fAlpha = fRotationAngle - fTemp;
 		if (abs(fRotationAngle + fTemp) < abs(fRotationAngle - fTemp))
 			fAlpha = fRotationAngle + fTemp;
-		
+
 		// Force-Vector drehen
 		CHMat mYRotMat = CHMat(std::cosf(fAlpha), 0, sinf(fAlpha), 0, 0, 1, 0, 0, -sinf(fAlpha), 0, cosf(fAlpha), 0, 0, 0, 0, 1);
 		resForce.vMovementForce = mYRotMat * resForce.vMovementForce;
-
-		// Direction übergeben
-		vFixedDir = resForce.vMovementForce;
-		vFixedDir.z = -vFixedDir.z;
 	}
 
-	
-	resForce.fRotationForce = vFixedDir.AngleXZ();
+	resForce.fRotationForce = CKinematics::AngleVektoriaToZX(resForce.vMovementForce);
 
 	return resForce;
 }

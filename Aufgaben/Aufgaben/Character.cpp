@@ -27,7 +27,7 @@ void CCharacter::Spawn(CHVector vPos /*= CHVector(0.0f, 0.0f, 0.0f)*/, float fOr
 {
 	m_zpKinematics.ResetPosRot();
 	m_zpKinematics.ChangeOrientation(fOrientationAngle);
-	assert(std::abs(fOrientationAngle - m_zpKinematics.GetOrientationAngleXZ()) < 0.001f);	// check correct orientation computing
+	assert(std::abs(fOrientationAngle - m_zpKinematics.GetOrientationAngleZX()) < 0.001f);	// check correct orientation computing
 	m_zpKinematics.SetPosition(vPos);
 
 	m_zpTop.SwitchOn();

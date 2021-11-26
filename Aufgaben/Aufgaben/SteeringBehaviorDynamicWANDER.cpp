@@ -30,7 +30,7 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	// kinematische Daten des NPCs / Boids
 	CHVector vUserPos = m_pUser->GetKinematics().GetPosition();
 	CHVector vUserOri = m_pUser->GetKinematics().GetOrientationVec();
-	float fAUserOri = m_pUser->GetKinematics().GetOrientationAngleXZ();
+	float fAUserOri = m_pUser->GetKinematics().GetOrientationAngleZX();
 
 	// Hilfskreis für Wander Bewegung
 	CHVector vCircleCenter = vUserPos + vUserOri * m_fOffset;
@@ -40,7 +40,7 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	CHVector vToCircle = vCircleCenter - vUserPos;
 	vToCircle.Norm();
 	assert((vUserOri - vToCircle).Length() < 0.001f);	// Kreis muss in Laufbahn des Boids liegen
-	float fAToCircle = CKinematics::AngleVektoriaToXZ(vToCircle);
+	float fAToCircle = CKinematics::AngleVektoriaToZX(vToCircle);
 	assert(std::abs(fAToCircle - fAUserOri) < 0.001f);	// Umrechnung zu Skalarwinkel muss auch übereinstimmen
 #endif // _DEBUG
 
@@ -57,7 +57,7 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	// Richtung: Boid zu Punkt
 	CHVector vDir = vCirclePoint - vUserPos;
 	vDir.Norm();
-	float fDir = CKinematics::AngleVektoriaToXZ(vDir);	// Skalarwinkel in lokalem Kreis
+	float fDir = CKinematics::AngleVektoriaToZX(vDir);	// Skalarwinkel in lokalem Kreis
 
 	// Rotationskraftänderung
 	// Addition von Winkeldelta (zu altem Winkel) verrechnet mit Zeitdelta

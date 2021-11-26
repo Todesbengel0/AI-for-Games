@@ -20,18 +20,21 @@ SSteeringForce CSteeringBehaviorDynamicFLEE::GetForce(float fTimeDelta)
 	if (!m_pKnowledgePosition)
 		return resForce;
 
-	// bewegung zum ziel
-	resForce.vMovementForce = m_pUser->GetKinematics().GetPosition() - m_pKnowledgePosition->GetPosition();
+	// Bewegung zum Ziel
+	CHVector vAwayFromPlayer = m_pUser->GetKinematics().GetPosition() - m_pKnowledgePosition->GetPosition();
 
 	// mitteln mit alter Kraft
 	CHVector vCurMovementForce = m_pUser->GetKinematics().GetMovementForce();
-	resForce.vMovementForce += vCurMovementForce;
+	vAwayFromPlayer += vCurMovementForce;
+	vAwayFromPlayer.Norm();
 
-	resForce.vMovementForce.Norm();
-	resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+	// neue Bewegungskraft aus mittel mit max. Geschwindigkeit
+	resForce.vMovementForce = vAwayFromPlayer * m_pUser->GetKinematics().GetMaxMovementForce();
+	resForce.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
 
 	// Skalarwinkel des Kraftvektors
-	resForce.fRotationForce = GetAngleDirectionByXZ(resForce.vMovementForce);
+	resForce.fRotationForce = CKinematics::AngleVektoriaToZX(resForce.vMovementForce);
+	resForce.bApplyRotationForce = false;	// direkte Richtungsänderung
 
 	return resForce;
 }

@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "SteeringBehaviorDynamicSEEK.h"
 #include "Npc.h"
 #include "KnowledgesInclude.h"
@@ -20,20 +20,23 @@ SSteeringForce CSteeringBehaviorDynamicSEEK::GetForce(float fTimeDelta)
 	if (!m_pKnowledgePosition)
 		return resForce;
 
-	// bewegung zum ziel
-	resForce.vMovementForce = m_pKnowledgePosition->GetPosition() - m_pUser->GetKinematics().GetPosition();
+	// Bewegung zum Ziel
+	CHVector vToPlayer = m_pKnowledgePosition->GetPosition() - m_pUser->GetKinematics().GetPosition();
 
 	// mitteln mit alter Kraft
 	CHVector vCurMovementForce = m_pUser->GetKinematics().GetMovementForce();
-	resForce.vMovementForce += vCurMovementForce;
-
-	// sch�nere Mittlung mit /2 (kein ARRIVE notwendig), aber nicht gefragt
-	//resForce.vMovementForce *= 0.5f;
-	resForce.vMovementForce.Norm();
-	resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+	vToPlayer += vCurMovementForce;
+	// schönere Mittlung mit /2 (kein ARRIVE notwendig), aber nicht gefragt
+	//vToPlayer *= 0.5f;
+	vToPlayer.Norm();
+	
+	// neue Bewegungskraft aus mittel mit max. Geschwindigkeit
+	resForce.vMovementForce = vToPlayer * m_pUser->GetKinematics().GetMaxMovementForce();
+	resForce.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
 
 	// Skalarwinkel des Kraftvektors
-	resForce.fRotationForce = GetAngleDirectionByXZ(resForce.vMovementForce);
+	resForce.fRotationForce = CKinematics::AngleVektoriaToZX(resForce.vMovementForce);
+	resForce.bApplyRotationForce = false;	// direkte Richtungsänderung
 
 	return resForce;
 }

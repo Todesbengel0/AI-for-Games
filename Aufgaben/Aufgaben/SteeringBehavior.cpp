@@ -18,18 +18,8 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 	// Bewegung nach Rotation ausrichten
 	if (force.bMoveByRot)
 	{
-		//// Force-Vector drehen
-		//CHMat mYRot(
-		//	std::cosf(force.fRotationForce), 0.0f, std::sinf(force.fRotationForce), 0.0f,
-		//	0.0f, 1.0f, 0.0f, 0.0f,
-		//	-std::sinf(force.fRotationForce), 0.0f, std::cosf(force.fRotationForce), 0.0f,
-		//	0.0f, 0.0f, 0.0f, 1.0f
-		//);
-		//force.vMovementForce = mYRot * force.vMovementForce;
-		////force.fRotationForce = GetAngleDirectionByZAxis(force.vMovementForce);
-
-		// Bewegung bezüglich lokaler +X Richtung
-		force.vMovementForce = CHVector(std::cosf(force.fRotationForce), 0.0f, -std::sinf(force.fRotationForce)) * force.vMovementForce.Length();
+		// Bewegung bezüglich lokaler -Z Richtung
+		force.vMovementForce = -CHVector(std::sinf(force.fRotationForce), 0.0f, std::cosf(force.fRotationForce)) * force.vMovementForce.Length();
 	}
 
 	// Bewegung
@@ -41,14 +31,6 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 	{
 		//Limit(force.fRotationForce, m_pUser->GetKinematics().GetMaxRotationForce());
 		m_pUser->GetKinematics().ApplyRotationForce(force.fRotationForce, fTimeDelta);
-		//m_pUser->GetKinematics().ApplyRotationForce(0*HALFPI, fTimeDelta);
-		//m_pUser->GetKinematics().ApplyRotationForce(1*HALFPI, fTimeDelta);
-		//m_pUser->GetKinematics().ApplyRotationForce(2*HALFPI, fTimeDelta);
-		//m_pUser->GetKinematics().ApplyRotationForce(3*HALFPI, fTimeDelta);
-		//m_pUser->GetKinematics().ApplyRotationForce(5*HALFPI, fTimeDelta);
-		//m_pUser->GetKinematics().ApplyRotationForce(-1*HALFPI, fTimeDelta);
-		//m_pUser->GetKinematics().ApplyRotationForce(-3*HALFPI, fTimeDelta);
-		//m_pUser->GetKinematics().ApplyRotationForce(-5*HALFPI, fTimeDelta);
 	}
 	else
 	{
@@ -71,10 +53,4 @@ void CSteeringBehavior::Limit(float& angle, float maxAngle)
 		angle = std::max(angle, -maxAngle);
 	else
 		angle = std::min(angle, maxAngle);
-}
-
-float CSteeringBehavior::GetAngleDirectionByXZ(CHVector v)
-{
-	v.z = -v.z;
-	return v.AngleXZ();
 }

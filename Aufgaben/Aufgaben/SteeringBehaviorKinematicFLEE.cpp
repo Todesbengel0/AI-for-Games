@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "SteeringBehaviorKinematicFLEE.h"
 #include "KnowledgePosition.h"
 #include "NPC.h"
@@ -20,13 +20,16 @@ SSteeringForce CSteeringBehaviorKinematicFLEE::GetForce(float fTimeDelta)
 	if (!m_pKnowledgePosition)
 		return resForce;
 
-	resForce.vMovementForce = m_pUser->GetKinematics().GetPosition() - m_pKnowledgePosition->GetPosition();
-	resForce.vMovementForce.Norm();
-	resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
-
-	// Skalarwinkel des Kraftvektors
-	resForce.fRotationForce = GetAngleDirectionByXZ(resForce.vMovementForce);
+	// Rotation zum Spieler
+	CHVector vAwayFromPlayer = m_pUser->GetKinematics().GetPosition() - m_pKnowledgePosition->GetPosition();
+	resForce.fRotationForce = CKinematics::AngleVektoriaToZX(vAwayFromPlayer);
 	resForce.bApplyRotationForce = false;
+
+	// Laufe mit max. Geschwindigkeit in die Richtung
+	// wird durch CSteeringBehavior::Update nach fRotationForce verrechnet
+	// muss lediglich Länge übergeben
+	resForce.bMoveByRot = true;
+	resForce.vMovementForce = CHVector(m_pUser->GetKinematics().GetMaxMovementForce(), 0.0f, 0.0f);
 
 	return resForce;
 }

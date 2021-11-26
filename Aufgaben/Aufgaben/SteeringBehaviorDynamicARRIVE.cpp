@@ -22,26 +22,28 @@ SSteeringForce CSteeringBehaviorDynamicARRIVE::GetForce(float fTimeDelta)
 	if (!m_pKnowledgePosition)
 		return resForce;
 
-	// bewegung zum ziel
-	resForce.vMovementForce = m_pKnowledgePosition->GetPosition() - m_pUser->GetKinematics().GetPosition();
+	// Bewegung zum Ziel
+	CHVector vToPlayer = m_pKnowledgePosition->GetPosition() - m_pUser->GetKinematics().GetPosition();
 
-	float fBrake = resForce.vMovementForce.Length() / m_fBrakeRadius;
+	float fBrake = vToPlayer.Length() / m_fBrakeRadius;
 
 	// mitteln mit alter Kraft
 	CHVector vCurMovementForce = m_pUser->GetKinematics().GetMovementForce();
-	resForce.vMovementForce += vCurMovementForce;
-
+	vToPlayer += vCurMovementForce;
 	// schönere Mittlung mit /2 (kein ARRIVE notwendig), aber nicht gefragt
 	//resForce.vMovementForce *= 0.5f;
-	resForce.vMovementForce.Norm();
-	resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+	vToPlayer.Norm();
 
+	// neue Bewegungskraft aus mittel mit max. Geschwindigkeit
+	resForce.vMovementForce = vToPlayer * m_pUser->GetKinematics().GetMaxMovementForce();
 	// wenn im Radius, abbremsen
 	if (fBrake < 1.0f)
 		resForce.vMovementForce *= fBrake / m_fBrakeFactor;
+	resForce.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
 
 	// Skalarwinkel des Kraftvektors
-	resForce.fRotationForce = GetAngleDirectionByXZ(resForce.vMovementForce);
+	resForce.fRotationForce = CKinematics::AngleVektoriaToZX(resForce.vMovementForce);
+	resForce.bApplyRotationForce = false;	// direkte Richtungsänderung
 
 	return resForce;
 }

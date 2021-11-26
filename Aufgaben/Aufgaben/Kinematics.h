@@ -11,8 +11,17 @@ public:
 	CPlacement& GetLowestPlacement();
 
 	CHVector GetPosition();
-	float GetOrientationAngleXZ();
+
+	///<summary>
+	///<para>Gibt Vektoria-Placement-Orientierungsvektor (bezüglich lokaler -Z Richtung) zurück.</para>
+	///</summary>
 	CHVector GetOrientationVec();
+
+	///<summary>
+	///<para>Gibt Winkelskalar des Vektoria-Placement-Orientierungsvektors bezüglich der lokalen +Z Richtung zurück</para>
+	///</summary>
+	float GetOrientationAngleZX();
+
 	CHVector GetMovementForce();
 	float GetRotationForce();
 	float GetMaxMovementForce();
@@ -22,7 +31,20 @@ public:
 	void SetPosition(CHVector vPos);
 	void ResetPosRot();
 	void SetBounds(CHVector vMin, CHVector vMax);
+
+	///<summary>
+	///<para>Setzt die Orientierung (gegeben in lokaler -Z Richtung) direkt.</para>
+	///<para>Nutze ApplyRotationForce um tatsächlich die Kraft zu aufzurechnen.</para>
+	///</summary>
+	///<param name="fAngle">Winkelskalar bezüglich lokaler -Z Richtung</param>
 	void ChangeOrientation(float fAngle);
+
+	///<summary>
+	///<para>Rechnet die Bewegungskraft über Zeit auf die Position auf.</para>
+	///<para>Kraft muss bezüglich lokaler -Z Richtung gegeben werden!</para>
+	///</summary>
+	///<param name="vMovementForce">Bewegungs-Kraftvektor zum Aufaddieren über Zeit.</param>
+	///<param name="fTimeDelta">Verstrichene Zeit seit letztem Frame</param>
 	void ApplyMovementForce(CHVector vMovementForce, float fTimeDelta);
 
 	///<summary>
@@ -48,10 +70,10 @@ public:
 	void SetMaxMovementAcceleration(float acceleration);
 
 	///<summary>
-	///<para>Rechnet Vektoria-Placement-Orientierungsvektor (bezüglich lokaler -Z Richtung) in Skalarwinkel bezüglich +X Richtung um.</para>
+	///<para>Rechnet Vektoria-Placement-Orientierungsvektor (bezüglich lokaler -Z Richtung) in Skalarwinkel bezüglich +Z Richtung um.</para>
 	///</summary>
 	///<param name="vVektoriaDirection">Vektoria-Placement-Orientierungsvektor</param>
-	static float AngleVektoriaToXZ(CHVector vVektoriaDirection);
+	static float AngleVektoriaToZX(CHVector vVektoriaDirection);
 
 	///<summary>
 	///<para>Berechnet die Differenz zwischen zwei Skalarwinkel, sodass diese im Bereich [-PI , PI] bleiben.</para>
