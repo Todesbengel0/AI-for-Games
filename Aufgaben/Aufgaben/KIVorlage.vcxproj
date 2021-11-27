@@ -150,6 +150,7 @@
     <ClInclude Include="KnowledgesInclude.h" />
     <ClInclude Include="KnowledgeWorld.h" />
     <ClInclude Include="KnowledgeWorldBorder.h" />
+    <ClInclude Include="MoveBoundsFix.h" />
     <ClInclude Include="NormalDistribution.h" />
     <ClInclude Include="FiveDegreeInterpolation.h" />
     <ClInclude Include="interpolation.h" />

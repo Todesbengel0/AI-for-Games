@@ -15,17 +15,6 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 {
 	SSteeringForce force = GetForce(fTimeDelta);
 
-	// Bewegung nach Rotation ausrichten
-	if (force.bMoveByRot)
-	{
-		// Bewegung bezüglich lokaler -Z Richtung
-		force.vMovementForce = -CHVector(std::sinf(force.fRotationForce), 0.0f, std::cosf(force.fRotationForce)) * force.vMovementForce.Length();
-	}
-
-	// Bewegung
-	Limit(force.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
-	m_pUser->GetKinematics().ApplyMovementForce(force.vMovementForce, fTimeDelta);
-
 	// Ausrichtung / Rotation
 	if (force.bApplyRotationForce)
 	{
@@ -36,6 +25,17 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 	{
 		m_pUser->GetKinematics().ChangeOrientation(force.fRotationForce);
 	}
+
+	// Bewegung nach Rotation ausrichten
+	if (force.bMoveByRot)
+	{
+		// Bewegung bezüglich lokaler -Z Richtung
+		force.vMovementForce = -CHVector(std::sinf(force.fRotationForce), 0.0f, std::cosf(force.fRotationForce)) * force.vMovementForce.Length();
+	}
+
+	// Bewegung
+	Limit(force.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
+	m_pUser->GetKinematics().ApplyMovementForce(force.vMovementForce, fTimeDelta, force.BoundsFix);
 }
 
 void CSteeringBehavior::Limit(CHVector& v, float maxLength)

@@ -101,13 +101,13 @@ void CKinematics::ChangeOrientation(float fAngle)
 	m_zpRot.RotateY(fAngle);
 }
 
-void CKinematics::ApplyMovementForce(CHVector vMovementForce, float fTimeDelta)
+void CKinematics::ApplyMovementForce(CHVector vMovementForce, float fTimeDelta, MoveBoundsFix eBoundsFix /*= MoveBoundsFix::Clamp*/)
 {
 	m_MovementForce = vMovementForce;
 	m_zpPos.TranslateDelta(vMovementForce * fTimeDelta);
 
 	// sicherstellen, dass bewegung in grenzen bleibt
-	ClampInBounds();
+	CheckBounds(eBoundsFix);
 }
 
 void CKinematics::ApplyRotationForce(float vel, float fTimeDelta)
@@ -147,21 +147,51 @@ void CKinematics::SetMaxMovementAcceleration(float acceleration)
 	m_MaxMovementAcceleration = acceleration;
 }
 
-void CKinematics::ClampInBounds()
+void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
 {
-	float fMinXDiff = m_zpPos.m_aabbMove.GetMin().x - m_zpPos.GetPos().x;
-	if (fMinXDiff > 0.0f)
-		m_zpPos.TranslateXDelta(fMinXDiff);
+	// out of left bound
+	float fDiff = m_zpPos.m_aabbMove.GetMin().x - m_zpPos.GetPos().x;
+	if (fDiff > 0.0f)
+	{
+		m_zpPos.TranslateXDelta(fDiff);
+		if (eBoundsFix == MoveBoundsFix::Bounce)
+			BounceOff(CHVector(1.0f, 0.0f, 0.0f, 0.0f));
+	}
 
-	float fMaxXDiff = m_zpPos.m_aabbMove.GetMax().x - m_zpPos.GetPos().x;
-	if (fMaxXDiff < 0.0f)
-		m_zpPos.TranslateXDelta(fMaxXDiff);
+	// out of right bound
+	fDiff = m_zpPos.m_aabbMove.GetMax().x - m_zpPos.GetPos().x;
+	if (fDiff < 0.0f)
+	{
+		m_zpPos.TranslateXDelta(fDiff);
+		if (eBoundsFix == MoveBoundsFix::Bounce)
+			BounceOff(CHVector(1.0f, 0.0f, 0.0f, 0.0f));
+	}
 
-	float fMinZDiff = m_zpPos.m_aabbMove.GetMin().z - m_zpPos.GetPos().z;
-	if (fMinZDiff > 0.0f)
-		m_zpPos.TranslateZDelta(fMinZDiff);
+	// out of bottom bound
+	fDiff = m_zpPos.m_aabbMove.GetMin().z - m_zpPos.GetPos().z;
+	if (fDiff > 0.0f)
+	{
+		m_zpPos.TranslateZDelta(fDiff);
+		if (eBoundsFix == MoveBoundsFix::Bounce)
+			BounceOff(CHVector(0.0f, 0.0f, 1.0f, 0.0f));
+	}
 
-	float fMaxZDiff = m_zpPos.m_aabbMove.GetMax().z - m_zpPos.GetPos().z;
-	if (fMaxZDiff < 0.0f)
-		m_zpPos.TranslateZDelta(fMaxZDiff);
+	// out of top bound
+	fDiff = m_zpPos.m_aabbMove.GetMax().z - m_zpPos.GetPos().z;
+	if (fDiff < 0.0f)
+	{
+		m_zpPos.TranslateZDelta(fDiff);
+		if (eBoundsFix == MoveBoundsFix::Bounce)
+			BounceOff(CHVector(0.0f, 0.0f, 1.0f, 0.0f));
+	}
+}
+
+void CKinematics::BounceOff(CHVector vRef)
+{
+	CHVector vDir = GetOrientationVec();
+	float fDot = vDir * vRef;
+	CHVector vReflected = vDir - (vRef * (2.0f * fDot));
+
+	ChangeOrientation(AngleVektoriaToZX(vReflected));
+	//ApplyMovementForce(vReflected * std::max(m_MovementForce.Length(), 0.2f), 1.0f, MoveBoundsFix::Clamp);
 }

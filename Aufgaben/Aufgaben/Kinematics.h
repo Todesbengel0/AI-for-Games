@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "MoveBoundsFix.h"
+
 class CKinematics
 {
 public:
@@ -45,7 +47,7 @@ public:
 	///</summary>
 	///<param name="vMovementForce">Bewegungs-Kraftvektor zum Aufaddieren über Zeit.</param>
 	///<param name="fTimeDelta">Verstrichene Zeit seit letztem Frame</param>
-	void ApplyMovementForce(CHVector vMovementForce, float fTimeDelta);
+	void ApplyMovementForce(CHVector vMovementForce, float fTimeDelta, MoveBoundsFix eBoundsFix = MoveBoundsFix::Clamp);
 
 	///<summary>
 	///<para>Verrechnet eine Winkelkraft über Zeit an den aktuellen Drehwinkel.</para>
@@ -70,6 +72,12 @@ public:
 	void SetMaxMovementAcceleration(float acceleration);
 
 	///<summary>
+	///<para>Stößt den Character von gegebener Achse ab</para>
+	///</summary>
+	///<param name="vRef"></param>
+	void BounceOff(CHVector vRef);
+
+	///<summary>
 	///<para>Rechnet Vektoria-Placement-Orientierungsvektor (bezüglich lokaler -Z Richtung) in Skalarwinkel bezüglich +Z Richtung um.</para>
 	///</summary>
 	///<param name="vVektoriaDirection">Vektoria-Placement-Orientierungsvektor</param>
@@ -83,7 +91,11 @@ public:
 	static float AngleDiff(float aSource, float aTarget);
 
 private:
-	void ClampInBounds();
+	///<summary>
+	///<para>Stellt mit Hilfe übergebener Option sicher, dass sich Character in den Mapgrenzen bewegt.</para>
+	///</summary>
+	///<param name="eBoundsFix">Option der Repositionierung an der Mapgrenze</param>
+	void CheckBounds(MoveBoundsFix eBoundsFix);
 
 private:
 	// Rotation muss unabh. von Positions-Placement bleiben, sonst Rotation um aktuelle Translation

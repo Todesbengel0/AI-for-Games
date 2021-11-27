@@ -26,6 +26,7 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	// resultierende Kraft, wir übernehmen Rotationskraftauswirkung über Zeit (bApplyRotationForce = false)
 	SSteeringForce resForce;
 	resForce.bApplyRotationForce = false;
+	resForce.BoundsFix = MoveBoundsFix::Bounce;
 
 	// kinematische Daten des NPCs / Boids
 	CHVector vUserPos = m_pUser->GetKinematics().GetPosition();
