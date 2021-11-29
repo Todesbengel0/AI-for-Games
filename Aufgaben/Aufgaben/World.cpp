@@ -27,6 +27,8 @@ void CWorld::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 
 	// knowledges
 	auto knowledgeWorldBorder = std::make_shared<CKnowledgeWorldBorder>(this);
+	auto knowledgeWorldCharactersDefault = std::make_shared<CKnowledgeWorldCharacters>(this, ArrayToPointerVector<CCharacter*>(m_DefaultNpcs));
+	auto knowledgeWorldCharactersRed = std::make_shared<CKnowledgeWorldCharacters>(this, ArrayToPointerVector<CCharacter*>(m_RedNpcs));
 	auto knowledgePlayerPos = std::make_shared<CKnowledgePosition>(&m_cPlayer);
 
 	// player
@@ -34,19 +36,21 @@ void CWorld::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 	m_zpBoard.AddPlacement(&m_cPlayer.GetPlacement());
 
 	// NPCs
-	for (auto& Npc : m_cTestobjekt)
+	for (auto& Npc : m_DefaultNpcs)
 	{
 		Npc.AddKnowledge("WorldBorder", knowledgeWorldBorder);
 		Npc.AddKnowledge("PlayerPos", knowledgePlayerPos);
+		Npc.AddKnowledge("Buddies", knowledgeWorldCharactersDefault);
 
 		Npc.Init(m_vBoardSize);
 		m_zpBoard.AddPlacement(&Npc.GetPlacement());
 		Npc.GetPlacement().SwitchOff();
 	}
-	for (auto& Npc : m_cRedObjekt)
+	for (auto& Npc : m_RedNpcs)
 	{
 		Npc.AddKnowledge("WorldBorder", knowledgeWorldBorder);
 		Npc.AddKnowledge("PlayerPos", knowledgePlayerPos);
+		Npc.AddKnowledge("Buddies", knowledgeWorldCharactersRed);
 
 		Npc.Init(m_vBoardSize);
 		m_zpBoard.AddPlacement(&Npc.GetPlacement());
@@ -58,7 +62,7 @@ void CWorld::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 	m_zgDebugNpc.Init(CHVector(0.5f, 2.0f, 0.5f), &m_zmDebugNpc);
 	m_zpDebugNpc.AddGeo(&m_zgDebugNpc);
 	m_zpDebugNpc.TranslateY(7.5f);
-	m_cTestobjekt[0].GetKinematics().GetTopPlacement().AddPlacement(&m_zpDebugNpc);
+	m_DefaultNpcs[0].GetKinematics().GetTopPlacement().AddPlacement(&m_zpDebugNpc);
 #endif // _DEBUG
 }
 
@@ -69,9 +73,9 @@ CHVector CWorld::GetBoardSize()
 
 void CWorld::SpawnNpc()
 {
-	for (auto& npc : m_cTestobjekt)
+	for (auto& npc : m_DefaultNpcs)
 		npc.RandomSpawn(m_vBoardSize, m_SpawnRnd);
-	for (auto& npc : m_cRedObjekt)
+	for (auto& npc : m_RedNpcs)
 		npc.RandomSpawn(m_vBoardSize, m_SpawnRnd);
 }
 
@@ -81,18 +85,18 @@ void CWorld::Update(float fTime, float fTimeDelta, CControlInput* pSteuerung)
 	m_cPlayer.Update(fTime, fTimeDelta, pSteuerung);
 
 	// npc AI logik updates
-	for (auto& npc : m_cTestobjekt)
+	for (auto& npc : m_DefaultNpcs)
 		npc.Update(fTime, fTimeDelta, pSteuerung);
-	for (auto& npc : m_cRedObjekt)
+	for (auto& npc : m_RedNpcs)
 		npc.Update(fTime, fTimeDelta, pSteuerung);
 }
 
 void CWorld::Fini()
 {
-	for (auto& npc : m_cTestobjekt)
+	for (auto& npc : m_DefaultNpcs)
 		npc.Fini();
 
-	for (auto& npc : m_cRedObjekt)
+	for (auto& npc : m_RedNpcs)
 		npc.Fini();
 
 	m_cPlayer.Fini();

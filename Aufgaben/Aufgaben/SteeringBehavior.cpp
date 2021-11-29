@@ -15,6 +15,10 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 {
 	SSteeringForce force = GetForce(fTimeDelta);
 
+	// Keine Änderungen (vor allem des Winkels) wenn keine Kraft wirkt
+	if (force.vMovementForce.Length() < 0.01f)
+		return;
+
 	// Ausrichtung / Rotation
 	if (force.bApplyRotationForce)
 	{
@@ -30,16 +34,31 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 	if (force.bMoveByRot)
 	{
 		// Bewegung bezüglich lokaler -Z Richtung
-		force.vMovementForce = -CHVector(std::sinf(force.fRotationForce), 0.0f, std::cosf(force.fRotationForce)) * force.vMovementForce.Length();
+		force.vMovementForce = AngleVektoriaToVector(force.fRotationForce) * force.vMovementForce.Length();
 	}
 
 	// Bewegung
-	Limit(force.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
+	Limit(force.vMovementForce, 0.0f, m_pUser->GetKinematics().GetMaxMovementForce());
 	m_pUser->GetKinematics().ApplyMovementForce(force.vMovementForce, fTimeDelta, force.BoundsFix);
 }
 
-void CSteeringBehavior::Limit(CHVector& v, float maxLength)
+//void CSteeringBehavior::Limit(CHVector& v, float maxLength)
+//{
+//	if (v.Length() <= maxLength)
+//		return;
+//
+//	v.Norm();
+//	v *= maxLength;
+//}
+
+void CSteeringBehavior::Limit(CHVector& v, float minLength, float maxLength)
 {
+	if (minLength > 0.0f && v.Length() < minLength)
+	{
+		v.Norm();
+		v *= minLength;
+	}
+
 	if (v.Length() <= maxLength)
 		return;
 

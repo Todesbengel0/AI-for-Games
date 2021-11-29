@@ -77,32 +77,12 @@ public:
 	///<param name="vRef"></param>
 	void BounceOff(CHVector vRef);
 
-	///<summary>
-	///<para>Rechnet Vektoria-Placement-Orientierungsvektor (bezüglich lokaler -Z Richtung) in Skalarwinkel bezüglich +Z Richtung um.</para>
-	///</summary>
-	///<param name="vVektoriaDirection">Vektoria-Placement-Orientierungsvektor</param>
-	static float AngleVektoriaToZX(CHVector vVektoriaDirection);
-
-	///<summary>
-	///<para>Berechnet die Differenz zwischen zwei Skalarwinkel, sodass diese im Bereich [-PI , PI] bleiben.</para>
-	///</summary>
-	///<param name="aSource">Ausganswinkel</param>
-	///<param name="aTarget">Zielwinkel</param>
-	static float AngleDiff(float aSource, float aTarget);
-
 private:
 	///<summary>
 	///<para>Stellt mit Hilfe übergebener Option sicher, dass sich Character in den Mapgrenzen bewegt.</para>
 	///</summary>
 	///<param name="eBoundsFix">Option der Repositionierung an der Mapgrenze</param>
 	void CheckBounds(MoveBoundsFix eBoundsFix);
-
-	/// <summary>
-	/// <para>Multipliziert die Elemente zweier Vektoren miteinander.</para>
-	/// </summary>
-	/// <param name="v1">Vektor 1</param>
-	/// <param name="v2">Vektor 2</param>
-	CHVector MultiplyElements(CHVector v1, CHVector v2);
 
 private:
 	// Rotation muss unabh. von Positions-Placement bleiben, sonst Rotation um aktuelle Translation

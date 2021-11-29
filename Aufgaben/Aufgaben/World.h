@@ -29,8 +29,8 @@ private:
 	CHVector m_vBoardSize;
 
 	CPlayerCharacter m_cPlayer;
-	CDefaultNpc m_cTestobjekt[15];
-	CRedNpc m_cRedObjekt[15];
+	CDefaultNpc m_DefaultNpcs[15];
+	CRedNpc m_RedNpcs[15];
 
 	CRandom m_SpawnRnd;
 

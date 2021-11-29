@@ -150,6 +150,7 @@
     <ClInclude Include="KnowledgesInclude.h" />
     <ClInclude Include="KnowledgeWorld.h" />
     <ClInclude Include="KnowledgeWorldBorder.h" />
+    <ClInclude Include="KnowledgeWorldCharacters.h" />
     <ClInclude Include="MoveBoundsFix.h" />
     <ClInclude Include="NormalDistribution.h" />
     <ClInclude Include="FiveDegreeInterpolation.h" />
@@ -172,19 +173,25 @@
     <ClInclude Include="RedNpc.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SteeringBehavior.h" />
+    <ClInclude Include="SteeringBehaviorBLEND.h" />
+    <ClInclude Include="SteeringBehaviorCOHESION.h" />
     <ClInclude Include="SteeringBehaviorDynamicARRIVE.h" />
     <ClInclude Include="SteeringBehaviorDynamicESCAPE.h" />
     <ClInclude Include="SteeringBehaviorDynamicFLEE.h" />
     <ClInclude Include="SteeringBehaviorDynamicSEEK.h" />
     <ClInclude Include="SteeringBehaviorDynamicWANDER.h" />
+    <ClInclude Include="SteeringBehaviorFLOCKING.h" />
     <ClInclude Include="SteeringBehaviorKinematicFLEE.h" />
     <ClInclude Include="SteeringBehaviorKinematicSEEK.h" />
     <ClInclude Include="SteeringBehaviorRealisticSEEK.h" />
+    <ClInclude Include="SteeringBehaviorSEPARATE.h" />
     <ClInclude Include="SteeringBehaviorsInclude.h" />
+    <ClInclude Include="SteeringBehaviorVELOCITY_MATCHING.h" />
     <ClInclude Include="SteeringForce.h" />
     <ClInclude Include="ControlInput.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThreeDegreeInterpolation.h" />
+    <ClInclude Include="Utility.hpp" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +201,9 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="KnowledgeWorld.cpp" />
     <ClCompile Include="KnowledgeWorldBorder.cpp" />
+    <ClCompile Include="KnowledgeWorldCharacters.cpp" />
+    <ClCompile Include="SteeringBehaviorBLEND.cpp" />
+    <ClCompile Include="SteeringBehaviorCOHESION.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicARRIVE.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicESCAPE.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicFLEE.cpp" />
@@ -223,10 +233,13 @@
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicSEEK.cpp" />
     <ClCompile Include="SteeringBehaviorDynamicWANDER.cpp" />
+    <ClCompile Include="SteeringBehaviorFLOCKING.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicFLEE.cpp" />
     <ClCompile Include="SteeringBehaviorKinematicSEEK.cpp" />
     <ClCompile Include="ControlInput.cpp" />
     <ClCompile Include="SteeringBehaviorRealisticSEEK.cpp" />
+    <ClCompile Include="SteeringBehaviorSEPARATE.cpp" />
+    <ClCompile Include="SteeringBehaviorVELOCITY_MATCHING.cpp" />
     <ClCompile Include="ThreeDegreeInterpolation.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>

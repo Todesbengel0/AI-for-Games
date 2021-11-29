@@ -33,7 +33,7 @@ SSteeringForce CSteeringBehaviorDynamicFLEE::GetForce(float fTimeDelta)
 	resForce.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
 
 	// Skalarwinkel des Kraftvektors
-	resForce.fRotationForce = CKinematics::AngleVektoriaToZX(resForce.vMovementForce);
+	resForce.fRotationForce = AngleVektoriaToZX(resForce.vMovementForce);
 	resForce.bApplyRotationForce = false;	// direkte Richtungsänderung
 
 	return resForce;

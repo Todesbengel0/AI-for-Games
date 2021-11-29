@@ -42,6 +42,12 @@ void CNpc::InitOptions()
 	{
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorDynamicWANDER>(this, knowledgeWorldBorder));
 	}
+
+	std::shared_ptr<CKnowledgeWorldCharacters> knowledgeBuddies = GetKnowledge<CKnowledgeWorldCharacters>("Buddies");
+	if (knowledgeBuddies)
+	{
+		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorVELOCITY_MATCHING>(this, knowledgeBuddies));
+	}
 }
 
 void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)

@@ -11,4 +11,6 @@ enum class NpcAIMode
 
 	DynamicArrive,
 	DynamicWander,
+
+	VelocityMatching,
 };

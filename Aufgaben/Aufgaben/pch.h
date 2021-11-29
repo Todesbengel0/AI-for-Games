@@ -47,3 +47,6 @@
 #endif
 #include "Vektoria\Root.h"
 using namespace Vektoria;	// sollte bei größeren Projekten herausgenommen werden
+
+// Common headers
+#include "Utility.hpp"

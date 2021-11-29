@@ -14,7 +14,8 @@ public:
 	void Update(float fTime, float fTimeDelta) final;
 	virtual SSteeringForce GetForce(float fTimeDelta) = 0;
 
-private:
-	static void Limit(CHVector& v, float maxLength);
+protected:
+	//static void Limit(CHVector& v, float maxLength);
+	static void Limit(CHVector& v, float minLength, float maxLength);
 	static void Limit(float& angle, float maxAngle);
 };

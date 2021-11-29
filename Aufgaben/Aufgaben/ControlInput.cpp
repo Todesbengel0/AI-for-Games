@@ -50,6 +50,10 @@ void CControlInput::STDSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 	{
 		m_NpcAIMode = NpcAIMode::DynamicWander;
 	}
+	if (m_zdKeyboard.KeyDown(DIK_8))
+	{
+		m_NpcAIMode = NpcAIMode::VelocityMatching;
+	}
 }
 
 void CControlInput::CamSteuerung(CPlacement& rzpCamera, float fTimeDelta)

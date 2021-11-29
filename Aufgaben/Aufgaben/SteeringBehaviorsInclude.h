@@ -7,3 +7,7 @@
 #include "SteeringBehaviorDynamicWANDER.h"
 #include "SteeringBehaviorDynamicESCAPE.h"
 #include "SteeringBehaviorRealisticSEEK.h"
+#include "SteeringBehaviorVELOCITY_MATCHING.h"
+#include "SteeringBehaviorSEPARATE.h"
+#include "SteeringBehaviorCOHESION.h"
+#include "SteeringBehaviorFLOCKING.h"

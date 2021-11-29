@@ -22,7 +22,7 @@ SSteeringForce CSteeringBehaviorKinematicFLEE::GetForce(float fTimeDelta)
 
 	// Rotation zum Spieler
 	CHVector vAwayFromPlayer = m_pUser->GetKinematics().GetPosition() - m_pKnowledgePosition->GetPosition();
-	resForce.fRotationForce = CKinematics::AngleVektoriaToZX(vAwayFromPlayer);
+	resForce.fRotationForce = AngleVektoriaToZX(vAwayFromPlayer);
 	resForce.bApplyRotationForce = false;
 
 	// Laufe mit max. Geschwindigkeit in die Richtung
