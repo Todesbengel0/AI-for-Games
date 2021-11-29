@@ -155,7 +155,7 @@ void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
 	{
 		m_zpPos.TranslateXDelta(fDiff);
 		if (eBoundsFix == MoveBoundsFix::Bounce)
-			BounceOff(CHVector(1.0f, 0.0f, 0.0f, 0.0f));
+			ChangeOrientation(AngleVektoriaToZX(MultiplyElements(GetOrientationVec(), CHVector(-1.0f, 1.0f, 1.0f))));
 	}
 
 	// out of right bound
@@ -164,7 +164,7 @@ void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
 	{
 		m_zpPos.TranslateXDelta(fDiff);
 		if (eBoundsFix == MoveBoundsFix::Bounce)
-			BounceOff(CHVector(1.0f, 0.0f, 0.0f, 0.0f));
+			ChangeOrientation(AngleVektoriaToZX(MultiplyElements(GetOrientationVec(), CHVector(-1.0f, 1.0f, 1.0f))));
 	}
 
 	// out of bottom bound
@@ -173,7 +173,7 @@ void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
 	{
 		m_zpPos.TranslateZDelta(fDiff);
 		if (eBoundsFix == MoveBoundsFix::Bounce)
-			BounceOff(CHVector(0.0f, 0.0f, 1.0f, 0.0f));
+			ChangeOrientation(AngleVektoriaToZX(MultiplyElements(GetOrientationVec(), CHVector(1.0f, 1.0f, -1.0f))));
 	}
 
 	// out of top bound
@@ -182,8 +182,16 @@ void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
 	{
 		m_zpPos.TranslateZDelta(fDiff);
 		if (eBoundsFix == MoveBoundsFix::Bounce)
-			BounceOff(CHVector(0.0f, 0.0f, 1.0f, 0.0f));
+			ChangeOrientation(AngleVektoriaToZX(MultiplyElements(GetOrientationVec(), CHVector(1.0f, 1.0f, -1.0f))));
 	}
+}
+
+CHVector CKinematics::MultiplyElements(CHVector v1, CHVector v2)
+{
+	v1.x *= v2.x;
+	v1.y *= v2.y;
+	v1.z *= v2.z;
+	return v1;
 }
 
 void CKinematics::BounceOff(CHVector vRef)

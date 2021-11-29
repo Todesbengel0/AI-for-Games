@@ -70,12 +70,6 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	resForce.bMoveByRot = true;
 	resForce.vMovementForce = CHVector(m_pUser->GetKinematics().GetMaxMovementForce(), 0.0f, 0.0f);
 
-	// NPC has Borderline-Syndrom
-	//if (std::abs(m_pUser->GetKinematics().GetPosition().x) >= EPSENV(m_pWorldBorder->GetBoardSize().x))
-	//	resForce.vMovementForce.x = -resForce.vMovementForce.x;
-	//if (std::abs(m_pUser->GetKinematics().GetPosition().z) >= EPSENV(m_pWorldBorder->GetBoardSize().z))
-	//	resForce.vMovementForce.z = -resForce.vMovementForce.z;
-
 	// Debug logging
 //#ifdef _DEBUG
 //	static CNpc* trackNpc = m_pUser;

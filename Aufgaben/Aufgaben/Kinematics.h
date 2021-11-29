@@ -97,6 +97,13 @@ private:
 	///<param name="eBoundsFix">Option der Repositionierung an der Mapgrenze</param>
 	void CheckBounds(MoveBoundsFix eBoundsFix);
 
+	/// <summary>
+	/// <para>Multipliziert die Elemente zweier Vektoren miteinander.</para>
+	/// </summary>
+	/// <param name="v1">Vektor 1</param>
+	/// <param name="v2">Vektor 2</param>
+	CHVector MultiplyElements(CHVector v1, CHVector v2);
+
 private:
 	// Rotation muss unabh. von Positions-Placement bleiben, sonst Rotation um aktuelle Translation
 	CPlacement m_zpPos;
