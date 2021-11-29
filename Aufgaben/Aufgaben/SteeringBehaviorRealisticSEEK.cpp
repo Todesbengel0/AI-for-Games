@@ -81,7 +81,7 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	// Drehgeschwindigkeit drosseln
 	float fRotationAngle = CKinematics::AngleDiff(CKinematics::AngleVektoriaToZX(resForce.vMovementForce), m_pUser->GetKinematics().GetOrientationAngleZX());
 	fTemp = 0.0f;
-	if (abs(fRotationAngle) > (fTemp = (m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta)) && resForce.vMovementForce.Length() > vCurMovementForce.Length())
+	if (abs(fRotationAngle) > (fTemp = (m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta)))
 	{
 		// Kürzesten Winkel zum Ziel nehmen
 		float fAlpha = fRotationAngle - fTemp;
