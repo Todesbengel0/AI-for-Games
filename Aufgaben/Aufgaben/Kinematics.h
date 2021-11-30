@@ -30,7 +30,7 @@ public:
 	float GetMaxRotationForce();
 	float GetMinMovementForce();
 	float GetMaxMovementAcceleration();
-	float GetMinBreakDuration();
+	float GetMaxMovementDeceleration();
 
 	void SetPosition(CHVector vPos);
 	void ResetPosRot();
@@ -87,7 +87,7 @@ public:
 	/// Setzt die Zeit, in welcher ein Objekt von Maximal- auf Minimalgeschwindigkeit abbremsen kann.
 	/// </summary>
 	/// <param name="time">Minimale Dauer des Bremsvorganges in Sekunden.</param>
-	void SetMinBreakDuration(float time);
+	void SetMaxMovementDeceleration(float time);
 
 	///<summary>
 	///<para>Stößt den Character von gegebener Achse ab</para>
@@ -112,5 +112,5 @@ private:
 
 	float m_MinMovementForce;
 	float m_MaxMovementAcceleration;
-	float m_MinBreakDuration;
+	float m_MaxMovementDeceleration;
 };

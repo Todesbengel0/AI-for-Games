@@ -86,34 +86,28 @@ void CSteeringBehavior::LimitToRotation(CHVector& v, float rotationAngle, float 
 void CSteeringBehavior::BreakThrottle(CHVector& vForce, float fTimeDelta)
 {
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
-	
-	// Bestimmung des Bremszeitpuntes der vorherigen Bewegunsgeschwindigkeit
-	float fPreviousBreakTiming = LinearFunctionX(m_pUser->GetKinematics().GetMaxMovementForce()
-												,m_pUser->GetKinematics().GetMinBreakDuration()
-												,m_pUser->GetKinematics().GetMinMovementForce()
-												,vPreviousMovementForce.Length());
-	// Bestimmung der Geschwindigkeit, die die aktuelle Bewegungskraft mindestens haben muss
-	float fMinMovementForce = LinearFunctionY(m_pUser->GetKinematics().GetMaxMovementForce()
-											, m_pUser->GetKinematics().GetMinBreakDuration()
-											, m_pUser->GetKinematics().GetMinMovementForce()
-											, fPreviousBreakTiming + fTimeDelta);
 
-	// Wenn die minimale Geschwindigkeit unterschritten wird, wird der Vektor auf diese gesetzt
-	Limit(vForce, fMinMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
-
-	// Wenn resultierende Geschwindigkeit kleiner als die Mindestgeschwindigkeit ist, bleibt das Objekt stehen
-	if (vForce.Length() < m_pUser->GetKinematics().GetMinMovementForce() * fTimeDelta)
-		vForce *= 0;
+	// Bestimmung der minimalen Geschwindigkeit, die angenommen werden darf
+	// vorherige Geschwindigkeit * Beschleunigungsfaktor * Zeitunterschied
+	vForce *= m_pUser->GetKinematics().GetMaxMovementDeceleration() * fTimeDelta;
 }
 
 void CSteeringBehavior::AccelerationThrottle(CHVector& vForce, float fTimeDelta)
 {
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
 
+	// Wenn das Objekt anfängt zu laufen, soll es sich mit MinMovementForce bewegen (Startgeschwindigkeit)
+	if (vPreviousMovementForce.Length() < m_pUser->GetKinematics().GetMinMovementForce())
+	{
+		vForce.Norm();
+		vForce *= m_pUser->GetKinematics().GetMinMovementForce();
+		return;
+	}
+
 	// Bestimmung der maximalen Geschwindigkeit, die angenommen werden darf
 	// vorherige Geschwindigkeit + (Beschleunigungsfaktor - 1) * Zeitunterschied
-	float fMaxMovementForce = vPreviousMovementForce.Length() + (m_pUser->GetKinematics().GetMaxMovementAcceleration() - 1) * fTimeDelta;
-
+	float fMaxMovementForce = vPreviousMovementForce.Length() + vPreviousMovementForce.Length() * (m_pUser->GetKinematics().GetMaxMovementAcceleration() - 1) * fTimeDelta;
+	
 	Limit(vForce, m_pUser->GetKinematics().GetMinMovementForce(), fMaxMovementForce);
 }
 

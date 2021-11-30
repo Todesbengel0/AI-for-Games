@@ -3,7 +3,7 @@
 #include "Npc.h"
 #include "KnowledgeWorldCharacters.h"
 
-CSteeringBehaviorVELOCITY_MATCHING::CSteeringBehaviorVELOCITY_MATCHING(CNpc* user, std::shared_ptr<CKnowledgeWorldCharacters> buddies, float fActivationDistance /*= 20.0f*/)
+CSteeringBehaviorVELOCITY_MATCHING::CSteeringBehaviorVELOCITY_MATCHING(CNpc* user, std::shared_ptr<CKnowledgeWorldCharacters> buddies, float fActivationDistance /*= 15.0f*/)
 	: CSteeringBehavior(user, NpcAIMode::VelocityMatching)
 	, m_Buddies(buddies)
 	, m_fActivationDistance(fActivationDistance)

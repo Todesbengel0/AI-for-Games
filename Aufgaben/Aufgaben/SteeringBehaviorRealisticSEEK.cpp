@@ -31,22 +31,16 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
 	resForce.vMovementForce += vPreviousMovementForce;
 
-	// schönere Mittlung mit breakFactor (ersetzt ARRIVE)
-	resForce.vMovementForce *= m_fBreakFactor;
+	/*schönere Mittlung mit breakFactor (ersetzt ARRIVE)
+		resForce.vMovementForce *= m_fBreakFactor;*/
+	BreakThrottle(resForce.vMovementForce, fTimeDelta);
 
 	float fTemp = 0.0f;
-	// setzt Geschwindigkeit mindestens auf MinMovementVelocity
-	if (vPreviousMovementForce.Length() < m_fMinMovementVelocity && vPreviousMovementForce.Length() < resForce.vMovementForce.Length())
-	{
-		resForce.vMovementForce.Norm();
-		resForce.vMovementForce *= m_fMinMovementVelocity;
-	}
-	// Beschleunigung soll nicht zu extrem sein
-	else if (resForce.vMovementForce.Length() > (fTemp = (vPreviousMovementForce.Length() + (m_pUser->GetKinematics().GetMaxMovementAcceleration() - 1) * fTimeDelta)))
-	{
-		resForce.vMovementForce.Norm();
-		resForce.vMovementForce *= fTemp;
-	}
+	// Bei Beschleunigung den Regulierungen folgen
+	if (resForce.vMovementForce.Length() > vPreviousMovementForce.Length())
+		AccelerationThrottle(resForce.vMovementForce, fTimeDelta);
+		
+
 
 	// Drehgeschwindigkeit drosseln
 	/*
