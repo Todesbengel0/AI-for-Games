@@ -72,3 +72,57 @@ inline std::vector<TPtr> ArrayToPointerVector(T(&arr)[n])
 
 	return res;
 }
+
+/// <summary>
+/// Gibt einen gesuchten Funktionswert für eine lineare Funktion aus.
+/// </summary>
+/// <param name="y0">y-Achsenabschnitt.</param>
+/// <param name="x1">x-Wert des zweiten bekannten Funktionswertes.</param>
+/// <param name="y1">Bekannter Funktionswert f(x1).</param>
+/// <param name="xInput">Der Parameterwert, für den der Funktionswert gesucht wird.</param>
+/// <returns>Gesuchter Funktionswert.</returns>
+inline float LinearFunctionY(float y0, float x1, float y1, float xInput)
+{
+	return xInput * (y1 - y0) / x1 + y0;
+}
+
+/// <summary>
+/// Gibt einen gesuchten Funktionswert für eine lineare Funktion aus.
+/// </summary>
+/// <param name="y0">y-Achsenabschnitt.</param>
+/// <param name="y1">Bekannter Funktionswert f(1).</param>
+/// <param name="xInput">Der Parameterwert, für den der Funktionswert gesucht wird.</param>
+/// <returns>Gesuchter Funktionswert.</returns>
+inline float LinearFunctionY(float y0, float y1, float xInput)
+{
+	return xInput * (y1 - y0) + y0;
+}
+
+/// <summary>
+/// Gibt einen gesuchten Parameterwert für eine lineare Funktion aus.
+/// </summary>
+/// <param name="v0">Funktionswert an y-Achsenabschnitt.</param>
+/// <param name="x1">Parameterwert des zweiten bekannten Funktionswertes.</param>
+/// <param name="v1">Bekannter Funktionswert f(x1).</param>
+/// <param name="vfunctionValue">Der Funktionswert, für den der entsprechende Parameterwert gesucht wird.</param>
+/// <returns>Gesuchter Parameterwert.</returns>
+inline float LinearFunctionX(float y0, float x1, float y1, float functionValue)
+{
+	if (y1 == y0)
+		return 0.0f;
+	return x1 * (functionValue - y0) / (y1 - y0);
+}
+
+/// <summary>
+/// Gibt einen gesuchten Parameterwert für eine lineare Funktion aus.
+/// </summary>
+/// <param name="v0">Funktionswert an y-Achsenabschnitt.</param>
+/// <param name="v1">Bekannter Funktionswert f(1).</param>
+/// <param name="vfunctionValue">Der Funktionswert, für den der entsprechende Parameterwert gesucht wird.</param>
+/// <returns>Gesuchter Parameterwert.</returns>
+inline float LinearFunctionX(float y0, float y1, float functionValue)
+{
+	if (y1 == y0)
+		return 0.0f;
+	return (functionValue - y0) / (y1 - y0);
+}

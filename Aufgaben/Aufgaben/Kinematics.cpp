@@ -4,7 +4,9 @@
 CKinematics::CKinematics()
 	: m_MovementForce(0.0f, 0.0f, 0.0f)
 	, m_RotationForce(0.0f)
+	, m_MinMovementForce(1.0f)
 	, m_MaxMovementAcceleration(1.0f)
+	, m_MinBreakDuration(1.0f)
 {
 	SetMaxMovementForce(1.0f);
 	SetMaxRotationForce(1.0f);
@@ -72,9 +74,19 @@ float CKinematics::GetMaxRotationForce()
 	return m_zpPos.GetRotationSensitivity();
 }
 
+float CKinematics::GetMinMovementForce()
+{
+	return m_MinMovementForce;
+}
+
 float CKinematics::GetMaxMovementAcceleration()
 {
 	return m_MaxMovementAcceleration;
+}
+
+float CKinematics::GetMinBreakDuration()
+{
+	return m_MinBreakDuration;
 }
 
 void CKinematics::SetPosition(CHVector vPos)
@@ -122,9 +134,19 @@ void CKinematics::SetMaxRotationForce(float vel)
 	m_zpRot.SetRotationSensitivity(vel);
 }
 
+void CKinematics::SetMinMovementForce(float force)
+{
+	m_MinMovementForce = force;
+}
+
 void CKinematics::SetMaxMovementAcceleration(float acceleration)
 {
 	m_MaxMovementAcceleration = acceleration;
+}
+
+void CKinematics::SetMinBreakDuration(float time)
+{
+	m_MinBreakDuration = time;
 }
 
 void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
