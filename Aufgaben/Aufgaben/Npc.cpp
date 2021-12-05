@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Npc.h"
 #include "SteeringBehaviorsInclude.h"
 #include "KnowledgesInclude.h"
@@ -13,18 +13,18 @@ CNpc::~CNpc()
 
 void CNpc::Init(CHVector dimension)
 {
-	// alle NPCs sind Schneem�nner
+	// alle NPCs sind Schneemänner
 	m_zgMesh = m_zfWaveFront.LoadGeoTriangleTable("Geos\\Schneeman_mit_Hut.obj", true);
 	InitMaterial();
 
 	InitOptions();
 
 	// Bewegungseigenschaften
-	m_zpKinematics.SetMaxMovementForce(8.0f);
-	m_zpKinematics.SetMaxRotationForce(UM_DEG2RAD(90.0f));
-	m_zpKinematics.SetMaxMovementAcceleration(1.5f);
 	m_zpKinematics.SetMinMovementForce(1.0f);
-	m_zpKinematics.SetMaxMovementDeceleration(0.6f);
+	m_zpKinematics.SetMaxMovementForce(8.0f);
+	m_zpKinematics.SetMaxMovementAcceleration(4.0f);
+	m_zpKinematics.SetMaxMovementDeceleration(10.0f);	// wenn zu niedrig, schießen über Ziel hinaus und oszillieren
+	m_zpKinematics.SetMaxRotationForce(UM_DEG2RAD(90.0f));
 
 	CCharacter::Init(dimension);
 }

@@ -44,17 +44,26 @@ void CSteeringBehavior::Update(float fTime, float fTimeDelta)
 
 void CSteeringBehavior::Limit(CHVector& v, float minLength, float maxLength)
 {
-	if (minLength > 0.0f && v.Length() < minLength)
+	assert(minLength < maxLength);
+
+	const float fVLen = v.Length();
+
+	float fFixedScale = 0.0f;
+	if (minLength > 0.0f && fVLen < minLength)
 	{
-		v.Norm();
-		v *= minLength;
+		fFixedScale = minLength;
+	}
+	else if (fVLen > maxLength)
+	{
+		fFixedScale = maxLength;
+	}
+	else
+	{
+		return;
 	}
 
-	if (v.Length() <= maxLength)
-		return;
-
 	v.Norm();
-	v *= maxLength;
+	v *= fFixedScale;
 }
 
 void CSteeringBehavior::Limit(float& angle, float maxAngle)
@@ -81,6 +90,33 @@ void CSteeringBehavior::LimitToRotation(CHVector& v, float rotationAngle, float 
 	
 	// Matrix auf Vektor anwenden
 	v = mYRotMat * v;
+}
+
+void CSteeringBehavior::SmoothForceDelta(CHVector& vForce, const CKinematics& rKinematics, float fTimeDelta)
+{
+	CHVector vPreviousMovementForce = rKinematics.GetMovementForce();
+	CHVector vDeltaForce = vForce - vPreviousMovementForce;
+
+	// nur bei merkbarer Beschleunigungsänderung überprüfen
+	constexpr float fCheckThreshold = 0.01f;
+	if (vDeltaForce.Length() > fCheckThreshold)
+	{
+		// Beschleunigung
+		if (vForce.Length() > vPreviousMovementForce.Length())
+		{
+			const float fMaxForce = std::min(vPreviousMovementForce.Length() + rKinematics.GetMaxMovementAcceleration() * fTimeDelta, rKinematics.GetMaxMovementForce());
+			Limit(vForce, 0.0f, fMaxForce);
+		}
+		// Abbremsung
+		else
+		{
+			const float fMinForce = std::max(vPreviousMovementForce.Length() - rKinematics.GetMaxMovementDeceleration() * fTimeDelta, /*rKinematics.GetMinMovementForce()*/ 0.0f);
+			Limit(vForce, fMinForce, FLT_MAX);
+		}
+	}
+
+	// sollte nicht nötig sein, wird oben schon überprüft
+	//Limit(vForce, 0.0f, rKinematics.GetMaxMovementForce());
 }
 
 void CSteeringBehavior::BreakThrottle(CHVector& vForce, float fTimeDelta)

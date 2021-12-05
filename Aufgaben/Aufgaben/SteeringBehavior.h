@@ -1,7 +1,9 @@
-#pragma once
+﻿#pragma once
 
 #include "Action.h"
 #include "SteeringForce.h"
+
+class CKinematics;
 
 class CSteeringBehavior : public CAction
 {
@@ -23,19 +25,27 @@ protected:
 	/// </summary>
 	/// <param name="v">Bereits um targetAngle gedrehter Vektor.</param>
 	/// <param name="rotationAngle">Der Winkel, um den der Vektor gedreht wurde.</param>
-	/// <param name="maxAngle">Der Winkel, um den der Vektor maximal gedreht werden d�rfte.</param>
+	/// <param name="maxAngle">Der Winkel, um den der Vektor maximal gedreht werden dürfte.</param>
 	static void LimitToRotation(CHVector& v, float rotationAngle, float maxAngle);
 
 protected:
 	/// <summary>
-	/// <para>Ver�ndert einen Vektor so, dass die Bremsregulationen des Objektes zutreffen.</para>
+	/// <para>Limitiert / glättet eine Bewegungs-Kraftänderung gemäß den Limits der übergebenen Kinematics.</para>
+	/// </summary>
+	/// <param name="vForce">neue Bewegungskraft des Characters</param>
+	/// <param name="rKinematics">kinematische Daten des Characters (inklusiver vorheriger Bewegungskraft und Limits)</param>
+	/// <param name="fTimeDelta">Zeit, die seit letztem Tick vergangen ist.</param>
+	static void SmoothForceDelta(CHVector& vForce, const CKinematics& rKinematics, float fTimeDelta);
+
+	/// <summary>
+	/// <para>Verändert einen Vektor so, dass die Bremsregulationen des Objektes zutreffen.</para>
 	/// </summary>
 	/// <param name="vForce">Geschwindigkeitsvektor</param>
 	/// <param name="fTimeDelta">Zeit, die seit letztem Tick vergangen ist.</param>
 	void BreakThrottle(CHVector& vForce, float fTimeDelta);
 
 	/// <summary>
-	/// <para>Ver�ndert einen Vektor so, dass die Beschleunigungsregulationen des Objekts zutreffen.</para>
+	/// <para>Verändert einen Vektor so, dass die Beschleunigungsregulationen des Objekts zutreffen.</para>
 	/// </summary>
 	/// <param name="vForce">Geschwindigkeitsvektor</param>
 	/// <param name="fTimeDelta">Zeit, die seit letztem Tick vergangen ist.</param>

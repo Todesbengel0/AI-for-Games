@@ -54,37 +54,37 @@ float CKinematics::GetOrientationAngleZX()
 	//return vDir.AngleZX();
 }
 
-CHVector CKinematics::GetMovementForce()
+CHVector CKinematics::GetMovementForce() const
 {
 	return m_MovementForce;
 }
 
-float CKinematics::GetRotationForce()
+float CKinematics::GetRotationForce() const
 {
 	return m_RotationForce;
 }
 
-float CKinematics::GetMaxMovementForce()
+float CKinematics::GetMaxMovementForce() const
 {
-	return m_zpPos.GetTranslationSensitivity();
+	return const_cast<CPlacement&>(m_zpPos).GetTranslationSensitivity();
 }
 
-float CKinematics::GetMaxRotationForce()
+float CKinematics::GetMaxRotationForce() const
 {
-	return m_zpPos.GetRotationSensitivity();
+	return const_cast<CPlacement&>(m_zpPos).GetRotationSensitivity();
 }
 
-float CKinematics::GetMinMovementForce()
+float CKinematics::GetMinMovementForce() const
 {
 	return m_MinMovementForce;
 }
 
-float CKinematics::GetMaxMovementAcceleration()
+float CKinematics::GetMaxMovementAcceleration() const
 {
 	return m_MaxMovementAcceleration;
 }
 
-float CKinematics::GetMaxMovementDeceleration()
+float CKinematics::GetMaxMovementDeceleration() const
 {
 	return m_MaxMovementDeceleration;
 }

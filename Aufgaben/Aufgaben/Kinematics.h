@@ -24,13 +24,13 @@ public:
 	///</summary>
 	float GetOrientationAngleZX();
 
-	CHVector GetMovementForce();
-	float GetRotationForce();
-	float GetMaxMovementForce();
-	float GetMaxRotationForce();
-	float GetMinMovementForce();
-	float GetMaxMovementAcceleration();
-	float GetMaxMovementDeceleration();
+	CHVector GetMovementForce() const;
+	float GetRotationForce() const;
+	float GetMaxMovementForce() const;
+	float GetMaxRotationForce() const;
+	float GetMinMovementForce() const;
+	float GetMaxMovementAcceleration() const;
+	float GetMaxMovementDeceleration() const;
 
 	void SetPosition(CHVector vPos);
 	void ResetPosRot();

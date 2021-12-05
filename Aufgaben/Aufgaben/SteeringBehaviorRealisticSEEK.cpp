@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "SteeringBehaviorRealisticSEEK.h"
 #include "Npc.h"
 #include "KnowledgesInclude.h"
@@ -14,6 +14,8 @@ CSteeringBehaviorRealisticSEEK::CSteeringBehaviorRealisticSEEK(CNpc* user, std::
 CSteeringBehaviorRealisticSEEK::~CSteeringBehaviorRealisticSEEK()
 {
 }
+
+#define VINZ_IDEE
 
 SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 {
@@ -31,7 +33,14 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
 	resForce.vMovementForce += vPreviousMovementForce;
 
-	/*sch�nere Mittlung mit breakFactor (ersetzt ARRIVE)
+#ifdef VINZ_IDEE
+	// hier muss tatsächlich gemittelt werden, sonst ist abbremsen nicht möglich
+	resForce.vMovementForce *= m_fBreakFactor;
+
+	// Beschleunigungskräfte einschränken / ausglätten
+	SmoothForceDelta(resForce.vMovementForce, m_pUser->GetKinematics(), fTimeDelta);
+#else
+	/*schönere Mittlung mit breakFactor (ersetzt ARRIVE)
 		resForce.vMovementForce *= m_fBreakFactor;*/
 	BreakThrottle(resForce.vMovementForce, fTimeDelta);
 
@@ -39,8 +48,7 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	// Bei Beschleunigung den Regulierungen folgen
 	if (resForce.vMovementForce.Length() > vPreviousMovementForce.Length())
 		AccelerationThrottle(resForce.vMovementForce, fTimeDelta);
-		
-
+#endif // VINZ_IDEE
 
 	// Drehgeschwindigkeit drosseln
 	/*
@@ -48,7 +56,7 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	fTemp = 0.0f;
 	if (abs(fAngleDifference) > (fTemp = (m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta)))
 	{
-		// K�rzesten Winkel zum Ziel nehmen
+		// Kürzesten Winkel zum Ziel nehmen
 		float fAlpha = fAngleDifference - fTemp;
 		if (abs(fAngleDifference + fTemp) < abs(fAngleDifference - fTemp))
 			fAlpha = fAngleDifference + fTemp;
