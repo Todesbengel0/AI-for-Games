@@ -5,8 +5,8 @@ CKinematics::CKinematics()
 	: m_MovementForce(0.0f, 0.0f, 0.0f)
 	, m_RotationForce(0.0f)
 	, m_MinMovementForce(1.0f)
-	, m_MaxMovementAcceleration(1.0f)
-	, m_MaxMovementDeceleration(1.0f)
+	, m_MaxMovementAcceleration(2.0f)
+	, m_MaxMovementDeceleration(10.0f)
 {
 	SetMaxMovementForce(1.0f);
 	SetMaxRotationForce(1.0f);
@@ -139,12 +139,12 @@ void CKinematics::SetMinMovementForce(float force)
 	m_MinMovementForce = force;
 }
 
-void CKinematics::SetMaxMovementAcceleration(float acceleration)
+void CKinematics::SetMaxMovementIncrease(float acceleration)
 {
 	m_MaxMovementAcceleration = acceleration;
 }
 
-void CKinematics::SetMaxMovementDeceleration(float time)
+void CKinematics::SetMaxMovementDecrease(float time)
 {
 	m_MaxMovementDeceleration = time;
 }

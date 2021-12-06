@@ -38,13 +38,6 @@ protected:
 	static void SmoothForceDelta(CHVector& vForce, const CKinematics& rKinematics, float fTimeDelta);
 
 	/// <summary>
-	/// <para>Verändert einen Vektor so, dass die Bremsregulationen des Objektes zutreffen.</para>
-	/// </summary>
-	/// <param name="vForce">Geschwindigkeitsvektor</param>
-	/// <param name="fTimeDelta">Zeit, die seit letztem Tick vergangen ist.</param>
-	void BreakThrottle(CHVector& vForce, float fTimeDelta);
-
-	/// <summary>
 	/// <para>Verändert einen Vektor so, dass die Beschleunigungsregulationen des Objekts zutreffen.</para>
 	/// </summary>
 	/// <param name="vForce">Geschwindigkeitsvektor</param>

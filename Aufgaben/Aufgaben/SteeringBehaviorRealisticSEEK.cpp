@@ -24,50 +24,22 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	if (!m_pKnowledgePosition)
 		return resForce;
 
-	// bewegung zum ziel
-	resForce.vMovementForce = m_pKnowledgePosition->GetPosition() - m_pUser->GetKinematics().GetPosition();
+	// Bewegung, die der Boid gerne ausüben würde (Zum Ziel)
+	CHVector vTargetedMovementForce = m_pKnowledgePosition->GetPosition() - m_pUser->GetKinematics().GetPosition();
+	Limit(vTargetedMovementForce, 0, m_pUser->GetKinematics().GetMaxMovementForce());
 
 	// mitteln mit alter Kraft
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
-	resForce.vMovementForce += vPreviousMovementForce;
+	resForce.vMovementForce = vTargetedMovementForce + vPreviousMovementForce;
+	resForce.vMovementForce.Norm();
+	resForce.vMovementForce *= (vTargetedMovementForce.Length() + vPreviousMovementForce.Length()) * 0.5f;
 
-#ifdef BESCHLEUNIGUNG_VINZ_IDEE
-	// hier muss tatsächlich gemittelt werden, sonst ist abbremsen nicht möglich
-	resForce.vMovementForce *= m_fBreakFactor;
-
-	// Beschleunigungskräfte einschränken / ausglätten
 	SmoothForceDelta(resForce.vMovementForce, m_pUser->GetKinematics(), fTimeDelta);
-#else
-	/*schönere Mittlung mit breakFactor (ersetzt ARRIVE)
-		resForce.vMovementForce *= m_fBreakFactor;*/
-	BreakThrottle(resForce.vMovementForce, fTimeDelta);
 
-	float fTemp = 0.0f;
-	// Bei Beschleunigung den Regulierungen folgen
-	if (resForce.vMovementForce.Length() > vPreviousMovementForce.Length())
-		AccelerationThrottle(resForce.vMovementForce, fTimeDelta);
-#endif // VINZ_IDEE
-
-	// Drehgeschwindigkeit drosseln
-	/*
-	float fAngleDifference = AngleDiff(AngleVektoriaToZX(resForce.vMovementForce), m_pUser->GetKinematics().GetOrientationAngleZX());
-	fTemp = 0.0f;
-	if (abs(fAngleDifference) > (fTemp = (m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta)))
-	{
-		// Kürzesten Winkel zum Ziel nehmen
-		float fAlpha = fAngleDifference - fTemp;
-		if (abs(fAngleDifference + fTemp) < abs(fAngleDifference - fTemp))
-			fAlpha = fAngleDifference + fTemp;
-
-		// Force-Vector drehen
-		CHMat mYRotMat = CHMat(std::cosf(fAlpha), 0, sinf(fAlpha), 0, 0, 1, 0, 0, -sinf(fAlpha), 0, cosf(fAlpha), 0, 0, 0, 0, 1);
-		resForce.vMovementForce = mYRotMat * resForce.vMovementForce;
-	}*/
 	LimitToRotation(resForce.vMovementForce
-					,AngleDiffToPreviousForce(resForce.vMovementForce)
-					,m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta);
+		, AngleDiffToPreviousForce(resForce.vMovementForce)
+		, m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta);
 
 	resForce.fRotationForce = AngleVektoriaToZX(resForce.vMovementForce);
-
 	return resForce;
 }

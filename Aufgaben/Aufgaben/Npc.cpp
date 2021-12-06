@@ -22,13 +22,9 @@ void CNpc::Init(CHVector dimension)
 	// Bewegungseigenschaften
 	m_zpKinematics.SetMinMovementForce(1.0f);
 	m_zpKinematics.SetMaxMovementForce(8.0f);
-#ifdef BESCHLEUNIGUNG_VINZ_IDEE
-	m_zpKinematics.SetMaxMovementAcceleration(4.0f);
-	m_zpKinematics.SetMaxMovementDeceleration(10.0f);	// wenn zu niedrig, schießen über Ziel hinaus und oszillieren
-#else
-	m_zpKinematics.SetMaxMovementAcceleration(1.5f);
-	m_zpKinematics.SetMaxMovementDeceleration(0.6f);	// wenn zu niedrig, schießen über Ziel hinaus und oszillieren
-#endif // BESCHLEUNIGUNG_VINZ_IDEE
+
+	m_zpKinematics.SetMaxMovementIncrease(4.0f);
+	m_zpKinematics.SetMaxMovementDecrease(10.0f);	// wenn zu niedrig, schießen über Ziel hinaus und oszillieren
 	m_zpKinematics.SetMaxRotationForce(UM_DEG2RAD(90.0f));
 
 	CCharacter::Init(dimension);

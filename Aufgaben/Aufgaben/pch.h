@@ -50,5 +50,3 @@ using namespace Vektoria;	// sollte bei größeren Projekten herausgenommen werd
 
 // Common headers
 #include "Utility.hpp"
-
-//#define BESCHLEUNIGUNG_VINZ_IDEE

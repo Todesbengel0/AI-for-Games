@@ -108,24 +108,16 @@ void CSteeringBehavior::SmoothForceDelta(CHVector& vForce, const CKinematics& rK
 			Limit(vForce, 0.0f, fMaxForce);
 		}
 		// Abbremsung
-		else
+		/* else
 		{
-			const float fMinForce = std::max(vPreviousMovementForce.Length() - rKinematics.GetMaxMovementDeceleration() * fTimeDelta, /*rKinematics.GetMinMovementForce()*/ 0.0f);
+			const float fMinForce = std::max(vPreviousMovementForce.Length() - rKinematics.GetMaxMovementDeceleration() * fTimeDelta, 0.0f);
 			Limit(vForce, fMinForce, FLT_MAX);
 		}
+		*/
 	}
 
 	// sollte nicht nötig sein, wird oben schon überprüft
 	//Limit(vForce, 0.0f, rKinematics.GetMaxMovementForce());
-}
-
-void CSteeringBehavior::BreakThrottle(CHVector& vForce, float fTimeDelta)
-{
-	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
-
-	// Bestimmung der minimalen Geschwindigkeit, die angenommen werden darf
-	// vorherige Geschwindigkeit * Beschleunigungsfaktor * Zeitunterschied
-	vForce *= m_pUser->GetKinematics().GetMaxMovementDeceleration() * fTimeDelta;
 }
 
 void CSteeringBehavior::AccelerationThrottle(CHVector& vForce, float fTimeDelta)

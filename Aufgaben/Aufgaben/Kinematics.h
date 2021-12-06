@@ -78,16 +78,16 @@ public:
 	void SetMinMovementForce(float force);
 
 	/// <summary>
-	/// Setzt den Wert, um den sich ein Objekt maximal beschleunigen kann.
+	/// Setzt den Wert, um den sich die Geschwindigkeit eines Objektes maximal erhöhen darf.
 	/// </summary>
-	/// <param name="acceleration">Faktor der maximalen Beschleunigung in einer Sekunde.</param>
-	void SetMaxMovementAcceleration(float acceleration);
+	/// <param name="acceleration">Geschwindigkeitsvergrößerung pro Sekunde.</param>
+	void SetMaxMovementIncrease(float acceleration);
 
 	/// <summary>
-	/// Setzt die Zeit, in welcher ein Objekt von Maximal- auf Minimalgeschwindigkeit abbremsen kann.
+	/// Setzt den Wert, um den sich die Geschwindigkeit eines Objektes maximal verringern darf.
 	/// </summary>
-	/// <param name="time">Minimale Dauer des Bremsvorganges in Sekunden.</param>
-	void SetMaxMovementDeceleration(float time);
+	/// <param name="time">Geschwindigkeitserniedrigung pro Sekunde.</param>
+	void SetMaxMovementDecrease(float time);
 
 	///<summary>
 	///<para>Stößt den Character von gegebener Achse ab</para>
