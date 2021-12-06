@@ -15,8 +15,6 @@ CSteeringBehaviorRealisticSEEK::~CSteeringBehaviorRealisticSEEK()
 {
 }
 
-#define VINZ_IDEE
-
 SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
@@ -33,7 +31,7 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
 	resForce.vMovementForce += vPreviousMovementForce;
 
-#ifdef VINZ_IDEE
+#ifdef BESCHLEUNIGUNG_VINZ_IDEE
 	// hier muss tatsächlich gemittelt werden, sonst ist abbremsen nicht möglich
 	resForce.vMovementForce *= m_fBreakFactor;
 
