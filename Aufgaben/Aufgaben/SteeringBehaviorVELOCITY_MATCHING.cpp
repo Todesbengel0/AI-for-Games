@@ -23,6 +23,7 @@ SSteeringForce CSteeringBehaviorVELOCITY_MATCHING::GetForce(float fTimeDelta)
 	if (!m_Buddies)
 	{
 		resForce.vMovementForce = vPreviousMovementForce;
+		resForce.fRotationForce = AngleVektoriaToZX(resForce.vMovementForce);
 		return resForce;
 	}
 
@@ -30,6 +31,7 @@ SSteeringForce CSteeringBehaviorVELOCITY_MATCHING::GetForce(float fTimeDelta)
 	if (buddies.size() <= 1)
 	{
 		resForce.vMovementForce = vPreviousMovementForce;
+		resForce.fRotationForce = AngleVektoriaToZX(resForce.vMovementForce);
 		return resForce;
 	}
 
@@ -62,21 +64,18 @@ SSteeringForce CSteeringBehaviorVELOCITY_MATCHING::GetForce(float fTimeDelta)
 	}
 	// Mitteln der Bewegungen
 	if (buddyCount > 1)
-	{
-		//vAverageVelocity /= float(buddyCount);
-		vAverageVelocity.Norm();
-		vAverageVelocity *= fAccumulatedSpeed / buddyCount;
-	}
+		ScaleVectorTo(vAverageVelocity, fAccumulatedSpeed / (float)buddyCount);
 
 	resForce.vMovementForce = vAverageVelocity + vPreviousMovementForce;
-	resForce.vMovementForce.Norm();
-	resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+	ScaleVectorTo(resForce.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
 
 	// Überprüfung, ob es zu einer Beschleunigung kommt -> Anwenden der Beschleunigungsregulationen
-	SmoothForceDelta(resForce.vMovementForce, m_pUser->GetKinematics(), fTimeDelta);
-	LimitToRotation(resForce.vMovementForce
-		, AngleDiffToPreviousForce(resForce.vMovementForce)
+
+ 	SmoothForceDelta(resForce.vMovementForce, m_pUser->GetKinematics(), fTimeDelta);
+ 	LimitToRotation(resForce.vMovementForce
+ 		, AngleDiffToPreviousForce(resForce.vMovementForce)
 		, m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta);
+
 
 	
 	resForce.fRotationForce = AngleVektoriaToZX(resForce.vMovementForce);

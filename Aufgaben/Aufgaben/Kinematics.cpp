@@ -2,7 +2,7 @@
 #include "Kinematics.h"
 
 CKinematics::CKinematics()
-	: m_MovementForce(0.0f, 0.0f, 0.0f)
+	: m_MovementForce(0.0f, 0.0f, 0.0f, 0.0f)
 	, m_RotationForce(0.0f)
 	, m_MinMovementForce(1.0f)
 	, m_MaxMovementAcceleration(2.0f)

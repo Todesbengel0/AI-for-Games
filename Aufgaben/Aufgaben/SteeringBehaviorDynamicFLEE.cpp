@@ -26,10 +26,10 @@ SSteeringForce CSteeringBehaviorDynamicFLEE::GetForce(float fTimeDelta)
 	// mitteln mit alter Kraft
 	CHVector vCurMovementForce = m_pUser->GetKinematics().GetMovementForce();
 	vAwayFromPlayer += vCurMovementForce;
-	vAwayFromPlayer.Norm();
+	ScaleVectorTo(vAwayFromPlayer, m_pUser->GetKinematics().GetMaxMovementForce());
 
 	// neue Bewegungskraft aus mittel mit max. Geschwindigkeit
-	resForce.vMovementForce = vAwayFromPlayer * m_pUser->GetKinematics().GetMaxMovementForce();
+	resForce.vMovementForce = vAwayFromPlayer;
 	resForce.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
 
 	// Skalarwinkel des Kraftvektors

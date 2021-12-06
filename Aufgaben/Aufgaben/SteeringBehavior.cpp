@@ -62,8 +62,7 @@ void CSteeringBehavior::Limit(CHVector& v, float minLength, float maxLength)
 		return;
 	}
 
-	v.Norm();
-	v *= fFixedScale;
+	ScaleVectorTo(v, fFixedScale);
 }
 
 void CSteeringBehavior::Limit(float& angle, float maxAngle)
@@ -127,8 +126,7 @@ void CSteeringBehavior::AccelerationThrottle(CHVector& vForce, float fTimeDelta)
 	// Wenn das Objekt anfängt zu laufen, soll es sich mit MinMovementForce bewegen (Startgeschwindigkeit)
 	if (vPreviousMovementForce.Length() < m_pUser->GetKinematics().GetMinMovementForce())
 	{
-		vForce.Norm();
-		vForce *= m_pUser->GetKinematics().GetMinMovementForce();
+		ScaleVectorTo(vForce, m_pUser->GetKinematics().GetMinMovementForce());
 		return;
 	}
 

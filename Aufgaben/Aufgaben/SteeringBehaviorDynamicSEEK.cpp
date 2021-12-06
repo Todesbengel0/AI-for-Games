@@ -28,10 +28,10 @@ SSteeringForce CSteeringBehaviorDynamicSEEK::GetForce(float fTimeDelta)
 	vToPlayer += vCurMovementForce;
 	// schönere Mittlung mit /2 (kein ARRIVE notwendig), aber nicht gefragt
 	//vToPlayer *= 0.5f;
-	vToPlayer.Norm();
+	ScaleVectorTo(vToPlayer, m_pUser->GetKinematics().GetMaxMovementForce());
 	
 	// neue Bewegungskraft aus mittel mit max. Geschwindigkeit
-	resForce.vMovementForce = vToPlayer * m_pUser->GetKinematics().GetMaxMovementForce();
+	resForce.vMovementForce = vToPlayer;
 	resForce.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
 
 	// Skalarwinkel des Kraftvektors

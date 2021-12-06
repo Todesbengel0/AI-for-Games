@@ -39,7 +39,7 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	// Debug check Orientierung- und Winkelumrechnungen
 #ifdef _DEBUG
 	CHVector vToCircle = vCircleCenter - vUserPos;
-	vToCircle.Norm();
+	vToCircle /= vToCircle.Length();
 	assert((vUserOri - vToCircle).Length() < 0.001f);	// Kreis muss in Laufbahn des Boids liegen
 	float fAToCircle = AngleVektoriaToZX(vToCircle);
 	assert(std::abs(fAToCircle - fAUserOri) < 0.001f);	// Umrechnung zu Skalarwinkel muss auch übereinstimmen
@@ -57,7 +57,7 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 
 	// Richtung: Boid zu Punkt
 	CHVector vDir = vCirclePoint - vUserPos;
-	vDir.Norm();
+	vDir /= vDir.Length();
 	float fDir = AngleVektoriaToZX(vDir);	// Skalarwinkel in lokalem Kreis
 
 	// Rotationskraftänderung

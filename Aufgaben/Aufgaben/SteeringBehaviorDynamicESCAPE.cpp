@@ -29,8 +29,7 @@ SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce(float fTimeDelta)
 	CHVector vCurMovementForce = m_pUser->GetKinematics().GetMovementForce();
 	resForce.vMovementForce += vCurMovementForce;
 
-	resForce.vMovementForce.Norm();
-	resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+	ScaleVectorTo(resForce.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
 
 	// Überprüfen, ob Zielpunkt außerhalb der Map liegen würde (an manchen Ecken gibts noch Vorzeichenfehler)
 	CHVector vMovementPosition = m_pUser->GetKinematics().GetPosition() + resForce.vMovementForce;
@@ -57,11 +56,9 @@ SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce(float fTimeDelta)
 				vTestForce.z -= vMovementPosition.z + m_pWorldBorder->GetBoardSize().z;
 			else
 				vTestForce.z -= vMovementPosition.z - m_pWorldBorder->GetBoardSize().z;
-			vTestForce.Norm();
-			vTestForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+			ScaleVectorTo(vTestForce, m_pUser->GetKinematics().GetMaxMovementForce());
 		}
-		vTestForce.Norm();
-		vTestForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+		ScaleVectorTo(vTestForce, m_pUser->GetKinematics().GetMaxMovementForce());
 		vMovementPosition = m_pUser->GetKinematics().GetPosition() + vTestForce;
 
 		if ((vMovementPosition - m_pKnowledgePosition->GetPosition()).Length() > (vCornerPosition - m_pKnowledgePosition->GetPosition()).Length())
@@ -73,8 +70,7 @@ SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce(float fTimeDelta)
 			resForce.vMovementForce.x -= vMovementPosition.x + m_pWorldBorder->GetBoardSize().x;
 		else
 			resForce.vMovementForce.x -= vMovementPosition.x - m_pWorldBorder->GetBoardSize().x;
-		resForce.vMovementForce.Norm();
-		resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+		ScaleVectorTo(resForce.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
 	}
 	else if (std::abs(vMovementPosition.z) > m_pWorldBorder->GetBoardSize().z)
 	{
@@ -82,8 +78,7 @@ SSteeringForce CSteeringBehaviorDynamicESCAPE::GetForce(float fTimeDelta)
 			resForce.vMovementForce.z -= vMovementPosition.z + m_pWorldBorder->GetBoardSize().z;
 		else
 			resForce.vMovementForce.z -= vMovementPosition.z - m_pWorldBorder->GetBoardSize().z;
-		resForce.vMovementForce.Norm();
-		resForce.vMovementForce *= m_pUser->GetKinematics().GetMaxMovementForce();
+		ScaleVectorTo(resForce.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
 	}
 
 	// Skalarwinkel des Kraftvektors

@@ -32,7 +32,7 @@ SSteeringForce CSteeringBehaviorDynamicARRIVE::GetForce(float fTimeDelta)
 	vToPlayer += vCurMovementForce;
 	// schönere Mittlung mit /2 (kein ARRIVE notwendig), aber nicht gefragt
 	//resForce.vMovementForce *= 0.5f;
-	vToPlayer.Norm();
+	vToPlayer /= vToPlayer.Length();
 
 	// neue Bewegungskraft aus mittel mit max. Geschwindigkeit
 	resForce.vMovementForce = vToPlayer * m_pUser->GetKinematics().GetMaxMovementForce();

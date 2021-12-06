@@ -126,3 +126,14 @@ inline float LinearFunctionX(float y0, float y1, float functionValue)
 		return 0.0f;
 	return (functionValue - y0) / (y1 - y0);
 }
+
+/// <summary>
+/// Skaliert einen Vektor auf den angegebenen Wert.
+/// </summary>
+/// <param name="v"></param>
+/// <param name="scale"></param>
+inline void ScaleVectorTo(CHVector& v, float scale)
+{
+	v /= v.Length();
+	v *= scale;
+}
