@@ -110,6 +110,8 @@ void CKinematics::ChangeOrientation(float fAngle)
 
 void CKinematics::ApplyMovementForce(CHVector vMovementForce, float fTimeDelta, MoveBoundsFix eBoundsFix /*= MoveBoundsFix::Clamp*/)
 {
+	assert(std::abs(vMovementForce.w) < 0.01f);
+
 	m_MovementForce = vMovementForce;
 	m_zpPos.TranslateDelta(vMovementForce * fTimeDelta);
 
