@@ -19,6 +19,10 @@ void CKinematics::ResetPosRot()
 	// should reset all transformations on the mats
 	m_zpPos.Translate(0.0f, 0.0f, 0.0f);
 	m_zpRot.Translate(0.0f, 0.0f, 0.0f);
+
+	// reset forces as well
+	m_MovementForce = CHVector(0.0f, 0.0f, 0.0f, 0.0f);
+	m_RotationForce = 0.0f;
 }
 
 CKinematics::~CKinematics()
