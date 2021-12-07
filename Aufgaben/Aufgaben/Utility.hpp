@@ -19,7 +19,7 @@ inline float AngleVektoriaToZX(CHVector vVektoriaDirection)
 ///<param name="fAngle">Winkelskalar</param>
 inline CHVector AngleVektoriaToVector(float fAngle)
 {
-	return -CHVector(std::sinf(fAngle), 0.0f, std::cosf(fAngle));
+	return CHVector(-std::sinf(fAngle), 0.0f, -std::cosf(fAngle), 0.0f);
 }
 
 ///<summary>

@@ -50,7 +50,7 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	m_fCurAngle += fNewAngle * m_fMaxAngleChange * fTimeDelta;
 
 	// lokaler Winkelvektor im Kreis (in Standardorientierung nach +X)
-	CHVector vAngleDir(std::cosf(m_fCurAngle), 0.0f, std::sinf(m_fCurAngle));
+	CHVector vAngleDir(std::cosf(m_fCurAngle), 0.0f, std::sinf(m_fCurAngle), 0.0f);
 
 	// Punkt auf Kreisbahn
 	CHVector vCirclePoint = vCircleCenter + vAngleDir * m_fRadius;
@@ -68,7 +68,7 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	// wird durch CSteeringBehavior::Update nach fRotationForce verrechnet
 	// muss lediglich Länge übergeben
 	resForce.bMoveByRot = true;
-	resForce.vMovementForce = CHVector(m_pUser->GetKinematics().GetMaxMovementForce(), 0.0f, 0.0f);
+	resForce.vMovementForce = CHVector(m_pUser->GetKinematics().GetMaxMovementForce(), 0.0f, 0.0f, 0.0f);
 
 	// Debug logging
 //#ifdef _DEBUG
