@@ -26,11 +26,12 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 
 	// Bewegung, die der Boid gerne ausüben würde (Zum Ziel)
 	CHVector vTargetedMovementForce = m_pKnowledgePosition->GetPosition() - m_pUser->GetKinematics().GetPosition();
-	Limit(vTargetedMovementForce, 0, m_pUser->GetKinematics().GetMaxMovementForce());
+	//Limit(vTargetedMovementForce, 0, m_pUser->GetKinematics().GetMaxMovementForce()); // Limit führt zu unnormal vielen 0-Vektoren hier
 
 	// mitteln mit alter Kraft
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
 	resForce.vMovementForce = vTargetedMovementForce + vPreviousMovementForce;
+	assert(resForce.vMovementForce.Length() > 0.01f);
 	ScaleVectorTo(resForce.vMovementForce, (vTargetedMovementForce.Length() + vPreviousMovementForce.Length()) * 0.5f);
 
 	SmoothForceDelta(resForce.vMovementForce, m_pUser->GetKinematics(), fTimeDelta);
