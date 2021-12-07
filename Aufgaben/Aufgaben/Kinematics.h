@@ -52,6 +52,15 @@ public:
 	void ApplyMovementForce(CHVector vMovementForce, float fTimeDelta, MoveBoundsFix eBoundsFix = MoveBoundsFix::Clamp);
 
 	///<summary>
+	///<para>Multipliziert die Bewegungskraft mit den übergebenen Faktoren und wendet sie mit TimeDelta an.</para>
+	///<para>Überschreiten von max. Bewegungskräften wird nicht überprüft!</para>
+	///</summary>
+	///<param name="vFactor">Faktoren die auf die einzelnen Komponenten der aktuellen Bewegungskraft aufgerechnet werden.</param>
+	///<param name="fTimeDelta">Verstrichene Zeit seit letztem Frame</param>
+	///<param name="bFixOrientation">Ob auch die Ausrichtung gemäß der neuen Kraft angeglichen werden soll</param>
+	void MultiplyApplyMovementForce(CHVector vFactor, float fTimeDelta, bool bFixOrientation = true);
+
+	///<summary>
 	///<para>Verrechnet eine Winkelkraft über Zeit an den aktuellen Drehwinkel.</para>
 	///<para>Der Winkel muss in lokaler +X Richtung gegeben werden.</para>
 	///</summary>
@@ -100,7 +109,7 @@ private:
 	///<para>Stellt mit Hilfe übergebener Option sicher, dass sich Character in den Mapgrenzen bewegt.</para>
 	///</summary>
 	///<param name="eBoundsFix">Option der Repositionierung an der Mapgrenze</param>
-	void CheckBounds(MoveBoundsFix eBoundsFix);
+	void CheckBounds(MoveBoundsFix eBoundsFix, float fTimeDelta);
 
 private:
 	// Rotation muss unabh. von Positions-Placement bleiben, sonst Rotation um aktuelle Translation

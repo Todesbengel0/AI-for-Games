@@ -116,7 +116,7 @@ void CKinematics::ApplyMovementForce(CHVector vMovementForce, float fTimeDelta, 
 	m_zpPos.TranslateDelta(vMovementForce * fTimeDelta);
 
 	// sicherstellen, dass bewegung in grenzen bleibt
-	CheckBounds(eBoundsFix);
+	CheckBounds(eBoundsFix, fTimeDelta);
 }
 
 void CKinematics::ApplyRotationForce(float vel, float fTimeDelta)
@@ -155,7 +155,7 @@ void CKinematics::SetMaxMovementDecrease(float time)
 	m_MaxMovementDeceleration = time;
 }
 
-void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
+void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix, float fTimeDelta)
 {
 	// out of left bound
 	float fDiff = m_zpPos.m_aabbMove.GetMin().x - m_zpPos.GetPos().x;
@@ -163,7 +163,7 @@ void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
 	{
 		m_zpPos.TranslateXDelta(fDiff);
 		if (eBoundsFix == MoveBoundsFix::Bounce)
-			ChangeOrientation(AngleVektoriaToZX(MultiplyElements(GetOrientationVec(), CHVector(-1.0f, 1.0f, 1.0f))));
+			MultiplyApplyMovementForce(CHVector(-1.0f, 1.0f, 1.0f, 0.0f), fTimeDelta);
 	}
 
 	// out of right bound
@@ -172,7 +172,7 @@ void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
 	{
 		m_zpPos.TranslateXDelta(fDiff);
 		if (eBoundsFix == MoveBoundsFix::Bounce)
-			ChangeOrientation(AngleVektoriaToZX(MultiplyElements(GetOrientationVec(), CHVector(-1.0f, 1.0f, 1.0f))));
+			MultiplyApplyMovementForce(CHVector(-1.0f, 1.0f, 1.0f, 0.0f), fTimeDelta);
 	}
 
 	// out of bottom bound
@@ -181,7 +181,7 @@ void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
 	{
 		m_zpPos.TranslateZDelta(fDiff);
 		if (eBoundsFix == MoveBoundsFix::Bounce)
-			ChangeOrientation(AngleVektoriaToZX(MultiplyElements(GetOrientationVec(), CHVector(1.0f, 1.0f, -1.0f))));
+			MultiplyApplyMovementForce(CHVector(1.0f, 1.0f, -1.0f, 0.0f), fTimeDelta);
 	}
 
 	// out of top bound
@@ -190,8 +190,19 @@ void CKinematics::CheckBounds(MoveBoundsFix eBoundsFix)
 	{
 		m_zpPos.TranslateZDelta(fDiff);
 		if (eBoundsFix == MoveBoundsFix::Bounce)
-			ChangeOrientation(AngleVektoriaToZX(MultiplyElements(GetOrientationVec(), CHVector(1.0f, 1.0f, -1.0f))));
+			MultiplyApplyMovementForce(CHVector(1.0f, 1.0f, -1.0f, 0.0f), fTimeDelta);
 	}
+}
+
+void CKinematics::MultiplyApplyMovementForce(CHVector vFactor, float fTimeDelta, bool bFixOrientation /*= true*/)
+{
+	// vorherige reine Richtungsänderung
+	//ChangeOrientation(AngleVektoriaToZX(MultiplyElements(GetOrientationVec(), CHVector(-1.0f, 1.0f, 1.0f, 0.0f))));
+
+	CHVector vNewMovementForce = MultiplyElements(m_MovementForce, vFactor);
+	ApplyMovementForce(vNewMovementForce, fTimeDelta);
+	if (bFixOrientation)
+		ChangeOrientation(AngleVektoriaToZX(vNewMovementForce));
 }
 
 void CKinematics::BounceOff(CHVector vRef)
