@@ -86,6 +86,9 @@ void CSteeringBehavior::LimitToRotation(CHVector& v, float rotationAngle, float 
 
 	// Rotationsmatrix zum Zurückdrehen bestimmen
 	CHMat mYRotMat = CHMat(std::cosf(fBackwardRotation), 0, sinf(fBackwardRotation), 0, 0, 1, 0, 0, -sinf(fBackwardRotation), 0, cosf(fBackwardRotation), 0, 0, 0, 0, 1);
+
+	// Schei%&#! W-Komponente
+	v.w = 0.0f;
 	
 	// Matrix auf Vektor anwenden
 	v = mYRotMat * v;

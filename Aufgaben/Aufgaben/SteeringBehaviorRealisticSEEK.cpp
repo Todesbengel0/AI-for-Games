@@ -31,8 +31,7 @@ SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 	// mitteln mit alter Kraft
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
 	resForce.vMovementForce = vTargetedMovementForce + vPreviousMovementForce;
-	resForce.vMovementForce /= resForce.vMovementForce.Length();
-	resForce.vMovementForce *= (vTargetedMovementForce.Length() + vPreviousMovementForce.Length()) * 0.5f;
+	ScaleVectorTo(resForce.vMovementForce, (vTargetedMovementForce.Length() + vPreviousMovementForce.Length()) * 0.5f);
 
 	SmoothForceDelta(resForce.vMovementForce, m_pUser->GetKinematics(), fTimeDelta);
 

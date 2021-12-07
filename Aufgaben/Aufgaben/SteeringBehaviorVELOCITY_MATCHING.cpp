@@ -66,8 +66,12 @@ SSteeringForce CSteeringBehaviorVELOCITY_MATCHING::GetForce(float fTimeDelta)
 	if (buddyCount > 1)
 		ScaleVectorTo(vAverageVelocity, fAccumulatedSpeed / (float)buddyCount);
 
+	assert(!isnan(vAverageVelocity.x) && !isnan(vAverageVelocity.y) && !isnan(vAverageVelocity.z));
+
 	resForce.vMovementForce = vAverageVelocity + vPreviousMovementForce;
 	ScaleVectorTo(resForce.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
+
+	assert(!isnan(resForce.vMovementForce.x) && !isnan(resForce.vMovementForce.y) && !isnan(resForce.vMovementForce.z));
 
 	// Überprüfung, ob es zu einer Beschleunigung kommt -> Anwenden der Beschleunigungsregulationen
 
@@ -76,7 +80,7 @@ SSteeringForce CSteeringBehaviorVELOCITY_MATCHING::GetForce(float fTimeDelta)
  		, AngleDiffToPreviousForce(resForce.vMovementForce)
 		, m_pUser->GetKinematics().GetMaxRotationForce() * fTimeDelta);
 
-
+	assert(!isnan(resForce.vMovementForce.x) && !isnan(resForce.vMovementForce.y) && !isnan(resForce.vMovementForce.z));
 	
 	resForce.fRotationForce = AngleVektoriaToZX(resForce.vMovementForce);
 

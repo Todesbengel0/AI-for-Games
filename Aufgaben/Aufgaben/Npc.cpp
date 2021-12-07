@@ -64,6 +64,7 @@ void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)
 
 void CNpc::Update(float fTime, float fTimeDelta, CControlInput* pSteuerung)
 {
+	//auto pos = m_zpKinematics.GetPosition();
 	m_AvailableOptions.UpdatePreferred(fTime, fTimeDelta, pSteuerung);
 }
 
