@@ -62,11 +62,15 @@ SSteeringForce CSteeringBehaviorVELOCITY_MATCHING::GetForce(float fTimeDelta)
 		resForce.fRotationForce = AngleVektoriaToZX(resForce.vMovementForce);
 		return resForce;
 	}
-	// Mitteln der Bewegungen
-	if (buddyCount > 1)
+
+	// Mitteln der Bewegungen (wenn Summe der Bewegungen nicht Nullvektor)
+	if (buddyCount > 1 && vAverageVelocity.Length() > 0.01f)
 		ScaleVectorTo(vAverageVelocity, fAccumulatedSpeed / (float)buddyCount);
 
 	resForce.vMovementForce = vAverageVelocity + vPreviousMovementForce;
+	if (resForce.vMovementForce.Length() < 0.01f)	// passiert eig. nur, wenn NPCs re-spawned werden
+		return resForce;
+
 	ScaleVectorTo(resForce.vMovementForce, m_pUser->GetKinematics().GetMaxMovementForce());
 
 	// Überprüfung, ob es zu einer Beschleunigung kommt -> Anwenden der Beschleunigungsregulationen
