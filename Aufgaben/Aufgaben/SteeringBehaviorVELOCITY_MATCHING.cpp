@@ -17,7 +17,7 @@ CSteeringBehaviorVELOCITY_MATCHING::~CSteeringBehaviorVELOCITY_MATCHING()
 SSteeringForce CSteeringBehaviorVELOCITY_MATCHING::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
-	resForce.BoundsFix = MoveBoundsFix::Bounce;
+	resForce.Flags.BoundsFix = MoveBoundsFix::Bounce;
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
 
 	if (!m_Buddies)

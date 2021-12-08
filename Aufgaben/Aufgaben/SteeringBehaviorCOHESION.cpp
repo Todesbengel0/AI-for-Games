@@ -17,7 +17,7 @@ CSteeringBehaviorCOHESION::~CSteeringBehaviorCOHESION()
 SSteeringForce CSteeringBehaviorCOHESION::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
-	resForce.BoundsFix = MoveBoundsFix::Bounce;
+	resForce.Flags.BoundsFix = MoveBoundsFix::Bounce;
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
 
 	if (!m_Buddies)
@@ -43,7 +43,7 @@ SSteeringForce CSteeringBehaviorCOHESION::GetForce(float fTimeDelta)
 	}
 	// Mitteln der Bewegungen (wenn Summe der Bewegungen nicht Nullvektor)
 	if (buddies.size() > 1)
-		vCenterOfCharacters /= buddies.size();
+		vCenterOfCharacters /= float(buddies.size());
 
 	// DirToCenter ist der Vektor, mit dem der NPC sich gerne bewegen würde
 	CHVector vDirToCenter = vCenterOfCharacters - m_pUser->GetKinematics().GetPosition();

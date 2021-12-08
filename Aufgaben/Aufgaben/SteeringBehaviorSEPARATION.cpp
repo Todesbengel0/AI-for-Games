@@ -18,7 +18,7 @@ CSteeringBehaviorSEPARATION::~CSteeringBehaviorSEPARATION()
 SSteeringForce CSteeringBehaviorSEPARATION::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
-	resForce.BoundsFix = MoveBoundsFix::Bounce;
+	resForce.Flags.BoundsFix = MoveBoundsFix::Bounce;
 	CHVector vPreviousMovementForce = m_pUser->GetKinematics().GetMovementForce();
 
 	if (!m_Characters)

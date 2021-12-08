@@ -58,6 +58,11 @@ void CNpc::InitOptions()
 	{
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorSEPARATION>(this, knowledgeCharacters));
 	}
+
+	if (knowledgeBuddies && knowledgeCharacters)
+	{
+		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorFLOCKING>(this, knowledgeBuddies, knowledgeCharacters));
+	}
 }
 
 void CNpc::RandomSpawn(CHVector dimension, CRandom& rRnd)

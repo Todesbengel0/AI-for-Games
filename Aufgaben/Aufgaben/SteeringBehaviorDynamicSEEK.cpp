@@ -32,11 +32,11 @@ SSteeringForce CSteeringBehaviorDynamicSEEK::GetForce(float fTimeDelta)
 	
 	// neue Bewegungskraft aus mittel mit max. Geschwindigkeit
 	resForce.vMovementForce = vToPlayer;
-	resForce.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
+	resForce.Flags.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
 
 	// Skalarwinkel des Kraftvektors
 	resForce.fRotationForce = AngleVektoriaToZX(resForce.vMovementForce);
-	resForce.bApplyRotationForce = false;	// direkte Richtungsänderung
+	resForce.Flags.bApplyRotationForce = false;	// direkte Richtungsänderung
 
 	return resForce;
 }

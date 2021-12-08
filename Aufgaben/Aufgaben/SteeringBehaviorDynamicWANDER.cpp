@@ -25,8 +25,8 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 {
 	// resultierende Kraft, wir übernehmen Rotationskraftauswirkung über Zeit (bApplyRotationForce = false)
 	SSteeringForce resForce;
-	resForce.bApplyRotationForce = false;
-	resForce.BoundsFix = MoveBoundsFix::Bounce;
+	resForce.Flags.bApplyRotationForce = false;
+	resForce.Flags.BoundsFix = MoveBoundsFix::Bounce;
 
 	// kinematische Daten des NPCs / Boids
 	CHVector vUserPos = m_pUser->GetKinematics().GetPosition();
@@ -67,7 +67,7 @@ SSteeringForce CSteeringBehaviorDynamicWANDER::GetForce(float fTimeDelta)
 	// Laufe mit max. Geschwindigkeit in neue Richtung
 	// wird durch CSteeringBehavior::Update nach fRotationForce verrechnet
 	// muss lediglich Länge übergeben
-	resForce.bMoveByRot = true;
+	resForce.Flags.bMoveByRot = true;
 	resForce.vMovementForce = CHVector(m_pUser->GetKinematics().GetMaxMovementForce(), 0.0f, 0.0f, 0.0f);
 
 	// Debug logging

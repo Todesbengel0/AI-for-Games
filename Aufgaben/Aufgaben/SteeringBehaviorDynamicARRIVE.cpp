@@ -39,11 +39,11 @@ SSteeringForce CSteeringBehaviorDynamicARRIVE::GetForce(float fTimeDelta)
 	// wenn im Radius, abbremsen
 	if (fBrake < 1.0f)
 		resForce.vMovementForce *= fBrake / m_fBrakeFactor;
-	resForce.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
+	resForce.Flags.bMoveByRot = false;	// kein Überschreiben durch SteeringBehavior
 
 	// Skalarwinkel des Kraftvektors
 	resForce.fRotationForce = AngleVektoriaToZX(resForce.vMovementForce);
-	resForce.bApplyRotationForce = false;	// direkte Richtungsänderung
+	resForce.Flags.bApplyRotationForce = false;	// direkte Richtungsänderung
 
 	return resForce;
 }

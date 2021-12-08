@@ -18,8 +18,8 @@ CSteeringBehaviorRealisticSEEK::~CSteeringBehaviorRealisticSEEK()
 SSteeringForce CSteeringBehaviorRealisticSEEK::GetForce(float fTimeDelta)
 {
 	SSteeringForce resForce;
-	resForce.bApplyRotationForce = false;
-	resForce.bMoveByRot = false;
+	resForce.Flags.bApplyRotationForce = false;
+	resForce.Flags.bMoveByRot = false;
 
 	if (!m_pKnowledgePosition)
 		return resForce;
