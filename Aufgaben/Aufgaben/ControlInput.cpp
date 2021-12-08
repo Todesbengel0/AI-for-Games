@@ -26,41 +26,45 @@ void CControlInput::STDSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 	{
 		m_NpcAIMode = NpcAIMode::Idle;
 	}
+	//if (m_zdKeyboard.KeyDown(DIK_2))
+	//{
+	//	m_NpcAIMode = NpcAIMode::KinematicSeek;
+	//}
+	//if (m_zdKeyboard.KeyDown(DIK_3))
+	//{
+	//	m_NpcAIMode = NpcAIMode::KinematicFlee;
+	//}
 	if (m_zdKeyboard.KeyDown(DIK_2))
-	{
-		m_NpcAIMode = NpcAIMode::KinematicSeek;
-	}
-	if (m_zdKeyboard.KeyDown(DIK_3))
-	{
-		m_NpcAIMode = NpcAIMode::KinematicFlee;
-	}
-	if (m_zdKeyboard.KeyDown(DIK_4))
 	{
 		m_NpcAIMode = NpcAIMode::DynamicSeek;
 	}
-	if (m_zdKeyboard.KeyDown(DIK_5))
+	if (m_zdKeyboard.KeyDown(DIK_3))
 	{
 		m_NpcAIMode = NpcAIMode::DynamicFlee;
 	}
-	if (m_zdKeyboard.KeyDown(DIK_6))
+	if (m_zdKeyboard.KeyDown(DIK_4))
 	{
 		m_NpcAIMode = NpcAIMode::DynamicArrive;
 	}
-	if (m_zdKeyboard.KeyDown(DIK_7))
+	if (m_zdKeyboard.KeyDown(DIK_5))
 	{
 		m_NpcAIMode = NpcAIMode::DynamicWander;
 	}
-	if (m_zdKeyboard.KeyDown(DIK_8))
+	if (m_zdKeyboard.KeyDown(DIK_6))
 	{
 		m_NpcAIMode = NpcAIMode::VelocityMatching;
 	}
-	if (m_zdKeyboard.KeyDown(DIK_9))
+	if (m_zdKeyboard.KeyDown(DIK_7))
 	{
 		m_NpcAIMode = NpcAIMode::Seperation;
 	}
-	if (m_zdKeyboard.KeyDown(DIK_0))
+	if (m_zdKeyboard.KeyDown(DIK_8))
 	{
 		m_NpcAIMode = NpcAIMode::Cohesion;
+	}
+	if (m_zdKeyboard.KeyDown(DIK_9))
+	{
+		m_NpcAIMode = NpcAIMode::Flocking;
 	}
 }
 
