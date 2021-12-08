@@ -51,10 +51,10 @@ inline CHVector MultiplyElements(CHVector v1, CHVector v2)
 	return v1;
 }
 
-template <typename T, std::size_t n>
-inline std::vector<T*> ArrayToPointerVector(T(&arr)[n])
+template <typename T1, std::size_t n>
+inline std::vector<T1*> ArrayToPointerVector(T1(&arr)[n])
 {
-	std::vector<T*> res;
+	std::vector<T1*> res;
 
 	for (auto& elem : arr)
 		res.emplace_back(&elem);
@@ -62,12 +62,25 @@ inline std::vector<T*> ArrayToPointerVector(T(&arr)[n])
 	return res;
 }
 
-template <typename TPtr, typename T, std::size_t n>
-inline std::vector<TPtr> ArrayToPointerVector(T(&arr)[n])
+template <typename TPtr, typename T1, std::size_t n>
+inline std::vector<TPtr> ArrayToPointerVector(T1(&arr)[n])
 {
 	std::vector<TPtr> res;
 
 	for (auto& elem : arr)
+		res.emplace_back(&elem);
+
+	return res;
+}
+
+template <typename TPtr, typename T1, std::size_t n1, typename T2, std::size_t n2>
+inline std::vector<TPtr> ArrayConcat(T1(&arr1)[n1], T2(&arr2)[n2])
+{
+	std::vector<TPtr> res;
+
+	for (auto& elem : arr1)
+		res.emplace_back(&elem);
+	for (auto& elem : arr2)
 		res.emplace_back(&elem);
 
 	return res;
@@ -132,8 +145,9 @@ inline float LinearFunctionX(float y0, float y1, float functionValue)
 /// </summary>
 /// <param name="v"></param>
 /// <param name="scale"></param>
-inline void ScaleVectorTo(CHVector& v, float scale)
+inline CHVector& ScaleVectorTo(CHVector& v, float scale)
 {
 	v /= v.Length();
 	v *= scale;
+	return v;
 }

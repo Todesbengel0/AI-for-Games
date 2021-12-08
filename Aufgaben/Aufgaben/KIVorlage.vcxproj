@@ -184,7 +184,7 @@
     <ClInclude Include="SteeringBehaviorKinematicFLEE.h" />
     <ClInclude Include="SteeringBehaviorKinematicSEEK.h" />
     <ClInclude Include="SteeringBehaviorRealisticSEEK.h" />
-    <ClInclude Include="SteeringBehaviorSEPARATE.h" />
+    <ClInclude Include="SteeringBehaviorSEPARATION.h" />
     <ClInclude Include="SteeringBehaviorsInclude.h" />
     <ClInclude Include="SteeringBehaviorVELOCITY_MATCHING.h" />
     <ClInclude Include="SteeringForce.h" />
@@ -238,7 +238,7 @@
     <ClCompile Include="SteeringBehaviorKinematicSEEK.cpp" />
     <ClCompile Include="ControlInput.cpp" />
     <ClCompile Include="SteeringBehaviorRealisticSEEK.cpp" />
-    <ClCompile Include="SteeringBehaviorSEPARATE.cpp" />
+    <ClCompile Include="SteeringBehaviorSEPARATION.cpp" />
     <ClCompile Include="SteeringBehaviorVELOCITY_MATCHING.cpp" />
     <ClCompile Include="ThreeDegreeInterpolation.cpp" />
     <ClCompile Include="World.cpp" />

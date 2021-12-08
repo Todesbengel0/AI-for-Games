@@ -171,17 +171,17 @@
     <ClInclude Include="SteeringBehaviorFLOCKING.h">
       <Filter>SteeringBehavior</Filter>
     </ClInclude>
-    <ClInclude Include="SteeringBehaviorSEPARATE.h">
-      <Filter>SteeringBehavior</Filter>
-    </ClInclude>
     <ClInclude Include="SteeringBehaviorVELOCITY_MATCHING.h">
       <Filter>SteeringBehavior</Filter>
     </ClInclude>
-    <ClInclude Include="KnowledgeWorldCharacters.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Utility.hpp">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="KnowledgeWorldCharacters.h">
+      <Filter>Knowledge</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviorSEPARATION.h">
+      <Filter>SteeringBehavior</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -302,14 +302,14 @@
     <ClCompile Include="SteeringBehaviorFLOCKING.cpp">
       <Filter>SteeringBehavior</Filter>
     </ClCompile>
-    <ClCompile Include="SteeringBehaviorSEPARATE.cpp">
-      <Filter>SteeringBehavior</Filter>
-    </ClCompile>
     <ClCompile Include="SteeringBehaviorVELOCITY_MATCHING.cpp">
       <Filter>SteeringBehavior</Filter>
     </ClCompile>
     <ClCompile Include="KnowledgeWorldCharacters.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Knowledge</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorSEPARATION.cpp">
+      <Filter>SteeringBehavior</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

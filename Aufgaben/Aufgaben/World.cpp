@@ -29,6 +29,9 @@ void CWorld::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 	auto knowledgeWorldBorder = std::make_shared<CKnowledgeWorldBorder>(this);
 	auto knowledgeWorldCharactersDefault = std::make_shared<CKnowledgeWorldCharacters>(this, ArrayToPointerVector<CCharacter*>(m_DefaultNpcs));
 	auto knowledgeWorldCharactersRed = std::make_shared<CKnowledgeWorldCharacters>(this, ArrayToPointerVector<CCharacter*>(m_RedNpcs));
+	std::vector<CCharacter*> allCharacters = ArrayConcat<CCharacter*>(m_DefaultNpcs, m_RedNpcs);
+	allCharacters.emplace_back(&m_cPlayer);
+	auto knowledgeWorldCharactersAll = std::make_shared<CKnowledgeWorldCharacters>(this, allCharacters);
 	auto knowledgePlayerPos = std::make_shared<CKnowledgePosition>(&m_cPlayer);
 
 	// player
@@ -41,6 +44,7 @@ void CWorld::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 		Npc.AddKnowledge("WorldBorder", knowledgeWorldBorder);
 		Npc.AddKnowledge("PlayerPos", knowledgePlayerPos);
 		Npc.AddKnowledge("Buddies", knowledgeWorldCharactersDefault);
+		Npc.AddKnowledge("Characters", knowledgeWorldCharactersAll);
 
 		Npc.Init(m_vBoardSize);
 		m_zpBoard.AddPlacement(&Npc.GetPlacement());
@@ -51,6 +55,7 @@ void CWorld::Init(CHVector vBoardSize /*= CHVector(80.0f, 1.0f, 40.0f)*/)
 		Npc.AddKnowledge("WorldBorder", knowledgeWorldBorder);
 		Npc.AddKnowledge("PlayerPos", knowledgePlayerPos);
 		Npc.AddKnowledge("Buddies", knowledgeWorldCharactersRed);
+		Npc.AddKnowledge("Characters", knowledgeWorldCharactersAll);
 
 		Npc.Init(m_vBoardSize);
 		m_zpBoard.AddPlacement(&Npc.GetPlacement());

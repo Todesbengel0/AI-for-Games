@@ -13,4 +13,5 @@ enum class NpcAIMode
 	DynamicWander,
 
 	VelocityMatching,
+	Seperation
 };
