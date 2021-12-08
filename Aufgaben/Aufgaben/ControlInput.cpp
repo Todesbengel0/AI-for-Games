@@ -58,6 +58,10 @@ void CControlInput::STDSteuerung(CPlacement& rzpCamera, float fTimeDelta)
 	{
 		m_NpcAIMode = NpcAIMode::Seperation;
 	}
+	if (m_zdKeyboard.KeyDown(DIK_0))
+	{
+		m_NpcAIMode = NpcAIMode::Cohesion;
+	}
 }
 
 void CControlInput::CamSteuerung(CPlacement& rzpCamera, float fTimeDelta)

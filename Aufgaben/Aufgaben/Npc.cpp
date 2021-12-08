@@ -50,6 +50,7 @@ void CNpc::InitOptions()
 	if (knowledgeBuddies)
 	{
 		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorVELOCITY_MATCHING>(this, knowledgeBuddies));
+		m_AvailableOptions.AddOption(std::make_shared<CSteeringBehaviorCOHESION>(this, knowledgeBuddies));
 	}
 
 	std::shared_ptr<CKnowledgeWorldCharacters> knowledgeCharacters = GetKnowledge<CKnowledgeWorldCharacters>("Characters");
